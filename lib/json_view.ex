@@ -53,6 +53,9 @@ defmodule Magik.JsonView do
           end
       end
   """
+
+  def render_json(nil, _, _), do: nil
+
   def render_json(struct, view, opts) when is_list(opts) do
     fields = Keyword.get(opts, :fields, [])
     custom_fields = Keyword.get(opts, :custom_fields, [])
