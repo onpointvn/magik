@@ -18,6 +18,8 @@ defmodule Magik.Paginator do
     total =
       if count_total? do
         count_entry(query, repo)
+      else
+        0
       end
 
     paginator = %{
