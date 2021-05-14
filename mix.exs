@@ -11,7 +11,8 @@ defmodule Magik.MixProject do
       lockfile: "./mix.lock",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -19,6 +20,14 @@ defmodule Magik.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  defp docs() do
+    [
+      output: "docs",
+      main: "readme",
+      extras: ["README.md"]
     ]
   end
 

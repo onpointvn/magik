@@ -6,18 +6,18 @@ defmodule Magik.EctoEnum do
 
   You can define an enum module manually like this
 
-    defmodule MyEnum do
-      def enum, do: ["value1", "value2", "value3"]
-      def value1, do: "value1"
-      def value2, do: "value2"
-      def value3, do: "value3"
-    end
+      defmodule MyEnum do
+          def enum, do: ["value1", "value2", "value3"]
+          def value1, do: "value1"
+          def value2, do: "value2"
+          def value3, do: "value3"
+      end
 
   Now with EctoEnum you can do it with a few lines of code
 
-    defmodule MyEnum do
-      use Magik.EctoEnum, ["value1", "value2", "value3"]
-    end
+      defmodule MyEnum do
+          use Magik.EctoEnum, ["value1", "value2", "value3"]
+      end
 
 
   It still provides same functions with manual implemented module
@@ -25,11 +25,13 @@ defmodule Magik.EctoEnum do
   ## Use in ecto schema
   EctoEnum also defines a Type module that you can used directly in Ecto schema
 
-    schema "orders do
-      field :first_name, :string
-      field :last_name, :string
-      field :status, MyEnum.Type
-    end
+      defmodule Order do
+        schema "orders do
+          field :first_name, :string
+          field :last_name, :string
+          field :status, MyEnum.Type
+        end
+      end
 
   EctoEnum automatically validate value and only allow valid value
   """

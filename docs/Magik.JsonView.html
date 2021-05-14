@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.24.0">
+    <meta name="project" content="magik v0.1.1">
+    <title>Magik.JsonView — magik v0.1.1</title>
+    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <script src="dist/sidebar_items-9015801eed.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+magik      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.1
+      </strong>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        Magik.JsonView <small class="app-vsn">(magik v0.1.1)</small>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Render a struct to a map with given options</p><ul><li><code class="inline">fields</code>: which fields are extract directly from struct</li><li><code class="inline">custom_fields</code>: which fields are render using custom <code class="inline">render_field/2</code> function</li><li><code class="inline">relationships</code>: a list of {field, view_module} defines which fields are rendered using another view</li></ul><p>Here is a sample view</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.PostView</span><span class="w"> </span><span class="k" data-group-id="0925025578-1">do</span><span class="w">
+    </span><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
+
+    </span><span class="na">@fields</span><span class="w"> </span><span class="p" data-group-id="0925025578-2">[</span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="ss">:excerpt</span><span class="p">,</span><span class="w"> </span><span class="ss">:cover</span><span class="p" data-group-id="0925025578-2">]</span><span class="w">
+    </span><span class="na">@custom_fields</span><span class="w"> </span><span class="p" data-group-id="0925025578-3">[</span><span class="ss">:like_count</span><span class="p" data-group-id="0925025578-3">]</span><span class="w">
+    </span><span class="na">@relationships</span><span class="w"> </span><span class="p" data-group-id="0925025578-4">[</span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.AuthorView</span><span class="p" data-group-id="0925025578-4">]</span><span class="w">
+
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render</span><span class="p" data-group-id="0925025578-5">(</span><span class="s">&quot;post.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0925025578-6">%{</span><span class="ss">post</span><span class="p">:</span><span class="w"> </span><span class="n">post</span><span class="p" data-group-id="0925025578-6">}</span><span class="p" data-group-id="0925025578-5">)</span><span class="w"> </span><span class="k" data-group-id="0925025578-7">do</span><span class="w">
+
+        </span><span class="c1"># 1st way if `use JsonView`</span><span class="w">
+        </span><span class="n">render_json</span><span class="p" data-group-id="0925025578-8">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@fields</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="0925025578-8">)</span><span class="w">
+
+        </span><span class="c1"># 2nd way same as above</span><span class="w">
+        </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_json</span><span class="p" data-group-id="0925025578-9">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w">
+            </span><span class="ss">fields</span><span class="p">:</span><span class="w"> </span><span class="na">@fields</span><span class="p">,</span><span class="w">
+            </span><span class="ss">custom_fields</span><span class="p">:</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p">,</span><span class="w">
+            </span><span class="ss">relationships</span><span class="p">:</span><span class="w"> </span><span class="na">@relationships</span><span class="w">
+        </span><span class="p" data-group-id="0925025578-9">)</span><span class="w">
+
+        </span><span class="c1"># 3rd render manual</span><span class="w">
+        </span><span class="n">post</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_fields</span><span class="p" data-group-id="0925025578-10">(</span><span class="na">@fields</span><span class="p" data-group-id="0925025578-10">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="0925025578-11">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_custom_fields</span><span class="p" data-group-id="0925025578-12">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p" data-group-id="0925025578-12">)</span><span class="p" data-group-id="0925025578-11">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="0925025578-13">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_relationships</span><span class="p" data-group-id="0925025578-14">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="0925025578-14">)</span><span class="p" data-group-id="0925025578-13">)</span><span class="w">
+    </span><span class="k" data-group-id="0925025578-7">end</span><span class="w">
+
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="0925025578-15">(</span><span class="ss">:like_count</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="0925025578-15">)</span><span class="w"> </span><span class="k" data-group-id="0925025578-16">do</span><span class="w">
+        </span><span class="c1"># load like_count from some where</span><span class="w">
+    </span><span class="k" data-group-id="0925025578-16">end</span><span class="w">
+</span><span class="k" data-group-id="0925025578-1">end</span></code></pre>        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_custom_fields/3">render_custom_fields(struct, view, fields)</a>
+  </div>
+    <div class="summary-synopsis"><p>Render field with custom render function
+View module must defines <code class="inline">render_field/2</code> function to render each custom field</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_fields/2">render_fields(structs, fields)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_json/3">render_json(struct, view, opts)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_relationship/3">render_relationship(struct, field, view)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_relationships/2">render_relationships(struct, relationships)</a>
+  </div>
+    <div class="summary-synopsis"><p>Render relationship field for struct. <code class="inline">relationships</code> is a list of {field, view} for mapping render.
+For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_template/3">render_template(struct, view, template)</a>
+  </div>
+</div>
+  </div>
+        </section>
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="render_custom_fields/3">
+  <div class="detail-header">
+    <a href="#render_custom_fields/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_custom_fields(struct, view, fields)</h1>
+  </div>
+
+  <section class="docstring">
+
+<p>Render field with custom render function
+View module must defines <code class="inline">render_field/2</code> function to render each custom field</p><pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="2563657494-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="2563657494-1">)</span><span class="w"> </span><span class="k" data-group-id="2563657494-2">do</span><span class="w">
+  </span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="k" data-group-id="2563657494-2">end</span><span class="w">
+
+</span><span class="n">render_custom_fields</span><span class="p" data-group-id="2563657494-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2563657494-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="2563657494-4">]</span><span class="p" data-group-id="2563657494-3">)</span></code></pre>  </section>
+</section>
+<section class="detail" id="render_fields/2">
+  <div class="detail-header">
+    <a href="#render_fields/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_fields(structs, fields)</h1>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="render_json/3">
+  <div class="detail-header">
+    <a href="#render_json/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_json(struct, view, opts)</h1>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="render_relationship/3">
+  <div class="detail-header">
+    <a href="#render_relationship/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_relationship(struct, field, view)</h1>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="render_relationships/2">
+  <div class="detail-header">
+    <a href="#render_relationships/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_relationships(struct, relationships)</h1>
+  </div>
+
+  <section class="docstring">
+
+<p>Render relationship field for struct. <code class="inline">relationships</code> is a list of {field, view} for mapping render.
+For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p><p>Example relationships:</p><pre><code class="makeup elixir"><span class="n">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4959840854-1">[</span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="p" data-group-id="4959840854-1">]</span></code></pre><p>Result of <code class="inline">render_relationships(post, relationships)</code> equal to output of below code</p><pre><code class="makeup elixir"><span class="p" data-group-id="1878656404-1">%{</span><span class="w">
+    </span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="o">.</span><span class="n">render_many</span><span class="p" data-group-id="1878656404-2">(</span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comment.json&quot;</span><span class="p" data-group-id="1878656404-2">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">autho</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="o">.</span><span class="n">render_one</span><span class="p" data-group-id="1878656404-3">(</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="nc">UserView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user.json&quot;</span><span class="p" data-group-id="1878656404-3">)</span><span class="w">
+</span><span class="p" data-group-id="1878656404-1">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="render_template/3">
+  <div class="detail-header">
+    <a href="#render_template/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_template(struct, view, template)</h1>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>

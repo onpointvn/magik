@@ -15,12 +15,15 @@ defmodule Magik.JsonView do
     end
   end
 
-  @doc """
+  @moduledoc """
   Render a struct to a map with given options
 
   - `fields`: which fields are extract directly from struct
   - `custom_fields`: which fields are render using custom `render_field/2` function
   - `relationships`: a list of {field, view_module} defines which fields are rendered using another view
+
+
+  Here is a sample view
 
       defmodule MyApp.PostView do
           use JsonView
@@ -52,6 +55,7 @@ defmodule Magik.JsonView do
               # load like_count from some where
           end
       end
+
   """
 
   def render_json(nil, _, _), do: nil
