@@ -29,7 +29,6 @@ defmodule Magik.MixProject do
 
   defp docs() do
     [
-      output: "docs",
       main: "readme",
       extras: ["README.md"]
     ]
