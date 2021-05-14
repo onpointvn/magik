@@ -12,7 +12,11 @@ defmodule Magik.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: docs()
+      docs: docs(),
+      name: "Magik",
+      description: description(),
+      source_url: "https://github.com/onpointvn/magik",
+      package: package()
     ]
   end
 
@@ -29,6 +33,20 @@ defmodule Magik.MixProject do
       main: "readme",
       extras: ["README.md"]
     ]
+  end
+
+  defp package() do
+    [
+      maintainers: ["Dung Nguyen"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/onpointvn/magik"}
+    ]
+  end
+
+  defp description() do
+    """
+    It's cool to do some magics
+    """
   end
 
   # Run "mix help deps" to learn about dependencies.
