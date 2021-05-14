@@ -1,21 +1,24 @@
 # Magik
 
-**TODO: Add description**
+Magik brings magics to your project that helps to make your life easier
 
-## Installation
+[Document here](https://onpointvn.github.io/magik/readme.html)
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `magik` to your list of dependencies in `mix.exs`:
+## Here are some magics in the `Magik` toolbox
 
-```elixir
-def deps do
-  [
-    {:magik, "~> 0.1.0"}
-  ]
-end
-```
+### 1. Paginator
+Help you to query by page and size with support for both counting and no counting total page (simple load more function)
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/magik](https://hexdocs.pm/magik).
+### 2. JsonView
+Render json with custom field and relationship that helps you to reuse view and build consistent json structure
+
+### 3. ExcelView
+Help you to render excel data with format supported
+
+
+### 4. EctoEnum
+Build enum module faster, shorter and can use directly in schema definition
+
+### 5. RepoPowerUp
+Add some handy method to your Repo module that make your Repo module more powerful
 
