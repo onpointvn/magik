@@ -6,19 +6,19 @@ Magik brings magics to your project that helps to make your life easier
 
 ## Here are some magics in the `Magik` toolbox
 
-### 1. Paginator
+### 1. `Magik.Paginator`
 Help you to query by page and size with support for both counting and no counting total page (simple load more function)
 
-### 2. JsonView
+### 2. `Magik.JsonView`
 Render json with custom field and relationship that helps you to reuse view and build consistent json structure
 
-### 3. ExcelView
+### 3. `Magik.ExcelView`
 Help you to render excel data with format supported
 
 
-### 4. EctoEnum
+### 4. `Magik.EctoEnum`
 Build enum module faster, shorter and can use directly in schema definition
 
-### 5. RepoPowerUp
+### 5. `Magik.PowerUpRepo`
 Add some handy method to your Repo module that make your Repo module more powerful
 
