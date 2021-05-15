@@ -4,7 +4,7 @@ defmodule Magik.MixProject do
   def project do
     [
       app: :magik,
-      version: "0.2.0",
+      version: "0.3.0",
       build_path: "./_build",
       config_path: "./config/config.exs",
       deps_path: "./deps",
@@ -54,6 +54,9 @@ defmodule Magik.MixProject do
       {:ecto, "~> 3.0", optional: true},
       {:plug, "~> 1.11", optional: true},
       {:phoenix, "~> 1.5", optional: true},
+      {:jason, "~> 1.2", optional: true},
+      {:tesla, "~> 1.4.0", optional: true},
+      {:hackney, "~> 1.17.0", optional: true},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false}
     ]
   end

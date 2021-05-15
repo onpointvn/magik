@@ -22,3 +22,5 @@ Build enum module faster, shorter and can use directly in schema definition
 ### 5. `Magik.PowerUpRepo`
 Add some handy method to your Repo module that make your Repo module more powerful
 
+### 6. `Magik.TelegramNoti` and `Magik.Plug.TelegramNoti`
+Provide helper function watch exception and send notification to a Telegram conversation
