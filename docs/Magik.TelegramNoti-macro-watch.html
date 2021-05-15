@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
     <meta name="project" content="Magik v0.3.0">
-    <title>Magik.Formatter.format_currency — Magik v0.3.0</title>
+    <title>Magik.TelegramNoti.watch — Magik v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
     <script src="dist/sidebar_items-79dbe2fcf1.js"></script>
       <script src="docs_config.js"></script>
@@ -68,38 +68,38 @@ Magik      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Magik.Formatter.format_currency</h1>
+<h1>Magik.TelegramNoti.watch</h1>
 
 <div class="deprecated">
-  You're seeing just the function <code>format_currency</code>, go back to <a href="Magik.Formatter.html">Magik.Formatter</a> module for more information.
+  You're seeing just the macro <code>watch</code>, go back to <a href="Magik.TelegramNoti.html">Magik.TelegramNoti</a> module for more information.
 </div>
 
-<section class="detail" id="format_currency/2">
-    <span id="format_currency/1"></span>
+<section class="detail" id="watch/2">
+    <span id="watch/1"></span>
   <div class="detail-header">
-    <a href="#format_currency/2" class="detail-link" title="Link to this function">
+    <a href="#watch/2" class="detail-link" title="Link to this macro">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
+      <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature">format_currency(number, opts \\ [])</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/formatter.ex#L36" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">watch(opts \\ [], list)</h1>
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/telegram_noti.ex#L35" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+      <span class="note">(macro)</span>
   </div>
 
   <section class="docstring">
 
-<p>Format currency value to thousand separated string</p><h2 id="format_currency/2-parameters" class="section-heading">
-  <a href="#format_currency/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Parameters
+<p>Watch a function and send notification to conversation if an exception occurs</p><h2 id="watch/2-options" class="section-heading">
+  <a href="#watch/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
 </h2>
-<ul><li><code class="inline">number</code>: integer number</li><li><code class="inline">opts</code>: list of format options<ul><li><code class="inline">thousand_separator</code>: thousand separator character. Default is <code class="inline">,</code></li><li><code class="inline">currency</code>: currency character. Default is &quot;đ&quot;</li></ul></li></ul><h2 id="format_currency/2-example" class="section-heading">
-  <a href="#format_currency/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Example
-</h2>
-<p>iex&gt; Magik.Formatter.format_currency(&quot;1232321&quot;, thousand_separator: &quot;.&quot;, currency: &quot;$&quot;)
-1.232.321$</p>  </section>
+<ul><li><code class="inline">to</code>: conversation name</li><li><code class="inline">args</code>: argument list that passed to function, this is sent to telegram chat for dev to debug easier</li><li><code class="inline">label</code>: Label for this error/function</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">...</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="6616870053-1">(</span><span class="n">args</span><span class="p" data-group-id="6616870053-1">)</span><span class="w"> </span><span class="k" data-group-id="6616870053-2">do</span><span class="w">
+
+</span><span class="k" data-group-id="6616870053-2">end</span><span class="w">
+</span><span class="n">...</span></code></pre>  </section>
 </section>
 
       <footer class="footer">
