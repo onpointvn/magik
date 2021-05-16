@@ -4,7 +4,6 @@ Magik.ExcelView.html
 Magik.Formatter.html
 Magik.JsonView.html
 Magik.Paginator.html
-Magik.Plug.TelegramNoti.html
 Magik.PowerUpRepo.html
 Magik.TelegramNoti.html
 Magik.html
@@ -15,8 +14,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-d134edbaf0.js
-dist/sidebar_items-79dbe2fcf1.js
+dist/search_items-23f65bef11.js
+dist/sidebar_items-801c2f03c8.js
 index.html
 readme.html
 search.html
