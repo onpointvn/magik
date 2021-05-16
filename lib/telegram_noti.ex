@@ -11,24 +11,30 @@ defmodule Magik.TelegramNoti do
             ],
           mode: :prod # or :dev
 
-  - `conversations` is a keyword list with name and chat_id
-  - `mode`: `:prod` or `:dev` is used in TelegramNoti Plug, if `mode == :dev` then reraise the error and return error stacktrace to client side. If `mode == :prod` then do not return error stacktrace.
+  - `bot_token`: your Telegram bot tokent
+  - `conversations`: keyword list of name and chat_id. There must be at least 1 conversation which is `:default`. `default` is used if you don't specify conversation name in the function call.
+
+  Then you are ready to send message to your Telegram conversation
   """
 
   require Logger
 
   @doc """
-  Watch a function and send notification to conversation if an exception occurs
+  This macro help you to catch exceptions and then send to your Telegram conversation using `send_error/4`
 
   ## Options
-  - `to`: conversation name
-  - `args`: argument list that passed to function, this is sent to telegram chat for dev to debug easier
-  - `label`: Label for this error/function
+  - `to`: conversation name from your config. Default is `:default`
+  - `args`: argument list that passed to function, this is sent to telegram chat for dev to debug easier. If not speficied, arguments for current function call are used
+  - `label`: label for this error/function. If not specified, current function name is used.
 
   **Example**
       ...
+      require Magik.TelegramNoti
+
       def do_something(args) do
-        
+        Magik.TelegramNoti.watch [to: :admin] do
+            # your logic code here
+        end
       end
       ...
   """
@@ -64,6 +70,12 @@ defmodule Magik.TelegramNoti do
     end
   end
 
+  @doc """
+  Send a message to conversation
+
+      send_message(:api, "this is a sample message")
+  """
+  @spec send_message(atom, String.t()) :: {:ok, map} | {:error, map}
   def send_message(conversation \\ :default, message) do
     config = Application.get_env(:magik, :telegram_noti, [])
 
@@ -91,6 +103,41 @@ defmodule Magik.TelegramNoti do
     end
   end
 
+  @doc """
+  Format and send error message to a Telegam conversation with data from a connection. This helper is used to send error from your phoenix router or controller.
+
+
+  ## From router
+      defmodule MyApp.Router do
+          use MyAppWeb, :router
+          use Plug.ErrorHandler
+          ...
+
+          def handle_errors(conn, error) do
+              if conn.status >= 500 do
+                   Magik.TelegramNoti.send_conn_error(:api, conn, error)
+              end
+              ....
+         end
+      end
+
+
+  ## from controller
+      defmodule MyAppWeb.PageController do
+          ...
+          def index(conn, params)do
+            try do
+                ...
+            catch
+              error ->
+                 Magik.TelegramNoti.send_conn_error(:api, conn, %{kind: :error, reason: error, stack: __STACKTRACE__})
+                 # return your error
+            end
+          end
+      end
+
+  """
+  @spec send_conn_error(atom, Plug.Conn.t(), map) :: {:ok, map} | {:error, map}
   def send_conn_error(conversation \\ :default, %{} = conn, %{
         kind: kind,
         reason: reason,
@@ -116,6 +163,23 @@ defmodule Magik.TelegramNoti do
     send_message(conversation, message)
   end
 
+  @doc """
+  Format error and send to Telegram conversation.
+
+      defmodule MyApp.Calculator do
+          ...
+          def divide(a, b)do
+              try do
+                  ...
+              catch
+                  error ->
+                      Magik.TelegramNoti.send_error(:api, "MyApp.Calculator error", [a,b], %{kind: :error, reason: error, stack: __STACKTRACE__})
+                      # return your error
+              end
+          end
+      end
+  """
+  @spec send_error(atom, String.t(), any, map) :: {:ok, map} | {:error, map}
   def send_error(conversation \\ :default, title, args \\ nil, %{
         kind: kind,
         reason: reason,
