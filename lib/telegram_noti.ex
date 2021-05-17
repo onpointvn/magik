@@ -144,7 +144,7 @@ defmodule Magik.TelegramNoti do
         stack: stacktrace
       }) do
     message = """
-    *ERROR: #{inspect(reason)}*
+    *ERROR: #{conn.private[:phoenix_controller]}.#{conn.private[:phoenix_action]}*
     --------------------
 
     *Request URL*: #{Phoenix.Controller.current_url(conn)}
