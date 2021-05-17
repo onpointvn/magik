@@ -44,7 +44,7 @@ defmodule Magik.TelegramNoti do
         unquote(block)
       rescue
         err ->
-          conversation = Keyword.get(unquote(opts), :to)
+          conversation = Keyword.get(unquote(opts), :to, :default)
           label = Keyword.get(unquote(opts), :label)
 
           label =
