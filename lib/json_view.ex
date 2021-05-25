@@ -3,13 +3,22 @@ defmodule Magik.JsonView do
     fields = Keyword.get(opts, :fields, [])
     custom_fields = Keyword.get(opts, :custom_fields, [])
 
+    after_render = Keyword.get(opts, :after_render)
+
     quote do
       def render_json(struct, fields, custom_fields, relationships) do
-        Magik.JsonView.render_json(struct, __MODULE__,
-          fields: unquote(fields) ++ fields,
-          custom_fields: unquote(custom_fields) ++ custom_fields,
-          relationships: relationships
-        )
+        data =
+          Magik.JsonView.render_json(struct, __MODULE__,
+            fields: unquote(fields) ++ fields,
+            custom_fields: unquote(custom_fields) ++ custom_fields,
+            relationships: relationships
+          )
+
+        if is_function(unquote(after_render)) do
+          apply(unquote(after_render), [data])
+        else
+          data
+        end
       end
 
       def render_view(struct, view, template) do

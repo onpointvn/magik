@@ -1,8 +1,20 @@
-defmodule MagikTest.AddressView do
-  use Magik.JsonView
+defmodule MagikTest.TestHookView do
+  use Magik.JsonView, after_render: &MagikTest.TestHookView.append_x/1
 
-  def render("address.json", %{address: address}) do
-    render_json(address, [:ward, :district, :city], [], [])
+  def(render("data.json", %{data: data})) do
+    render_json(data, [:name, :email], [:has_email], [])
+  end
+
+  def render_field(:has_email, data) do
+    (is_nil(data.email) && "NO") || "YES"
+  end
+
+  def append_x(data) do
+    Enum.map(data, fn
+      {k, v} when is_binary(v) -> {k, "#{v}.x"}
+      {k, v} -> {k, v}
+    end)
+    |> Enum.into(%{})
   end
 end
 
@@ -62,6 +74,14 @@ defmodule MagikTestJsonView do
              name: "John Doe",
              has_email: "YES"
            } == render_json(@data, [:name], [:has_email], [])
+  end
+
+  test "append x to all string attribute" do
+    assert %{
+             name: "John Doe.x",
+             email: "test@gmail.com.x",
+             has_email: "YES.x"
+           } = MagikTest.TestHookView.render("data.json", %{data: @data})
   end
 
   def render_field(:is_teenager, data) do
