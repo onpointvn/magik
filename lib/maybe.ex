@@ -3,10 +3,12 @@ defmodule Magik.Maybe do
   def pipe(data, nil, _), do: data
 
   def pipe(data, true, func) when is_function(func, 1) do
+    :test2
     func.(data)
   end
 
   def pipe_ok({:ok, data}, func) when is_function(func, 1) do
+    :test2
     func.(data)
   end
 
@@ -15,6 +17,7 @@ defmodule Magik.Maybe do
   def maybe(false, _func), do: :ok
 
   def maybe(true, func) when is_function(func) do
+    :test2
     func.()
   end
 
