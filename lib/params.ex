@@ -1,4 +1,18 @@
 defmodule Magik.Params do
+  @moduledoc """
+  Params provide some helpers method to work with parameters
+  """
+
+  @doc """
+  A plug which do srubbing params
+
+  **Example**
+
+    plug Magik.Params.plug_srub when action in [:index, :show]
+    # or specify which field to scrub
+    plug Magik.Params.plug_srub, ["id", "keyword"] when action in [:index, :show]
+
+  """
   def plug_srub(conn, keys \\ []) do
     params =
       if keys == [] do
@@ -15,6 +29,15 @@ defmodule Magik.Params do
     %{conn | params: params}
   end
 
+  @doc """
+  Convert all parameter which value is empty string or string with all whitespace to nil
+
+  **Example**
+
+    params = %{"keyword" => "   ", "email" => "", "type" => "customer"}
+    Magik.Params.scrub_param(params)
+    # => %{"keyword" => nil, "email" => nil, "type" => "customer"}
+  """
   def scrub_param(%{__struct__: mod} = struct) when is_atom(mod) do
     struct
   end
