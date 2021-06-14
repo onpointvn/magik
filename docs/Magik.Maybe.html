@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.3.1">
-    <title>Magik.Maybe — Magik v0.3.1</title>
+    <meta name="project" content="Magik v0.6.0">
+    <title>Magik.Maybe — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-98b25fdb61.js"></script>
+    <script src="dist/sidebar_items-04ace70d72.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -49,7 +49,7 @@
       <a href="readme.html" class="sidebar-projectName">
 Magik      </a>
       <strong class="sidebar-projectVersion">
-        v0.3.1
+        v0.6.0
       </strong>
     </div>
   </div>
@@ -69,7 +69,7 @@ Magik      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Magik.Maybe <small class="app-vsn">(Magik v0.3.1)</small>
+        Magik.Maybe <small class="app-vsn">(Magik v0.6.0)</small>
           <a href="https://github.com/onpointvn/magik/blob/master/lib/maybe.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
@@ -234,11 +234,11 @@ Using function condition</p><p>  a = 10
   <section class="docstring">
 
 <p>This function is mostly used with <code class="inline">with</code>. In some case, you may want to invoke a function if it meets a specific condition without breaking <code class="inline">with</code> into 2 block like this</p><p>  params = %{}
-  with {:ok, data} &lt;- insert_something(),</p><pre><code class="makeup elixir"><span class="w">   </span><span class="ss">:ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="0413727962-1">(</span><span class="k">if</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="n">checked</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">do_something</span><span class="p" data-group-id="0413727962-2">(</span><span class="n">data</span><span class="p" data-group-id="0413727962-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="ss">:ok</span><span class="p" data-group-id="0413727962-1">)</span><span class="p">,</span><span class="w">
-   </span><span class="p" data-group-id="0413727962-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">another_data</span><span class="p" data-group-id="0413727962-3">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">send_something</span><span class="p" data-group-id="0413727962-4">(</span><span class="n">data</span><span class="p" data-group-id="0413727962-4">)</span><span class="w"> </span><span class="k" data-group-id="0413727962-5">do</span><span class="w">
+  with {:ok, data} &lt;- insert_something(),</p><pre><code class="makeup elixir"><span class="w">   </span><span class="ss">:ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="1981181390-1">(</span><span class="k">if</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="n">checked</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">do_something</span><span class="p" data-group-id="1981181390-2">(</span><span class="n">data</span><span class="p" data-group-id="1981181390-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="ss">:ok</span><span class="p" data-group-id="1981181390-1">)</span><span class="p">,</span><span class="w">
+   </span><span class="p" data-group-id="1981181390-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">another_data</span><span class="p" data-group-id="1981181390-3">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">send_something</span><span class="p" data-group-id="1981181390-4">(</span><span class="n">data</span><span class="p" data-group-id="1981181390-4">)</span><span class="w"> </span><span class="k" data-group-id="1981181390-5">do</span><span class="w">
    </span><span class="c1"># aha</span></code></pre><p>  end</p><p>This function help to write it shorter</p><p>  params = %{}
-  with {:ok, data} &lt;- insert_something(),</p><pre><code class="makeup elixir"><span class="w">    </span><span class="ss">:ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="0292826998-1">(</span><span class="n">params</span><span class="o">.</span><span class="n">checked</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">do_something</span><span class="p" data-group-id="0292826998-2">(</span><span class="n">data</span><span class="p" data-group-id="0292826998-2">)</span><span class="p" data-group-id="0292826998-1">)</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="0292826998-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">another_data</span><span class="p" data-group-id="0292826998-3">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">send_something</span><span class="p" data-group-id="0292826998-4">(</span><span class="n">data</span><span class="p" data-group-id="0292826998-4">)</span><span class="w"> </span><span class="k" data-group-id="0292826998-5">do</span><span class="w">
+  with {:ok, data} &lt;- insert_something(),</p><pre><code class="makeup elixir"><span class="w">    </span><span class="ss">:ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="9606380877-1">(</span><span class="n">params</span><span class="o">.</span><span class="n">checked</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">do_something</span><span class="p" data-group-id="9606380877-2">(</span><span class="n">data</span><span class="p" data-group-id="9606380877-2">)</span><span class="p" data-group-id="9606380877-1">)</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="9606380877-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">another_data</span><span class="p" data-group-id="9606380877-3">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">send_something</span><span class="p" data-group-id="9606380877-4">(</span><span class="n">data</span><span class="p" data-group-id="9606380877-4">)</span><span class="w"> </span><span class="k" data-group-id="9606380877-5">do</span><span class="w">
     </span><span class="c1"># aha</span></code></pre><p>  end</p>  </section>
 </section>
           </div>

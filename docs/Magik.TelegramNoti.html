@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.3.1">
-    <title>Magik.TelegramNoti — Magik v0.3.1</title>
+    <meta name="project" content="Magik v0.6.0">
+    <title>Magik.TelegramNoti — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-98b25fdb61.js"></script>
+    <script src="dist/sidebar_items-04ace70d72.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -49,7 +49,7 @@
       <a href="readme.html" class="sidebar-projectName">
 Magik      </a>
       <strong class="sidebar-projectVersion">
-        v0.3.1
+        v0.6.0
       </strong>
     </div>
   </div>
@@ -69,7 +69,7 @@ Magik      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Magik.TelegramNoti <small class="app-vsn">(Magik v0.3.1)</small>
+        Magik.TelegramNoti <small class="app-vsn">(Magik v0.6.0)</small>
           <a href="https://github.com/onpointvn/magik/blob/master/lib/telegram_noti.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
@@ -84,10 +84,10 @@ Magik      </a>
 </h2>
 <pre><code class="makeup elixir"><span class="n">config</span><span class="w"> </span><span class="ss">:magik</span><span class="p">,</span><span class="w"> </span><span class="ss">:telegram_noti</span><span class="p">,</span><span class="w">
     </span><span class="ss">bot_token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your bot token&quot;</span><span class="o">.</span><span class="w">
-    </span><span class="ss">conversations</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4947261334-1">[</span><span class="w">
+    </span><span class="ss">conversations</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0658428917-1">[</span><span class="w">
           </span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default_chat_id&quot;</span><span class="p">,</span><span class="w">
           </span><span class="ss">admin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other chat id&quot;</span><span class="w">
-      </span><span class="p" data-group-id="4947261334-1">]</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="0658428917-1">]</span><span class="p">,</span><span class="w">
     </span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:prod</span><span class="w"> </span><span class="c1"># or :dev</span></code></pre><ul><li><code class="inline">bot_token</code>: your Telegram bot tokent</li><li><code class="inline">conversations</code>: keyword list of name and chat_id. There must be at least 1 conversation which is <code class="inline">:default</code>. <code class="inline">default</code> is used if you don't specify conversation name in the function call.</li></ul><p>Then you are ready to send message to your Telegram conversation</p>        </section>
 
         <section id="summary" class="details-list">
@@ -161,33 +161,33 @@ Functions          </h1>
   <a href="#send_conn_error/3-from-router" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   From router
 </h2>
-<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="4641933489-1">do</span><span class="w">
+<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="7495022337-1">do</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">MyAppWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:router</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">Plug.ErrorHandler</span><span class="w">
     </span><span class="n">...</span><span class="w">
 
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle_errors</span><span class="p" data-group-id="4641933489-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="4641933489-2">)</span><span class="w"> </span><span class="k" data-group-id="4641933489-3">do</span><span class="w">
-        </span><span class="k">if</span><span class="w"> </span><span class="n">conn</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k" data-group-id="4641933489-4">do</span><span class="w">
-             </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="4641933489-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="4641933489-5">)</span><span class="w">
-        </span><span class="k" data-group-id="4641933489-4">end</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle_errors</span><span class="p" data-group-id="7495022337-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="7495022337-2">)</span><span class="w"> </span><span class="k" data-group-id="7495022337-3">do</span><span class="w">
+        </span><span class="k">if</span><span class="w"> </span><span class="n">conn</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k" data-group-id="7495022337-4">do</span><span class="w">
+             </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="7495022337-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="7495022337-5">)</span><span class="w">
+        </span><span class="k" data-group-id="7495022337-4">end</span><span class="w">
         </span><span class="n">...</span><span class="o">.</span><span class="w">
-   </span><span class="k" data-group-id="4641933489-3">end</span><span class="w">
-</span><span class="k" data-group-id="4641933489-1">end</span></code></pre><h2 id="send_conn_error/3-from-controller" class="section-heading">
+   </span><span class="k" data-group-id="7495022337-3">end</span><span class="w">
+</span><span class="k" data-group-id="7495022337-1">end</span></code></pre><h2 id="send_conn_error/3-from-controller" class="section-heading">
   <a href="#send_conn_error/3-from-controller" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   from controller
 </h2>
-<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.PageController</span><span class="w"> </span><span class="k" data-group-id="4277981930-1">do</span><span class="w">
+<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.PageController</span><span class="w"> </span><span class="k" data-group-id="4505889266-1">do</span><span class="w">
     </span><span class="n">...</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="4277981930-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="4277981930-2">)</span><span class="k" data-group-id="4277981930-3">do</span><span class="w">
-      </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="4277981930-4">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="4505889266-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="4505889266-2">)</span><span class="k" data-group-id="4505889266-3">do</span><span class="w">
+      </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="4505889266-4">do</span><span class="w">
           </span><span class="n">...</span><span class="w">
-      </span><span class="k" data-group-id="4277981930-4">catch</span><span class="w">
+      </span><span class="k" data-group-id="4505889266-4">catch</span><span class="w">
         </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-           </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="4277981930-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4277981930-6">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="4277981930-6">}</span><span class="p" data-group-id="4277981930-5">)</span><span class="w">
+           </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="4505889266-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4505889266-6">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="4505889266-6">}</span><span class="p" data-group-id="4505889266-5">)</span><span class="w">
            </span><span class="c1"># return your error</span><span class="w">
-      </span><span class="k" data-group-id="4277981930-4">end</span><span class="w">
-    </span><span class="k" data-group-id="4277981930-3">end</span><span class="w">
-</span><span class="k" data-group-id="4277981930-1">end</span></code></pre>  </section>
+      </span><span class="k" data-group-id="4505889266-4">end</span><span class="w">
+    </span><span class="k" data-group-id="4505889266-3">end</span><span class="w">
+</span><span class="k" data-group-id="4505889266-1">end</span></code></pre>  </section>
 </section>
 <section class="detail" id="send_error/4">
     <span id="send_error/2"></span>
@@ -210,18 +210,18 @@ Functions          </h1>
           <pre>send_error(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
       </div>
 
-<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="8400429148-1">do</span><span class="w">
+<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="8173641800-1">do</span><span class="w">
     </span><span class="n">...</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="8400429148-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="8400429148-2">)</span><span class="k" data-group-id="8400429148-3">do</span><span class="w">
-        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8400429148-4">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="8173641800-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="8173641800-2">)</span><span class="k" data-group-id="8173641800-3">do</span><span class="w">
+        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8173641800-4">do</span><span class="w">
             </span><span class="n">...</span><span class="w">
-        </span><span class="k" data-group-id="8400429148-4">catch</span><span class="w">
+        </span><span class="k" data-group-id="8173641800-4">catch</span><span class="w">
             </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="8400429148-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8400429148-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="8400429148-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8400429148-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="8400429148-7">}</span><span class="p" data-group-id="8400429148-5">)</span><span class="w">
+                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="8173641800-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8173641800-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="8173641800-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8173641800-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="8173641800-7">}</span><span class="p" data-group-id="8173641800-5">)</span><span class="w">
                 </span><span class="c1"># return your error</span><span class="w">
-        </span><span class="k" data-group-id="8400429148-4">end</span><span class="w">
-    </span><span class="k" data-group-id="8400429148-3">end</span><span class="w">
-</span><span class="k" data-group-id="8400429148-1">end</span></code></pre>  </section>
+        </span><span class="k" data-group-id="8173641800-4">end</span><span class="w">
+    </span><span class="k" data-group-id="8173641800-3">end</span><span class="w">
+</span><span class="k" data-group-id="8173641800-1">end</span></code></pre>  </section>
 </section>
 <section class="detail" id="send_message/2">
     <span id="send_message/1"></span>
@@ -243,7 +243,7 @@ Functions          </h1>
           <pre>send_message(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
       </div>
 
-<p>Send a message to conversation</p><pre><code class="makeup elixir"><span class="n">send_message</span><span class="p" data-group-id="4974284729-1">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;this is a sample message&quot;</span><span class="p" data-group-id="4974284729-1">)</span></code></pre>  </section>
+<p>Send a message to conversation</p><pre><code class="makeup elixir"><span class="n">send_message</span><span class="p" data-group-id="9949702938-1">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;this is a sample message&quot;</span><span class="p" data-group-id="9949702938-1">)</span></code></pre>  </section>
 </section>
 <section class="detail" id="watch/2">
     <span id="watch/1"></span>
@@ -269,11 +269,11 @@ Functions          </h1>
 <ul><li><code class="inline">to</code>: conversation name from your config. Default is <code class="inline">:default</code></li><li><code class="inline">args</code>: argument list that passed to function, this is sent to telegram chat for dev to debug easier. If not speficied, arguments for current function call are used</li><li><code class="inline">label</code>: label for this error/function. If not specified, current function name is used.</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">...</span><span class="w">
 </span><span class="kn">require</span><span class="w"> </span><span class="nc">Magik.TelegramNoti</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="9419239102-1">(</span><span class="n">args</span><span class="p" data-group-id="9419239102-1">)</span><span class="w"> </span><span class="k" data-group-id="9419239102-2">do</span><span class="w">
-  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="9419239102-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="9419239102-3">]</span><span class="w"> </span><span class="k" data-group-id="9419239102-4">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="1543781965-1">(</span><span class="n">args</span><span class="p" data-group-id="1543781965-1">)</span><span class="w"> </span><span class="k" data-group-id="1543781965-2">do</span><span class="w">
+  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="1543781965-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="1543781965-3">]</span><span class="w"> </span><span class="k" data-group-id="1543781965-4">do</span><span class="w">
       </span><span class="c1"># your logic code here</span><span class="w">
-  </span><span class="k" data-group-id="9419239102-4">end</span><span class="w">
-</span><span class="k" data-group-id="9419239102-2">end</span><span class="w">
+  </span><span class="k" data-group-id="1543781965-4">end</span><span class="w">
+</span><span class="k" data-group-id="1543781965-2">end</span><span class="w">
 </span><span class="n">...</span></code></pre>  </section>
 </section>
           </div>

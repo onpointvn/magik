@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.3.1">
-    <title>Magik.TelegramNoti.watch — Magik v0.3.1</title>
+    <meta name="project" content="Magik v0.6.0">
+    <title>Magik.TelegramNoti.watch — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-98b25fdb61.js"></script>
+    <script src="dist/sidebar_items-04ace70d72.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -49,7 +49,7 @@
       <a href="readme.html" class="sidebar-projectName">
 Magik      </a>
       <strong class="sidebar-projectVersion">
-        v0.3.1
+        v0.6.0
       </strong>
     </div>
   </div>
@@ -98,11 +98,11 @@ Magik      </a>
 <ul><li><code class="inline">to</code>: conversation name from your config. Default is <code class="inline">:default</code></li><li><code class="inline">args</code>: argument list that passed to function, this is sent to telegram chat for dev to debug easier. If not speficied, arguments for current function call are used</li><li><code class="inline">label</code>: label for this error/function. If not specified, current function name is used.</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">...</span><span class="w">
 </span><span class="kn">require</span><span class="w"> </span><span class="nc">Magik.TelegramNoti</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="9419239102-1">(</span><span class="n">args</span><span class="p" data-group-id="9419239102-1">)</span><span class="w"> </span><span class="k" data-group-id="9419239102-2">do</span><span class="w">
-  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="9419239102-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="9419239102-3">]</span><span class="w"> </span><span class="k" data-group-id="9419239102-4">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="1543781965-1">(</span><span class="n">args</span><span class="p" data-group-id="1543781965-1">)</span><span class="w"> </span><span class="k" data-group-id="1543781965-2">do</span><span class="w">
+  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="1543781965-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="1543781965-3">]</span><span class="w"> </span><span class="k" data-group-id="1543781965-4">do</span><span class="w">
       </span><span class="c1"># your logic code here</span><span class="w">
-  </span><span class="k" data-group-id="9419239102-4">end</span><span class="w">
-</span><span class="k" data-group-id="9419239102-2">end</span><span class="w">
+  </span><span class="k" data-group-id="1543781965-4">end</span><span class="w">
+</span><span class="k" data-group-id="1543781965-2">end</span><span class="w">
 </span><span class="n">...</span></code></pre>  </section>
 </section>
 

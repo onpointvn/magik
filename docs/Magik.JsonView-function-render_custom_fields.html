@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.3.1">
-    <title>Magik.JsonView.render_custom_fields — Magik v0.3.1</title>
+    <meta name="project" content="Magik v0.6.0">
+    <title>Magik.JsonView.render_custom_fields — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-98b25fdb61.js"></script>
+    <script src="dist/sidebar_items-04ace70d72.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -49,7 +49,7 @@
       <a href="readme.html" class="sidebar-projectName">
 Magik      </a>
       <strong class="sidebar-projectVersion">
-        v0.3.1
+        v0.6.0
       </strong>
     </div>
   </div>
@@ -93,11 +93,11 @@ Magik      </a>
 <p>Render field with custom render function
 View module must defines <code class="inline">render_field/2</code> function to render each custom field</p><pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="5117992377-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="5117992377-1">)</span><span class="w"> </span><span class="k" data-group-id="5117992377-2">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="5702103585-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="5702103585-1">)</span><span class="w"> </span><span class="k" data-group-id="5702103585-2">do</span><span class="w">
   </span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">
-</span><span class="k" data-group-id="5117992377-2">end</span><span class="w">
+</span><span class="k" data-group-id="5702103585-2">end</span><span class="w">
 
-</span><span class="n">render_custom_fields</span><span class="p" data-group-id="5117992377-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5117992377-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="5117992377-4">]</span><span class="p" data-group-id="5117992377-3">)</span></code></pre>  </section>
+</span><span class="n">render_custom_fields</span><span class="p" data-group-id="5702103585-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5702103585-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="5702103585-4">]</span><span class="p" data-group-id="5702103585-3">)</span></code></pre>  </section>
 </section>
 
       <footer class="footer">
