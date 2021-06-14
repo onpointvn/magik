@@ -1,9 +1,15 @@
-defmodule OrderStatus do
+defmodule MagikEctoEnumTest.OrderStatus do
   use Magik.EctoEnum, ["new", "pending", "processing", "completed", "cancelled"]
+end
+
+defmodule MagikEctoEnumTest.ContractType do
+  use Magik.EctoEnum, part_time: "Part time", full_time: "Full time", cooperator: "Cooperator"
 end
 
 defmodule MagikEctoEnumTest do
   use ExUnit.Case
+  alias MagikEctoEnumTest.OrderStatus
+  alias MagikEctoEnumTest.ContractType
 
   @states ["new", "pending", "processing", "completed", "cancelled"]
   test "enum value should match" do
@@ -15,6 +21,20 @@ defmodule MagikEctoEnumTest do
     |> Enum.each(fn state ->
       assert apply(OrderStatus, :"#{state}", []) == state
     end)
+  end
+
+  test "enum with tuple key - value" do
+    assert "Part time" == ContractType.part_time()
+    assert "Full time" == ContractType.full_time()
+  end
+
+  test "enum values with tuple key - value" do
+    assert ["Part time", "Full time", "Cooperator"] == ContractType.enum()
+  end
+
+  test "enum has_value? with tuple key - value" do
+    assert true == ContractType.has_value?("Part time")
+    assert false == ContractType.has_value?("part time")
   end
 
   test "check has_value should pass all" do
