@@ -8,7 +8,7 @@
     <meta name="project" content="Magik v0.3.1">
     <title>Magik.JsonView.render_custom_fields — Magik v0.3.1</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-801c2f03c8.js"></script>
+    <script src="dist/sidebar_items-98b25fdb61.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -75,13 +75,14 @@ Magik      </a>
 </div>
 
 <section class="detail" id="render_custom_fields/3">
+    <span id="render_custom_fields/2"></span>
   <div class="detail-header">
     <a href="#render_custom_fields/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render_custom_fields(struct, view, fields)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/json_view.ex#L91" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">render_custom_fields(struct, view \\ nil, fields)</h1>
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/json_view.ex#L104" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -92,11 +93,11 @@ Magik      </a>
 <p>Render field with custom render function
 View module must defines <code class="inline">render_field/2</code> function to render each custom field</p><pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="2674031766-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="2674031766-1">)</span><span class="w"> </span><span class="k" data-group-id="2674031766-2">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="5117992377-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="5117992377-1">)</span><span class="w"> </span><span class="k" data-group-id="5117992377-2">do</span><span class="w">
   </span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">
-</span><span class="k" data-group-id="2674031766-2">end</span><span class="w">
+</span><span class="k" data-group-id="5117992377-2">end</span><span class="w">
 
-</span><span class="n">render_custom_fields</span><span class="p" data-group-id="2674031766-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2674031766-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="2674031766-4">]</span><span class="p" data-group-id="2674031766-3">)</span></code></pre>  </section>
+</span><span class="n">render_custom_fields</span><span class="p" data-group-id="5117992377-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5117992377-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="5117992377-4">]</span><span class="p" data-group-id="5117992377-3">)</span></code></pre>  </section>
 </section>
 
       <footer class="footer">

@@ -8,7 +8,7 @@
     <meta name="project" content="Magik v0.3.1">
     <title>Magik.TelegramNoti.send_error — Magik v0.3.1</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-801c2f03c8.js"></script>
+    <script src="dist/sidebar_items-98b25fdb61.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -95,18 +95,18 @@ Magik      </a>
           <pre>send_error(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
       </div>
 
-<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="1255164724-1">do</span><span class="w">
+<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="8400429148-1">do</span><span class="w">
     </span><span class="n">...</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="1255164724-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1255164724-2">)</span><span class="k" data-group-id="1255164724-3">do</span><span class="w">
-        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="1255164724-4">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="8400429148-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="8400429148-2">)</span><span class="k" data-group-id="8400429148-3">do</span><span class="w">
+        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8400429148-4">do</span><span class="w">
             </span><span class="n">...</span><span class="w">
-        </span><span class="k" data-group-id="1255164724-4">catch</span><span class="w">
+        </span><span class="k" data-group-id="8400429148-4">catch</span><span class="w">
             </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="1255164724-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1255164724-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="1255164724-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1255164724-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="1255164724-7">}</span><span class="p" data-group-id="1255164724-5">)</span><span class="w">
+                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="8400429148-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8400429148-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="8400429148-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8400429148-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="8400429148-7">}</span><span class="p" data-group-id="8400429148-5">)</span><span class="w">
                 </span><span class="c1"># return your error</span><span class="w">
-        </span><span class="k" data-group-id="1255164724-4">end</span><span class="w">
-    </span><span class="k" data-group-id="1255164724-3">end</span><span class="w">
-</span><span class="k" data-group-id="1255164724-1">end</span></code></pre>  </section>
+        </span><span class="k" data-group-id="8400429148-4">end</span><span class="w">
+    </span><span class="k" data-group-id="8400429148-3">end</span><span class="w">
+</span><span class="k" data-group-id="8400429148-1">end</span></code></pre>  </section>
 </section>
 
       <footer class="footer">
