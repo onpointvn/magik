@@ -24,3 +24,6 @@ Add some handy method to your Repo module that make your Repo module more powerf
 
 ### 6. `Magik.TelegramNoti`
 Provide helper function watch exception, format message and send notification to a Telegram conversation
+
+### 7. `Magik.Params`
+Provide helper function to process params like `scrub_params` and `clean_nil`

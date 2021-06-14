@@ -6,11 +6,19 @@ defmodule Magik.Params do
   @doc """
   A plug which do srubbing params
 
-  **Example**
+  **Use in Router**
 
-    plug Magik.Params.plug_srub when action in [:index, :show]
-    # or specify which field to scrub
-    plug Magik.Params.plug_srub, ["id", "keyword"] when action in [:index, :show]
+      defmodule MyApp.Router do
+        ...
+        plug Magik.Params.plug_srub
+        ...
+      end
+
+  **Use in controller**
+
+      plug Magik.Params.plug_srub when action in [:index, :show]
+      # or specify which field to scrub
+      plug Magik.Params.plug_srub, ["id", "keyword"] when action in [:index, :show]
 
   """
   def plug_srub(conn, keys \\ []) do
@@ -30,13 +38,17 @@ defmodule Magik.Params do
   end
 
   @doc """
-  Convert all parameter which value is empty string or string with all whitespace to nil
+  Convert all parameter which value is empty string or string with all whitespace to nil. It works with nested map and list too.
 
   **Example**
 
-    params = %{"keyword" => "   ", "email" => "", "type" => "customer"}
-    Magik.Params.scrub_param(params)
-    # => %{"keyword" => nil, "email" => nil, "type" => "customer"}
+      params = %{"keyword" => "   ", "email" => "", "type" => "customer"}
+      Magik.Params.scrub_param(params)
+      # => %{"keyword" => nil, "email" => nil, "type" => "customer"}
+
+      params = %{user_ids: [1, 2, "", "  "]}
+      Magik.Params.scrub_param(params)
+      # => %{user_ids: [1, 2, nil, nil]}
   """
   def scrub_param(%{__struct__: mod} = struct) when is_atom(mod) do
     struct
@@ -59,4 +71,45 @@ defmodule Magik.Params do
   defp scrub?(" " <> rest), do: scrub?(rest)
   defp scrub?(""), do: true
   defp scrub?(_), do: false
+
+  @doc """
+  Clean all nil field from params, support nested map and list.
+
+  **Example**
+
+      params = %{"keyword" => nil, "email" => nil, "type" => "customer"}
+      Magik.Params.clean_nil(params)
+      # => %{"type" => "customer"}
+
+      params = %{user_ids: [1, 2, nil]}
+      Magik.Params.clean_nil(params)
+      # => %{user_ids: [1, 2]}
+  """
+  @spec clean_nil(any) :: any
+  def clean_nil(%{__struct__: mod} = param) when is_atom(mod) do
+    param
+  end
+
+  def clean_nil(%{} = param) do
+    Enum.reduce(param, %{}, fn {k, v}, acc ->
+      if is_nil(v) do
+        acc
+      else
+        Map.put(acc, k, clean_nil(v))
+      end
+    end)
+  end
+
+  def clean_nil(param) when is_list(param) do
+    Enum.reduce(param, [], fn item, acc ->
+      if is_nil(item) do
+        acc
+      else
+        [clean_nil(item) | acc]
+      end
+    end)
+    |> Enum.reverse()
+  end
+
+  def clean_nil(param), do: param
 end
