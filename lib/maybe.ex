@@ -8,13 +8,13 @@ defmodule Magik.Maybe do
 
   **Example**
 
-    a = 10
-    b = 12
+      a = 10
+      b = 12
 
-    a
-    |> Kernel.*(2)
-    |> Maybe.pipe( b != 0, & &1/b)
-    |> Kernel.+(10)
+      a
+      |> Kernel.*(2)
+      |> Maybe.pipe( b != 0, & &1/b)
+      |> Kernel.+(10)
 
   **The condition**
   Could be any value:
@@ -25,10 +25,11 @@ defmodule Magik.Maybe do
   **Example 2**
   Using function condition
 
-    a = 10
-    a
-    |> Kernel.+(3)
-    |> Maybe.pipe(& &1 > 0, & &1 - 5)
+      a = 10
+      a
+      |> Kernel.+(3)
+      |> Maybe.pipe(& &1 > 0, & &1 - 5)
+
   """
   @spec pipe(any, condition :: any, function) :: any
   def pipe(data, true, func) when is_function(func, 1) do
@@ -50,11 +51,11 @@ defmodule Magik.Maybe do
 
   **Example**
 
-    changeset = User.changeset(%User{}, params)
-    Repo.insert(changeset)
-    |> Maybe.pipe(fn user ->
-      # do something with user
-    end)
+      changeset = User.changeset(%User{}, params)
+      Repo.insert(changeset)
+      |> Maybe.pipe(fn user ->
+        # do something with user
+      end)
 
   In case you are using `with`, don't care about this function
   """
@@ -68,20 +69,21 @@ defmodule Magik.Maybe do
   @doc """
   This function is mostly used with `with`. In some case, you may want to invoke a function if it meets a specific condition without breaking `with` into 2 block like this
 
-    params = %{}
-    with {:ok, data} <- insert_something(),
-         :ok <- (if params.checked, do: do_something(data), else: :ok),
-         {:ok, another_data} <- send_something(data) do
-         # aha
-    end
+      params = %{}
+
+      with {:ok, data} <- insert_something(),
+           :ok <- (if params.checked, do: do_something(data), else: :ok),
+           {:ok, another_data} <- send_something(data) do
+           # aha
+      end
 
   This function help to write it shorter
 
-    params = %{}
-    with {:ok, data} <- insert_something(),
-          :ok <- Maybe.run(params.checked, &do_something(data)),
-          {:ok, another_data} <- send_something(data) do
-          # aha
+      params = %{}
+      with {:ok, data} <- insert_something(),
+            :ok <- Maybe.run(params.checked, &do_something(data)),
+            {:ok, another_data} <- send_something(data) do
+            # aha
     end
   """
   def run(nil, _func), do: :ok
