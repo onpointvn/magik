@@ -1,6 +1,4 @@
 defmodule Magik.EctoEnum do
-  import Ecto.Changeset
-
   @moduledoc """
   EctoEnum helps to generate enum type and enum helper function.
 
@@ -22,6 +20,17 @@ defmodule Magik.EctoEnum do
 
   It still provides same functions with manual implemented module
 
+
+  ## Use different name and value
+  In some case, you want to use a different name instead of the same with value, you can pass a tuple like this
+
+      defmodule MyEnum do
+        use Magik.EctoEnum, {name1: "Value 1", name2: "value 2"}
+      end
+
+      MyEnum.name1()
+      # => "Value 1"
+
   ## Use in ecto schema
   EctoEnum also defines a Type module that you can used directly in Ecto schema
 
@@ -39,7 +48,15 @@ defmodule Magik.EctoEnum do
   defmacro __using__(enum, opts \\ []) do
     type = Keyword.get(opts, :type, :string)
 
-    quote bind_quoted: [enum: enum, type: type] do
+    enum =
+      Enum.map(enum, fn
+        {k, v} -> {k, v}
+        v -> {v, v}
+      end)
+
+    enum_values = Enum.map(enum, &elem(&1, 1))
+
+    quote bind_quoted: [enum: enum, enum_values: enum_values, type: type] do
       ### Type definition
 
       defmodule Type do
@@ -47,7 +64,7 @@ defmodule Magik.EctoEnum do
         def type, do: unquote(type)
 
         defp enum do
-          unquote(enum)
+          unquote(enum_values)
         end
 
         def cast(value) when is_binary(value) do
@@ -83,12 +100,12 @@ defmodule Magik.EctoEnum do
 
       #### Enum fuctions
       def enum do
-        unquote(enum)
+        unquote(enum_values)
       end
 
-      for item <- enum do
-        def unquote(:"#{item}")() do
-          unquote(item)
+      for {key, value} <- enum do
+        def unquote(:"#{key}")() do
+          unquote(value)
         end
       end
 
