@@ -1,12 +1,24 @@
 defmodule Magik.JsonView do
-  defmacro __using__(_) do
+  defmacro __using__(opts \\ []) do
+    fields = Keyword.get(opts, :fields, [])
+    custom_fields = Keyword.get(opts, :custom_fields, [])
+
+    after_render = Keyword.get(opts, :after_render)
+
     quote do
       def render_json(struct, fields, custom_fields, relationships) do
-        Magik.JsonView.render_json(struct, __MODULE__,
-          fields: fields,
-          custom_fields: custom_fields,
-          relationships: relationships
-        )
+        data =
+          Magik.JsonView.render_json(struct, __MODULE__,
+            fields: unquote(fields) ++ fields,
+            custom_fields: unquote(custom_fields) ++ custom_fields,
+            relationships: relationships
+          )
+
+        if is_function(unquote(after_render)) do
+          apply(unquote(after_render), [data])
+        else
+          data
+        end
       end
 
       def render_view(struct, view, template) do
@@ -88,17 +100,19 @@ defmodule Magik.JsonView do
       render_custom_fields(struct, __MODULE__, [:is_success])
 
   """
-  def render_custom_fields(struct, view, fields) do
+
+  def render_custom_fields(struct, view \\ nil, fields) do
     # if fields is not empty and render_field/2 is not defined, raise exception
-    if Kernel.function_exported?(view, :render_field, 2) == false and length(fields) > 0 do
-      raise "render_field/2 is not defined in #{view}"
-    else
-      fields
-      |> Enum.map(fn field ->
+
+    fields
+    |> Enum.map(fn
+      {field, render_func} when is_function(render_func) ->
+        {field, render_func.(struct)}
+
+      field ->
         {field, view.render_field(field, struct)}
-      end)
-      |> Enum.into(%{})
-    end
+    end)
+    |> Enum.into(%{})
   end
 
   @doc """
