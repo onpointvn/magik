@@ -8,7 +8,7 @@
     <meta name="project" content="Magik v0.6.0">
     <title>Magik.PowerUpRepo.find — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-04ace70d72.js"></script>
+    <script src="dist/sidebar_items-f4921a665f.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -94,12 +94,12 @@ Magik      </a>
   {:ok, item :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:error, :not_found}</pre>
       </div>
 
-<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="3953185115-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="3953185115-1">)</span><span class="w"> </span><span class="k" data-group-id="3953185115-2">do</span><span class="w">
-  </span><span class="p" data-group-id="3953185115-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="3953185115-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="3953185115-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="3953185115-4">)</span><span class="w">
-  </span><span class="p" data-group-id="3953185115-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="3953185115-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="3953185115-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="3953185115-6">)</span><span class="w">
-</span><span class="k" data-group-id="3953185115-2">end</span></code></pre>  </section>
+<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="4327587231-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="4327587231-1">)</span><span class="w"> </span><span class="k" data-group-id="4327587231-2">do</span><span class="w">
+  </span><span class="p" data-group-id="4327587231-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="4327587231-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="4327587231-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="4327587231-4">)</span><span class="w">
+  </span><span class="p" data-group-id="4327587231-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="4327587231-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="4327587231-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="4327587231-6">)</span><span class="w">
+</span><span class="k" data-group-id="4327587231-2">end</span></code></pre>  </section>
 </section>
 
       <footer class="footer">

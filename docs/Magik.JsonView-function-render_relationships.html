@@ -8,7 +8,7 @@
     <meta name="project" content="Magik v0.6.0">
     <title>Magik.JsonView.render_relationships — Magik v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-04ace70d72.js"></script>
+    <script src="dist/sidebar_items-f4921a665f.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
   </head>
@@ -90,10 +90,10 @@ Magik      </a>
   <section class="docstring">
 
 <p>Render relationship field for struct. <code class="inline">relationships</code> is a list of {field, view} for mapping render.
-For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p><p>Example relationships:</p><pre><code class="makeup elixir"><span class="n">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1667369650-1">[</span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="p" data-group-id="1667369650-1">]</span></code></pre><p>Result of <code class="inline">render_relationships(post, relationships)</code> equal to output of below code</p><pre><code class="makeup elixir"><span class="p" data-group-id="7951295693-1">%{</span><span class="w">
-    </span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="o">.</span><span class="n">render_many</span><span class="p" data-group-id="7951295693-2">(</span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comment.json&quot;</span><span class="p" data-group-id="7951295693-2">)</span><span class="p">,</span><span class="w">
-    </span><span class="ss">autho</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="o">.</span><span class="n">render_one</span><span class="p" data-group-id="7951295693-3">(</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="nc">UserView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user.json&quot;</span><span class="p" data-group-id="7951295693-3">)</span><span class="w">
-</span><span class="p" data-group-id="7951295693-1">}</span></code></pre>  </section>
+For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p><p>Example relationships:</p><pre><code class="makeup elixir"><span class="n">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5087469959-1">[</span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="p" data-group-id="5087469959-1">]</span></code></pre><p>Result of <code class="inline">render_relationships(post, relationships)</code> equal to output of below code</p><pre><code class="makeup elixir"><span class="p" data-group-id="5664533796-1">%{</span><span class="w">
+    </span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="o">.</span><span class="n">render_many</span><span class="p" data-group-id="5664533796-2">(</span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comment.json&quot;</span><span class="p" data-group-id="5664533796-2">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">autho</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="o">.</span><span class="n">render_one</span><span class="p" data-group-id="5664533796-3">(</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="nc">UserView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user.json&quot;</span><span class="p" data-group-id="5664533796-3">)</span><span class="w">
+</span><span class="p" data-group-id="5664533796-1">}</span></code></pre>  </section>
 </section>
 
       <footer class="footer">
