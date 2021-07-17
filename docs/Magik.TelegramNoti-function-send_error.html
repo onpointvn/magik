@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.TelegramNoti.send_error — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.TelegramNoti.send_error — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -75,39 +86,50 @@ Magik      </a>
 </div>
 
 <section class="detail" id="send_error/4">
+
     <span id="send_error/2"></span>
+
     <span id="send_error/3"></span>
+
   <div class="detail-header">
     <a href="#send_error/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">send_error(conversation \\ :default, title, args \\ nil, map)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/telegram_noti.ex#L183" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>send_error(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+
       </div>
 
-<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="4022254631-1">do</span><span class="w">
+<p>Format error and send to Telegram conversation.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Calculator</span><span class="w"> </span><span class="k" data-group-id="3587215386-1">do</span><span class="w">
     </span><span class="n">...</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="4022254631-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="4022254631-2">)</span><span class="k" data-group-id="4022254631-3">do</span><span class="w">
-        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="4022254631-4">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide</span><span class="p" data-group-id="3587215386-2">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="3587215386-2">)</span><span class="k" data-group-id="3587215386-3">do</span><span class="w">
+        </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="3587215386-4">do</span><span class="w">
             </span><span class="n">...</span><span class="w">
-        </span><span class="k" data-group-id="4022254631-4">catch</span><span class="w">
+        </span><span class="k" data-group-id="3587215386-4">catch</span><span class="w">
             </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="4022254631-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4022254631-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="4022254631-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4022254631-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="4022254631-7">}</span><span class="p" data-group-id="4022254631-5">)</span><span class="w">
+                </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_error</span><span class="p" data-group-id="3587215386-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MyApp.Calculator error&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3587215386-6">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p" data-group-id="3587215386-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3587215386-7">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="3587215386-7">}</span><span class="p" data-group-id="3587215386-5">)</span><span class="w">
                 </span><span class="c1"># return your error</span><span class="w">
-        </span><span class="k" data-group-id="4022254631-4">end</span><span class="w">
-    </span><span class="k" data-group-id="4022254631-3">end</span><span class="w">
-</span><span class="k" data-group-id="4022254631-1">end</span></code></pre>  </section>
+        </span><span class="k" data-group-id="3587215386-4">end</span><span class="w">
+    </span><span class="k" data-group-id="3587215386-3">end</span><span class="w">
+</span><span class="k" data-group-id="3587215386-1">end</span></code></pre>
+  </section>
 </section>
+
 
       <footer class="footer">
         <p>
@@ -122,7 +144,9 @@ Magik      </a>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -142,5 +166,7 @@ Magik      </a>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

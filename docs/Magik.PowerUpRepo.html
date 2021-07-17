@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.PowerUpRepo — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.PowerUpRepo — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -69,11 +80,13 @@ Magik      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Magik.PowerUpRepo <small>behaviour</small> <small class="app-vsn">(Magik v0.6.0)</small>
+Magik.PowerUpRepo <small>behaviour</small> <small class="app-vsn">(Magik v0.8.0)</small>
+
           <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
+
       </h1>
 
 
@@ -82,13 +95,15 @@ Magik      </a>
   <a href="#module-how-to-use" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   How to use
 </h2>
-<p><code class="inline">use Magik.PowerUpRepo</code> in your Repo module and all helper functions are ready for use</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w"> </span><span class="k" data-group-id="0680812580-1">do</span><span class="w">
+<p><code class="inline">use Magik.PowerUpRepo</code> in your Repo module and all helper functions are ready for use</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w"> </span><span class="k" data-group-id="3544266573-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Repo</span><span class="p">,</span><span class="w">
       </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w">
       </span><span class="ss">adapter</span><span class="p">:</span><span class="w"> </span><span class="nc">Ecto.Adapters.Postgres</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.PowerUpRepo</span><span class="w">
-</span><span class="k" data-group-id="0680812580-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="3544266573-1">end</span></code></pre>
+        </section>
+
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -98,6 +113,7 @@ Magik      </a>
             </a>
             Summary
           </h1>
+
   <div class="summary-callbacks summary">
     <h2>
       <a href="#callbacks">Callbacks</a>
@@ -105,29 +121,44 @@ Magik      </a>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#c:find/2">find(queryable, arg2)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Find the first entry in the database that match the filter</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#c:paginate/3">paginate(query, paging_params, opts)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Fetch query by pagination parama</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#c:preload_paginate/2">preload_paginate({}, preloads)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Preload entries return from <code class="inline">Repo.paginate</code></p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#c:stream_query/2">stream_query(queryable, opts)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Load query with given size and provide the result as a stream</p></div>
+
 </div>
+
   </div>
+
         </section>
+
 
         <section id="callbacks" class="details-list">
           <h1 class="section-heading">
@@ -135,110 +166,145 @@ Magik      </a>
               <span class="icon-link" aria-hidden="true"></span>
               <span class="sr-only">Link to this section</span>
             </a>
-Callbacks          </h1>
+Callbacks
+          </h1>
           <div class="callbacks-list">
 <section class="detail" id="c:find/2">
+
   <div class="detail-header">
     <a href="#c:find/2" class="detail-link" title="Link to this callback">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this callback</span>
     </a>
     <h1 class="signature">find(queryable, arg2)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L122" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>find(queryable :: <a href="https://hexdocs.pm/ecto/3.5.8/Ecto.Queryable.html#t:t/0">Ecto.Queryable.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) ::
   {:ok, item :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:error, :not_found}</pre>
+
       </div>
 
-<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="4327587231-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="4327587231-1">)</span><span class="w"> </span><span class="k" data-group-id="4327587231-2">do</span><span class="w">
-  </span><span class="p" data-group-id="4327587231-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="4327587231-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="4327587231-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="4327587231-4">)</span><span class="w">
-  </span><span class="p" data-group-id="4327587231-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="4327587231-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="4327587231-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="4327587231-6">)</span><span class="w">
-</span><span class="k" data-group-id="4327587231-2">end</span></code></pre>  </section>
+<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="1581325371-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="1581325371-1">)</span><span class="w"> </span><span class="k" data-group-id="1581325371-2">do</span><span class="w">
+  </span><span class="p" data-group-id="1581325371-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="1581325371-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="1581325371-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="1581325371-4">)</span><span class="w">
+  </span><span class="p" data-group-id="1581325371-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="1581325371-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="1581325371-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="1581325371-6">)</span><span class="w">
+</span><span class="k" data-group-id="1581325371-2">end</span></code></pre>
+  </section>
 </section>
 <section class="detail" id="c:paginate/3">
+
   <div class="detail-header">
     <a href="#c:paginate/3" class="detail-link" title="Link to this callback">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this callback</span>
     </a>
     <h1 class="signature">paginate(query, paging_params, opts)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L78" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>paginate(query :: <a href="https://hexdocs.pm/ecto/3.5.8/Ecto.Queryable.html#t:t/0">Ecto.Queryable.t</a>(), paging_params :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), opts :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
   {<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+
       </div>
 
-<p>Fetch query by pagination parama</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">from</span><span class="p" data-group-id="2693319262-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="2693319262-1">)</span><span class="w">
-</span><span class="p" data-group-id="2693319262-2">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="2693319262-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="2693319262-3">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2693319262-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="2693319262-4">}</span><span class="p" data-group-id="2693319262-3">)</span></code></pre>  </section>
+<p>Fetch query by pagination parama</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">from</span><span class="p" data-group-id="4918255102-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="4918255102-1">)</span><span class="w">
+</span><span class="p" data-group-id="4918255102-2">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="4918255102-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="4918255102-3">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4918255102-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="4918255102-4">}</span><span class="p" data-group-id="4918255102-3">)</span></code></pre>
+  </section>
 </section>
 <section class="detail" id="c:preload_paginate/2">
+
   <div class="detail-header">
     <a href="#c:preload_paginate/2" class="detail-link" title="Link to this callback">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this callback</span>
     </a>
     <h1 class="signature">preload_paginate({}, preloads)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L91" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>preload_paginate({entries :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), paginator :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}, preloads :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
   {<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+
       </div>
 
-<p>Preload entries return from <code class="inline">Repo.paginate</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="5327312552-1">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="5327312552-1">}</span><span class="w"> </span><span class="o">=</span><span class="w">
-  </span><span class="n">from</span><span class="p" data-group-id="5327312552-2">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="5327312552-2">)</span><span class="w">
-  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="5327312552-3">(</span><span class="p" data-group-id="5327312552-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="5327312552-4">}</span><span class="p" data-group-id="5327312552-3">)</span><span class="w">
-  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="5327312552-5">(</span><span class="p" data-group-id="5327312552-6">[</span><span class="ss">:brand</span><span class="p">,</span><span class="w"> </span><span class="ss">:category</span><span class="p" data-group-id="5327312552-6">]</span><span class="p" data-group-id="5327312552-5">)</span></code></pre>  </section>
+<p>Preload entries return from <code class="inline">Repo.paginate</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="7707731991-1">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="7707731991-1">}</span><span class="w"> </span><span class="o">=</span><span class="w">
+  </span><span class="n">from</span><span class="p" data-group-id="7707731991-2">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="7707731991-2">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="7707731991-3">(</span><span class="p" data-group-id="7707731991-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="7707731991-4">}</span><span class="p" data-group-id="7707731991-3">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="7707731991-5">(</span><span class="p" data-group-id="7707731991-6">[</span><span class="ss">:brand</span><span class="p">,</span><span class="w"> </span><span class="ss">:category</span><span class="p" data-group-id="7707731991-6">]</span><span class="p" data-group-id="7707731991-5">)</span></code></pre>
+  </section>
 </section>
 <section class="detail" id="c:stream_query/2">
+
   <div class="detail-header">
     <a href="#c:stream_query/2" class="detail-link" title="Link to this callback">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this callback</span>
     </a>
     <h1 class="signature">stream_query(queryable, opts)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L108" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>stream_query(queryable :: <a href="https://hexdocs.pm/ecto/3.5.8/Ecto.Queryable.html#t:t/0">Ecto.Queryable.t</a>(), opts :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
   <a href="https://hexdocs.pm/elixir/Enumerable.html#t:t/0">Enumerable.t</a>()</pre>
+
       </div>
 
-<p>Load query with given size and provide the result as a stream</p><p><strong>Options</strong></p><ul><li>page_size: number of entry to load per batch</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">from</span><span class="p" data-group-id="9789083344-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="9789083344-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">stream_query</span><span class="p" data-group-id="9789083344-2">(</span><span class="mi">20</span><span class="p" data-group-id="9789083344-2">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="9789083344-3">(</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="9789083344-3">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">to_list</span></code></pre>  </section>
+<p>Load query with given size and provide the result as a stream</p><p><strong>Options</strong></p><ul><li>page_size: number of entry to load per batch</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">from</span><span class="p" data-group-id="5283643666-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="5283643666-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">stream_query</span><span class="p" data-group-id="5283643666-2">(</span><span class="mi">20</span><span class="p" data-group-id="5283643666-2">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="5283643666-3">(</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="5283643666-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">to_list</span></code></pre>
+  </section>
 </section>
+
           </div>
         </section>
+
       <footer class="footer">
         <p>
           <span class="line">
@@ -252,7 +318,9 @@ Callbacks          </h1>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -272,5 +340,7 @@ Callbacks          </h1>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

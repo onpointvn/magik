@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.ExcelView.render_cell — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.ExcelView.render_cell — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -74,24 +85,32 @@ Magik      </a>
   You're seeing just the function <code>render_cell</code>, go back to <a href="Magik.ExcelView.html">Magik.ExcelView</a> module for more information.
 </div>
 
-<section class="detail" id="render_cell/3">
+<section class="detail" id="render_cell/4">
+
+    <span id="render_cell/3"></span>
+
   <div class="detail-header">
-    <a href="#render_cell/3" class="detail-link" title="Link to this function">
+    <a href="#render_cell/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render_cell(struct, view, field)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L37" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">render_cell(struct, view, field, assigns \\ [])</h1>
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L114" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
 
-<p>render cell with a view, view must define <code class="inline">render_cell/2</code> for each field
-field definition format:</p><ul><li><code class="inline">{field_name, format}</code></li><li><code class="inline">field_name</code></li></ul>  </section>
+<p>render cell without view, in this case, field must be a tuple of</p><ul><li><code class="inline">{field, render_fn, format}</code></li><li><code class="inline">{field, render_fn}</code></li><li><code class="inline">{field, format}</code></li><li><code class="inline">field_name</code></li></ul><p>render cell with a view, view must define <code class="inline">render_cell/2</code> for each field
+field definition format:</p><ul><li><code class="inline">{field_name, format}</code></li><li><code class="inline">field_name</code></li></ul>
+  </section>
 </section>
+
 
       <footer class="footer">
         <p>
@@ -106,7 +125,9 @@ field definition format:</p><ul><li><code class="inline">{field_name, format}</c
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -126,5 +147,7 @@ field definition format:</p><ul><li><code class="inline">{field_name, format}</c
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

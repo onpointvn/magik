@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.Maybe.pipe — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.Maybe.pipe — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -75,58 +86,81 @@ Magik      </a>
 </div>
 
 <section class="detail" id="pipe/2">
+
   <div class="detail-header">
     <a href="#pipe/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">pipe(data, func)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/maybe.ex#L62" class="view-source" rel="help" title="View Source">
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/maybe.ex#L63" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>pipe({:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">function</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
       </div>
 
-<p>This function check first argument, if it is tuple of <code class="inline">{:ok, data}</code> then invoke the function with <code class="inline">data</code> of the tuple. Otherwise return the first argument.</p><p><strong>Example</strong></p><p>  changeset = User.changeset(%User{}, params)
-  Repo.insert(changeset)
-  |&gt; Maybe.pipe(fn user -&gt;</p><pre><code class="makeup elixir"><span class="c1"># do something with user</span></code></pre><p>  end)</p><p>In case you are using <code class="inline">with</code>, don't care about this function</p>  </section>
+<p>This function check first argument, if it is tuple of <code class="inline">{:ok, data}</code> then invoke the function with <code class="inline">data</code> of the tuple. Otherwise return the first argument.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="8100760767-1">(</span><span class="p" data-group-id="8100760767-2">%</span><span class="nc" data-group-id="8100760767-2">User</span><span class="p" data-group-id="8100760767-2">{</span><span class="p" data-group-id="8100760767-2">}</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="8100760767-1">)</span><span class="w">
+</span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="8100760767-3">(</span><span class="n">changeset</span><span class="p" data-group-id="8100760767-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="8100760767-4">(</span><span class="k" data-group-id="8100760767-5">fn</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+  </span><span class="c1"># do something with user</span><span class="w">
+</span><span class="k" data-group-id="8100760767-5">end</span><span class="p" data-group-id="8100760767-4">)</span></code></pre><p>In case you are using <code class="inline">with</code>, don't care about this function</p>
+  </section>
 </section>
+
+
 <section class="detail" id="pipe/3">
+
   <div class="detail-header">
     <a href="#pipe/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">pipe(data, guard_func, func)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/maybe.ex#L34" class="view-source" rel="help" title="View Source">
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/maybe.ex#L35" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>pipe(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), condition :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">function</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
       </div>
 
-<p>This helper is used in pipe, to invoke function if condition is true, otherwise passing data to nex function</p><p><strong>Example</strong></p><p>  a = 10
-  b = 12</p><p>  a
-  |&gt; Kernel.*(2)
-  |&gt; Maybe.pipe( b != 0, &amp; &amp;1/b)
-  |&gt; Kernel.+(10)</p><p><strong>The condition</strong>
+<p>This helper is used in pipe, to invoke function if condition is true, otherwise passing data to nex function</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="w">
+
+</span><span class="n">a</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">*</span><span class="p" data-group-id="7230973957-1">(</span><span class="mi">2</span><span class="p" data-group-id="7230973957-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="7230973957-2">(</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">/</span><span class="n">b</span><span class="p" data-group-id="7230973957-2">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="7230973957-3">(</span><span class="mi">10</span><span class="p" data-group-id="7230973957-3">)</span></code></pre><p><strong>The condition</strong>
 Could be any value:</p><ul><li>if condition is <code class="inline">true</code> then call the function with the first argument</li><li>if condition is <code class="inline">function/1</code> then invoke condition function. If return value is <code class="inline">true</code> then invoke the function with first argument</li><li>other value of condition don't trigger the function and just return the first argument that passed to this function</li></ul><p><strong>Example 2</strong>
-Using function condition</p><p>  a = 10
-  a
-  |&gt; Kernel.+(3)
-  |&gt; Maybe.pipe(&amp; &amp;1 &gt; 0, &amp; &amp;1 - 5)</p>  </section>
+Using function condition</p><pre><code class="makeup elixir"><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="n">a</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="4046152765-1">(</span><span class="mi">3</span><span class="p" data-group-id="4046152765-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="4046152765-2">(</span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="4046152765-2">)</span></code></pre>
+  </section>
 </section>
+
 
       <footer class="footer">
         <p>
@@ -141,7 +175,9 @@ Using function condition</p><p>  a = 10
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -161,5 +197,7 @@ Using function condition</p><p>  a = 10
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

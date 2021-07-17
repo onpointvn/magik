@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.Params — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.Params — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -69,16 +80,20 @@ Magik      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Magik.Params <small class="app-vsn">(Magik v0.6.0)</small>
+Magik.Params <small class="app-vsn">(Magik v0.8.0)</small>
+
           <a href="https://github.com/onpointvn/magik/blob/master/lib/params.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
+
       </h1>
 
 
         <section id="moduledoc">
-<p>Params provide some helpers method to work with parameters</p>        </section>
+<p>Params provide some helpers method to work with parameters</p>
+        </section>
+
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -88,6 +103,7 @@ Magik      </a>
             </a>
             Summary
           </h1>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -95,23 +111,35 @@ Magik      </a>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#clean_nil/1">clean_nil(param)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Clean all nil field from params, support nested map and list.</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#plug_srub/2">plug_srub(conn, keys \\ [])</a>
+
   </div>
+
     <div class="summary-synopsis"><p>A plug which do srubbing params</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#scrub_param/1">scrub_param(struct)</a>
+
   </div>
+
     <div class="summary-synopsis"><p>Convert all parameter which value is empty string or string with all whitespace to nil. It works with nested map and list too.</p></div>
+
 </div>
+
   </div>
+
         </section>
+
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -119,84 +147,106 @@ Magik      </a>
               <span class="icon-link" aria-hidden="true"></span>
               <span class="sr-only">Link to this section</span>
             </a>
-Functions          </h1>
+Functions
+          </h1>
           <div class="functions-list">
 <section class="detail" id="clean_nil/1">
+
   <div class="detail-header">
     <a href="#clean_nil/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">clean_nil(param)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/params.ex#L89" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
       <h2>Specs</h2>
       <div class="specs">
+
           <pre>clean_nil(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
       </div>
 
-<p>Clean all nil field from params, support nested map and list.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="2458099662-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="2458099662-1">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="2458099662-2">(</span><span class="n">params</span><span class="p" data-group-id="2458099662-2">)</span><span class="w">
+<p>Clean all nil field from params, support nested map and list.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0617836999-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="0617836999-1">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="0617836999-2">(</span><span class="n">params</span><span class="p" data-group-id="0617836999-2">)</span><span class="w">
 </span><span class="c1"># =&gt; %{&quot;type&quot; =&gt; &quot;customer&quot;}</span><span class="w">
 
-</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="2458099662-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2458099662-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="2458099662-4">]</span><span class="p" data-group-id="2458099662-3">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="2458099662-5">(</span><span class="n">params</span><span class="p" data-group-id="2458099662-5">)</span><span class="w">
-</span><span class="c1"># =&gt; %{user_ids: [1, 2]}</span></code></pre>  </section>
+</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0617836999-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0617836999-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="0617836999-4">]</span><span class="p" data-group-id="0617836999-3">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="0617836999-5">(</span><span class="n">params</span><span class="p" data-group-id="0617836999-5">)</span><span class="w">
+</span><span class="c1"># =&gt; %{user_ids: [1, 2]}</span></code></pre>
+  </section>
 </section>
 <section class="detail" id="plug_srub/2">
+
     <span id="plug_srub/1"></span>
+
   <div class="detail-header">
     <a href="#plug_srub/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">plug_srub(conn, keys \\ [])</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/params.ex#L24" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
 
-<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="1387553961-1">do</span><span class="w">
+<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="6678248119-1">do</span><span class="w">
   </span><span class="n">...</span><span class="w">
   </span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w">
   </span><span class="n">...</span><span class="w">
-</span><span class="k" data-group-id="1387553961-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7340516247-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7340516247-1">]</span><span class="w">
+</span><span class="k" data-group-id="6678248119-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7505425022-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7505425022-1">]</span><span class="w">
 </span><span class="c1"># or specify which field to scrub</span><span class="w">
-</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7340516247-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="7340516247-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7340516247-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7340516247-3">]</span></code></pre>  </section>
+</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7505425022-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="7505425022-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7505425022-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7505425022-3">]</span></code></pre>
+  </section>
 </section>
 <section class="detail" id="scrub_param/1">
+
   <div class="detail-header">
     <a href="#scrub_param/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">scrub_param(struct)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/params.ex#L53" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
 
-<p>Convert all parameter which value is empty string or string with all whitespace to nil. It works with nested map and list too.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4308474373-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;   &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="4308474373-1">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">scrub_param</span><span class="p" data-group-id="4308474373-2">(</span><span class="n">params</span><span class="p" data-group-id="4308474373-2">)</span><span class="w">
+<p>Convert all parameter which value is empty string or string with all whitespace to nil. It works with nested map and list too.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1695974032-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;   &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="1695974032-1">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">scrub_param</span><span class="p" data-group-id="1695974032-2">(</span><span class="n">params</span><span class="p" data-group-id="1695974032-2">)</span><span class="w">
 </span><span class="c1"># =&gt; %{&quot;keyword&quot; =&gt; nil, &quot;email&quot; =&gt; nil, &quot;type&quot; =&gt; &quot;customer&quot;}</span><span class="w">
 
-</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4308474373-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4308474373-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="p" data-group-id="4308474373-4">]</span><span class="p" data-group-id="4308474373-3">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">scrub_param</span><span class="p" data-group-id="4308474373-5">(</span><span class="n">params</span><span class="p" data-group-id="4308474373-5">)</span><span class="w">
-</span><span class="c1"># =&gt; %{user_ids: [1, 2, nil, nil]}</span></code></pre>  </section>
+</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1695974032-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1695974032-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="p" data-group-id="1695974032-4">]</span><span class="p" data-group-id="1695974032-3">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">scrub_param</span><span class="p" data-group-id="1695974032-5">(</span><span class="n">params</span><span class="p" data-group-id="1695974032-5">)</span><span class="w">
+</span><span class="c1"># =&gt; %{user_ids: [1, 2, nil, nil]}</span></code></pre>
+  </section>
 </section>
+
           </div>
         </section>
+
       <footer class="footer">
         <p>
           <span class="line">
@@ -210,7 +260,9 @@ Functions          </h1>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -230,5 +282,7 @@ Functions          </h1>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

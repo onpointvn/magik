@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.ExcelView — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.ExcelView — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -69,13 +80,62 @@ Magik      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Magik.ExcelView <small class="app-vsn">(Magik v0.6.0)</small>
+Magik.ExcelView <small class="app-vsn">(Magik v0.8.0)</small>
+
           <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
+
       </h1>
 
+
+        <section id="moduledoc">
+<p>ExcelView helps to render Excel content for <code class="inline">Elixlsx</code> easier</p><h2 id="module-use-as-a-view" class="section-heading">
+  <a href="#module-use-as-a-view" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Use as a view
+</h2>
+<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TestView</span><span class="w"> </span><span class="k" data-group-id="8696536996-1">do</span><span class="w">
+    </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.ExcelView</span><span class="w">
+
+    </span><span class="c1"># render list or stream</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_content</span><span class="p" data-group-id="8696536996-2">(</span><span class="n">user_list</span><span class="p" data-group-id="8696536996-2">)</span><span class="w"> </span><span class="k" data-group-id="8696536996-3">do</span><span class="w">
+      </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="8696536996-4">[</span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">:age</span><span class="p">,</span><span class="w"> </span><span class="ss">:is_teenager</span><span class="p" data-group-id="8696536996-4">]</span><span class="w">
+      </span><span class="n">render_row</span><span class="p" data-group-id="8696536996-5">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="8696536996-5">)</span><span class="w">
+
+      </span><span class="c1"># or render with assigns</span><span class="w">
+      </span><span class="n">render_row</span><span class="p" data-group-id="8696536996-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8696536996-7">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p" data-group-id="8696536996-7">}</span><span class="p" data-group-id="8696536996-6">)</span><span class="w">
+    </span><span class="k" data-group-id="8696536996-3">end</span><span class="w">
+
+    </span><span class="c1"># by default raw value of the item is used</span><span class="w">
+    </span><span class="c1"># here we define custom render for a specific view</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="8696536996-8">(</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="8696536996-8">)</span><span class="w"> </span><span class="k" data-group-id="8696536996-9">do</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NO&quot;</span><span class="w">
+    </span><span class="k" data-group-id="8696536996-9">end</span><span class="w">
+  </span><span class="k" data-group-id="8696536996-1">end</span></code></pre><p><strong>Fields</strong>
+Could be a real field in the data or virtual field. If it's virtual field, you have to define a custom render function as described below.
+A field could be:</p><ul><li><code class="inline">field_name</code> Ex: <code class="inline">:name</code></li><li><code class="inline">{field, format}</code> Ex: <code class="inline">{:name, bold: true, italic: true}</code></li></ul><p><strong>Custom render</strong>
+You can define custom render function for specific field</p><ul><li><code class="inline">render_field(field_name, struct)</code></li><li><code class="inline">render_field(field_name, struct, assigns)</code></li></ul><h2 id="module-use-without-view" class="section-heading">
+  <a href="#module-use-without-view" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Use without view
+</h2>
+<p><code class="inline">ExcelView</code> can be used without defining a view.</p><pre><code class="makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">render_excel_data</span><span class="w"> </span><span class="p" data-group-id="7668033810-1">(</span><span class="n">user_list</span><span class="p" data-group-id="7668033810-1">)</span><span class="w"> </span><span class="k" data-group-id="7668033810-2">do</span><span class="w">
+  </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="7668033810-3">[</span><span class="w">
+    </span><span class="ss">:name</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7668033810-4">{</span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">bold</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="7668033810-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">:age</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7668033810-5">{</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="o">/</span><span class="n">is_teenager</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="7668033810-5">}</span><span class="w">
+  </span><span class="p" data-group-id="7668033810-3">]</span><span class="w">
+  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="7668033810-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="7668033810-6">)</span><span class="w">
+
+  </span><span class="c1"># or with assigns</span><span class="w">
+  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="7668033810-7">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7668033810-8">%{</span><span class="ss">custom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom&quot;</span><span class="p" data-group-id="7668033810-8">}</span><span class="p" data-group-id="7668033810-7">)</span><span class="w">
+</span><span class="k" data-group-id="7668033810-2">end</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">is_teenager</span><span class="p" data-group-id="7668033810-9">(</span><span class="n">user</span><span class="p" data-group-id="7668033810-9">)</span><span class="w"> </span><span class="k" data-group-id="7668033810-10">do</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NO&quot;</span><span class="w">
+</span><span class="k" data-group-id="7668033810-10">end</span></code></pre><p>A field could be:</p><ul><li><code class="inline">field_name</code> Ex: <code class="inline">:name</code></li><li><code class="inline">{field, format}</code> Ex: <code class="inline">{:name, bold: true, italic: true}</code></li><li><code class="inline">{field, render_func}</code></li><li><code class="inline">{field, render_func, format}</code></li></ul><p>Render functions would be accepted</p><ul><li><code class="inline">func(struct)</code></li><li><code class="inline">func(field_name, struct)</code></li></ul>
+        </section>
 
 
         <section id="summary" class="details-list">
@@ -86,24 +146,32 @@ Magik      </a>
             </a>
             Summary
           </h1>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#render_cell/3">render_cell(struct, view, field)</a>
+    <a href="#render_cell/4">render_cell(struct, view, field, assigns \\ [])</a>
+
   </div>
-    <div class="summary-synopsis"><p>render cell with a view, view must define <code class="inline">render_cell/2</code> for each field
-field definition format</p></div>
+
+    <div class="summary-synopsis"><p>render cell without view, in this case, field must be a tuple of</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#render_row/3">render_row(struct, view \\ nil, fields)</a>
+    <a href="#render_row/4">render_row(struct, view \\ nil, fields, assigns \\ [])</a>
+
   </div>
+
 </div>
+
   </div>
+
         </section>
+
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -111,46 +179,64 @@ field definition format</p></div>
               <span class="icon-link" aria-hidden="true"></span>
               <span class="sr-only">Link to this section</span>
             </a>
-Functions          </h1>
+Functions
+          </h1>
           <div class="functions-list">
-<section class="detail" id="render_cell/3">
+<section class="detail" id="render_cell/4">
+
+    <span id="render_cell/3"></span>
+
   <div class="detail-header">
-    <a href="#render_cell/3" class="detail-link" title="Link to this function">
+    <a href="#render_cell/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render_cell(struct, view, field)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L37" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">render_cell(struct, view, field, assigns \\ [])</h1>
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L114" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
 
-<p>render cell with a view, view must define <code class="inline">render_cell/2</code> for each field
-field definition format:</p><ul><li><code class="inline">{field_name, format}</code></li><li><code class="inline">field_name</code></li></ul>  </section>
+<p>render cell without view, in this case, field must be a tuple of</p><ul><li><code class="inline">{field, render_fn, format}</code></li><li><code class="inline">{field, render_fn}</code></li><li><code class="inline">{field, format}</code></li><li><code class="inline">field_name</code></li></ul><p>render cell with a view, view must define <code class="inline">render_cell/2</code> for each field
+field definition format:</p><ul><li><code class="inline">{field_name, format}</code></li><li><code class="inline">field_name</code></li></ul>
+  </section>
 </section>
-<section class="detail" id="render_row/3">
+<section class="detail" id="render_row/4">
+
     <span id="render_row/2"></span>
+
+    <span id="render_row/3"></span>
+
   <div class="detail-header">
-    <a href="#render_row/3" class="detail-link" title="Link to this function">
+    <a href="#render_row/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render_row(struct, view \\ nil, fields)</h1>
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L17" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">render_row(struct, view \\ nil, fields, assigns \\ [])</h1>
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L95" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
+
 
   </section>
 </section>
+
           </div>
         </section>
+
       <footer class="footer">
         <p>
           <span class="line">
@@ -164,7 +250,9 @@ field definition format:</p><ul><li><code class="inline">{field_name, format}</c
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -184,5 +272,7 @@ field definition format:</p><ul><li><code class="inline">{field_name, format}</c
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

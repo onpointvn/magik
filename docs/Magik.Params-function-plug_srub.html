@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.Params.plug_srub — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.Params.plug_srub — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -75,29 +86,36 @@ Magik      </a>
 </div>
 
 <section class="detail" id="plug_srub/2">
+
     <span id="plug_srub/1"></span>
+
   <div class="detail-header">
     <a href="#plug_srub/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">plug_srub(conn, keys \\ [])</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/params.ex#L24" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
 
-<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="1387553961-1">do</span><span class="w">
+<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="6678248119-1">do</span><span class="w">
   </span><span class="n">...</span><span class="w">
   </span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w">
   </span><span class="n">...</span><span class="w">
-</span><span class="k" data-group-id="1387553961-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7340516247-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7340516247-1">]</span><span class="w">
+</span><span class="k" data-group-id="6678248119-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7505425022-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7505425022-1">]</span><span class="w">
 </span><span class="c1"># or specify which field to scrub</span><span class="w">
-</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7340516247-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="7340516247-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7340516247-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7340516247-3">]</span></code></pre>  </section>
+</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7505425022-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="7505425022-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="7505425022-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="7505425022-3">]</span></code></pre>
+  </section>
 </section>
+
 
       <footer class="footer">
         <p>
@@ -112,7 +130,9 @@ Magik      </a>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -132,5 +152,7 @@ Magik      </a>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

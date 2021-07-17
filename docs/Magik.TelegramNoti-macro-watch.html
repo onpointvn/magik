@@ -5,21 +5,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.6.0">
-    <title>Magik.TelegramNoti.watch — Magik v0.6.0</title>
+    <meta name="project" content="Magik v0.8.0">
+
+    <title>Magik.TelegramNoti.watch — Magik v0.8.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
-    <script src="dist/sidebar_items-f4921a665f.js"></script>
+
+    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>
+
       try {
         if (localStorage.getItem('night-mode') === 'true') {
           document.body.classList.add('night-mode');
         }
       } catch (error) { }
     </script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -47,17 +55,20 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName">
-Magik      </a>
+Magik
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.6.0
+        v0.8.0
       </strong>
     </div>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -75,18 +86,24 @@ Magik      </a>
 </div>
 
 <section class="detail" id="watch/2">
+
     <span id="watch/1"></span>
+
   <div class="detail-header">
     <a href="#watch/2" class="detail-link" title="Link to this macro">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this macro</span>
     </a>
     <h1 class="signature">watch(opts \\ [], list)</h1>
+
       <a href="https://github.com/onpointvn/magik/blob/master/lib/telegram_noti.ex#L41" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
       <span class="note">(macro)</span>
+
   </div>
 
   <section class="docstring">
@@ -98,13 +115,15 @@ Magik      </a>
 <ul><li><code class="inline">to</code>: conversation name from your config. Default is <code class="inline">:default</code></li><li><code class="inline">args</code>: argument list that passed to function, this is sent to telegram chat for dev to debug easier. If not speficied, arguments for current function call are used</li><li><code class="inline">label</code>: label for this error/function. If not specified, current function name is used.</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">...</span><span class="w">
 </span><span class="kn">require</span><span class="w"> </span><span class="nc">Magik.TelegramNoti</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="1184906730-1">(</span><span class="n">args</span><span class="p" data-group-id="1184906730-1">)</span><span class="w"> </span><span class="k" data-group-id="1184906730-2">do</span><span class="w">
-  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="1184906730-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="1184906730-3">]</span><span class="w"> </span><span class="k" data-group-id="1184906730-4">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">do_something</span><span class="p" data-group-id="7136727357-1">(</span><span class="n">args</span><span class="p" data-group-id="7136727357-1">)</span><span class="w"> </span><span class="k" data-group-id="7136727357-2">do</span><span class="w">
+  </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">watch</span><span class="w"> </span><span class="p" data-group-id="7136727357-3">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="7136727357-3">]</span><span class="w"> </span><span class="k" data-group-id="7136727357-4">do</span><span class="w">
       </span><span class="c1"># your logic code here</span><span class="w">
-  </span><span class="k" data-group-id="1184906730-4">end</span><span class="w">
-</span><span class="k" data-group-id="1184906730-2">end</span><span class="w">
-</span><span class="n">...</span></code></pre>  </section>
+  </span><span class="k" data-group-id="7136727357-4">end</span><span class="w">
+</span><span class="k" data-group-id="7136727357-2">end</span><span class="w">
+</span><span class="n">...</span></code></pre>
+  </section>
 </section>
+
 
       <footer class="footer">
         <p>
@@ -119,7 +138,9 @@ Magik      </a>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -139,5 +160,7 @@ Magik      </a>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>
