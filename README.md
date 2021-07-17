@@ -27,3 +27,7 @@ Provide helper function watch exception, format message and send notification to
 
 ### 7. `Magik.Params`
 Provide helper function to process params like `scrub_params` and `clean_nil`
+
+
+### 8. `Magik.Contract`
+Provide helper function to validate data structure and value, it does not cast value, only validate data
