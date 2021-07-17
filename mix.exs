@@ -4,7 +4,7 @@ defmodule Magik.MixProject do
   def project do
     [
       app: :magik,
-      version: "0.7.0",
+      version: "0.8.0",
       build_path: "./_build",
       config_path: "./config/config.exs",
       deps_path: "./deps",
@@ -44,7 +44,7 @@ defmodule Magik.MixProject do
 
   defp description() do
     """
-    It's cool to do some magics
+    Toolbox that help to do trivial things faster. I have more free time for life
     """
   end
 
