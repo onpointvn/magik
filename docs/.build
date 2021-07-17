@@ -1,4 +1,5 @@
 404.html
+Magik.Contract.html
 Magik.EctoEnum.html
 Magik.ExcelView.html
 Magik.Formatter.html
@@ -8,6 +9,7 @@ Magik.Paginator.html
 Magik.Params.html
 Magik.PowerUpRepo.html
 Magik.TelegramNoti.html
+Magik.Validator.html
 Magik.html
 api-reference.html
 dist/app-f27ff079945e43879c46.js
@@ -16,8 +18,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-5b2ff38c75.js
-dist/sidebar_items-0be2ae9030.js
+dist/search_items-020d9e780d.js
+dist/sidebar_items-d065fa7abc.js
 index.html
 readme.html
 search.html

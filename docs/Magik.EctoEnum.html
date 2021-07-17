@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.8.0">
+    <meta name="project" content="Magik v0.9.0">
 
-    <title>Magik.EctoEnum — Magik v0.8.0</title>
+    <title>Magik.EctoEnum — Magik v0.9.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-0be2ae9030.js"></script>
+    <script src="dist/sidebar_items-d065fa7abc.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.8.0
+        v0.9.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Magik
     <div id="content" class="content-inner">
 
       <h1>
-Magik.EctoEnum <small class="app-vsn">(Magik v0.8.0)</small>
+Magik.EctoEnum <small class="app-vsn">(Magik v0.9.0)</small>
 
           <a href="https://github.com/onpointvn/magik/blob/master/lib/ecto_enum.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -91,33 +91,33 @@ Magik.EctoEnum <small class="app-vsn">(Magik v0.8.0)</small>
 
 
         <section id="moduledoc">
-<p>EctoEnum helps to generate enum type and enum helper function.</p><p>You can define an enum module manually like this</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="7158156496-1">do</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">enum</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7158156496-2">[</span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="p" data-group-id="7158156496-2">]</span><span class="w">
+<p>EctoEnum helps to generate enum type and enum helper function.</p><p>You can define an enum module manually like this</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="9742369263-1">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">enum</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9742369263-2">[</span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="p" data-group-id="9742369263-2">]</span><span class="w">
     </span><span class="kd">def</span><span class="w"> </span><span class="nf">value1</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value1&quot;</span><span class="w">
     </span><span class="kd">def</span><span class="w"> </span><span class="nf">value2</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="w">
     </span><span class="kd">def</span><span class="w"> </span><span class="nf">value3</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="w">
-</span><span class="k" data-group-id="7158156496-1">end</span></code></pre><p>Now with EctoEnum you can do it with a few lines of code</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="3488420732-1">do</span><span class="w">
-    </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.EctoEnum</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3488420732-2">[</span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="p" data-group-id="3488420732-2">]</span><span class="w">
-</span><span class="k" data-group-id="3488420732-1">end</span></code></pre><p>It still provides same functions with manual implemented module</p><h2 id="module-use-different-name-and-value" class="section-heading">
+</span><span class="k" data-group-id="9742369263-1">end</span></code></pre><p>Now with EctoEnum you can do it with a few lines of code</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="0251685982-1">do</span><span class="w">
+    </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.EctoEnum</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0251685982-2">[</span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="p" data-group-id="0251685982-2">]</span><span class="w">
+</span><span class="k" data-group-id="0251685982-1">end</span></code></pre><p>It still provides same functions with manual implemented module</p><h2 id="module-use-different-name-and-value" class="section-heading">
   <a href="#module-use-different-name-and-value" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Use different name and value
 </h2>
-<p>In some case, you want to use a different name instead of the same with value, you can pass a tuple like this</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="7762094126-1">do</span><span class="w">
-  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.EctoEnum</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7762094126-2">{</span><span class="ss">name1</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Value 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name2</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value 2&quot;</span><span class="p" data-group-id="7762094126-2">}</span><span class="w">
-</span><span class="k" data-group-id="7762094126-1">end</span><span class="w">
+<p>In some case, you want to use a different name instead of the same with value, you can pass a tuple like this</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyEnum</span><span class="w"> </span><span class="k" data-group-id="9160041365-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.EctoEnum</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9160041365-2">{</span><span class="ss">name1</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Value 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name2</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value 2&quot;</span><span class="p" data-group-id="9160041365-2">}</span><span class="w">
+</span><span class="k" data-group-id="9160041365-1">end</span><span class="w">
 
-</span><span class="nc">MyEnum</span><span class="o">.</span><span class="n">name1</span><span class="p" data-group-id="7762094126-3">(</span><span class="p" data-group-id="7762094126-3">)</span><span class="w">
+</span><span class="nc">MyEnum</span><span class="o">.</span><span class="n">name1</span><span class="p" data-group-id="9160041365-3">(</span><span class="p" data-group-id="9160041365-3">)</span><span class="w">
 </span><span class="c1"># =&gt; &quot;Value 1&quot;</span></code></pre><h2 id="module-use-in-ecto-schema" class="section-heading">
   <a href="#module-use-in-ecto-schema" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Use in ecto schema
 </h2>
-<p>EctoEnum also defines a Type module that you can used directly in Ecto schema</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="k" data-group-id="9460747415-1">do</span><span class="w">
-  </span><span class="n">schema</span><span class="w"> </span><span class="err">&quot;</span><span class="n">orders</span><span class="w"> </span><span class="k" data-group-id="9460747415-2">do</span><span class="w">
+<p>EctoEnum also defines a Type module that you can used directly in Ecto schema</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="k" data-group-id="1813489286-1">do</span><span class="w">
+  </span><span class="n">schema</span><span class="w"> </span><span class="err">&quot;</span><span class="n">orders</span><span class="w"> </span><span class="k" data-group-id="1813489286-2">do</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:last_name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:status</span><span class="p">,</span><span class="w"> </span><span class="nc">MyEnum.Type</span><span class="w">
-  </span><span class="k" data-group-id="9460747415-2">end</span><span class="w">
-</span><span class="k" data-group-id="9460747415-1">end</span></code></pre><p>EctoEnum automatically validate value and only allow valid value</p>
+  </span><span class="k" data-group-id="1813489286-2">end</span><span class="w">
+</span><span class="k" data-group-id="1813489286-1">end</span></code></pre><p>EctoEnum automatically validate value and only allow valid value</p>
         </section>
 
 

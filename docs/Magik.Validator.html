@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.0">
     <meta name="project" content="Magik v0.9.0">
 
-    <title>Magik.Formatter — Magik v0.9.0</title>
+    <title>Magik.Validator — Magik v0.9.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-d065fa7abc.js"></script>
@@ -80,9 +80,9 @@ Magik
     <div id="content" class="content-inner">
 
       <h1>
-Magik.Formatter <small class="app-vsn">(Magik v0.9.0)</small>
+Magik.Validator <small class="app-vsn">(Magik v0.9.0)</small>
 
-          <a href="https://github.com/onpointvn/magik/blob/master/lib/formatter.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -91,7 +91,7 @@ Magik.Formatter <small class="app-vsn">(Magik v0.9.0)</small>
 
 
         <section id="moduledoc">
-<p>Provides functions to format value to string</p>
+<p>Validation module that support</p><ul><li>Validate type</li></ul>
         </section>
 
 
@@ -110,20 +110,34 @@ Magik.Formatter <small class="app-vsn">(Magik v0.9.0)</small>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#format_currency/2">format_currency(number, opts \\ [])</a>
+    <a href="#validate_format/2">validate_format(value, check)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Format currency value to thousand separated string</p></div>
+    <div class="summary-synopsis"><p>Checks whether an item_name conforms the given format.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#format_thousand/2">format_thousand(number, separator \\ &quot;.&quot;)</a>
+    <a href="#validate_length/2">validate_length(value, checks)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Format number to thousand seperated string</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_number/2">validate_number(value, checks)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_type/2">validate_type(value, struct_name)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Validate value type that support</p></div>
 
 </div>
 
@@ -141,18 +155,16 @@ Magik.Formatter <small class="app-vsn">(Magik v0.9.0)</small>
 Functions
           </h1>
           <div class="functions-list">
-<section class="detail" id="format_currency/2">
-
-    <span id="format_currency/1"></span>
+<section class="detail" id="validate_format/2">
 
   <div class="detail-header">
-    <a href="#format_currency/2" class="detail-link" title="Link to this function">
+    <a href="#validate_format/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">format_currency(number, opts \\ [])</h1>
+    <h1 class="signature">validate_format(value, check)</h1>
 
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/formatter.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L122" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -162,30 +174,31 @@ Functions
 
   <section class="docstring">
 
-<p>Format currency value to thousand separated string</p><h2 id="format_currency/2-parameters" class="section-heading">
-  <a href="#format_currency/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Parameters
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_format(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/Regex.html#t:t/0">Regex.t</a>()) :: :ok | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Checks whether an item_name conforms the given format.</p><h2 id="validate_format/2-examples" class="section-heading">
+  <a href="#validate_format/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
 </h2>
-<ul><li><code class="inline">number</code>: integer number</li><li><code class="inline">opts</code>: list of format options<ul><li><code class="inline">thousand_separator</code>: thousand separator character. Default is <code class="inline">,</code></li><li><code class="inline">currency</code>: currency character. Default is &quot;đ&quot;</li></ul></li></ul><h2 id="format_currency/2-example" class="section-heading">
-  <a href="#format_currency/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Example
-</h2>
-<p>iex&gt; Magik.Formatter.format_currency(&quot;1232321&quot;, thousand_separator: &quot;.&quot;, currency: &quot;$&quot;)
-1.232.321$</p>
+<p>iex&gt; Exop.ValidationChecks.validate_regex(%{a: &quot;bar&quot;}, :a, ~r/bar/)
+:ok</p>
   </section>
 </section>
-<section class="detail" id="format_thousand/2">
-
-    <span id="format_thousand/1"></span>
+<section class="detail" id="validate_length/2">
 
   <div class="detail-header">
-    <a href="#format_thousand/2" class="detail-link" title="Link to this function">
+    <a href="#validate_length/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">format_thousand(number, separator \\ &quot;.&quot;)</h1>
+    <h1 class="signature">validate_length(value, checks)</h1>
 
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/formatter.ex#L17" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L131" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -195,16 +208,58 @@ Functions
 
   <section class="docstring">
 
-<p>Format number to thousand seperated string</p><h2 id="format_thousand/2-parameters" class="section-heading">
-  <a href="#format_thousand/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Parameters
-</h2>
-<ul><li><code class="inline">number</code>: integer number</li><li><code class="inline">separator</code>: thousand separator character. Default is <code class="inline">.</code></li></ul><h2 id="format_thousand/2-example" class="section-heading">
-  <a href="#format_thousand/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Example
-</h2>
-<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Magik.Formatter</span><span class="o">.</span><span class="n">format_thousand</span><span class="p" data-group-id="4054854985-1">(</span><span class="s">&quot;1232321&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="p" data-group-id="4054854985-1">)</span><span class="w">
-</span><span class="mf">1.232</span><span class="o">.</span><span class="mi">321</span></code></pre>
+
+  </section>
+</section>
+<section class="detail" id="validate_number/2">
+
+  <div class="detail-header">
+    <a href="#validate_number/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_number(value, checks)</h1>
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L55" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_number(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">number</a>(), {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">number</a>()}) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="validate_type/2">
+
+  <div class="detail-header">
+    <a href="#validate_type/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_type(value, struct_name)</h1>
+
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L24" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Validate value type that support</p><ul><li>boolean</li><li>integer</li><li>float</li><li>number</li><li>string</li><li>tuple</li><li>map</li><li>list</li><li>atom</li><li>function</li><li>keyword</li><li>struct</li></ul>
   </section>
 </section>
 
