@@ -25,7 +25,7 @@ defmodule Magik.EctoEnum do
   In some case, you want to use a different name instead of the same with value, you can pass a tuple like this
 
       defmodule MyEnum do
-        use Magik.EctoEnum, {name1: "Value 1", name2: "value 2"}
+        use Magik.EctoEnum, %{name1: "Value 1", name2: "value 2"}
       end
 
       MyEnum.name1()
@@ -43,10 +43,35 @@ defmodule Magik.EctoEnum do
       end
 
   EctoEnum automatically validate value and only allow valid value
+
+  ## Use Enum integer
+
+  You can specify type of column in database, default is `string`
+
+      defmodule MyEnum do
+        use Magik.EctoEnum, enum: %{name1: 1, name2: 2}, type: :integer
+      end
   """
 
-  defmacro __using__(enum, opts \\ []) do
-    type = Keyword.get(opts, :type, :string)
+  defmacro __using__(opts) do
+    support_types = [:string, :integer]
+
+    {enum, type} =
+      if Keyword.keyword?(opts) and Keyword.has_key?(opts, :enum) do
+        {opts[:enum], opts[:type] || :string}
+      else
+        {opts, :string}
+      end
+
+    if type not in support_types do
+      raise "Enum of type #{type} is not support"
+    end
+
+    enum =
+      case enum do
+        {_, _, enum} -> enum
+        _ -> enum
+      end
 
     enum =
       Enum.map(enum, fn
@@ -67,33 +92,31 @@ defmodule Magik.EctoEnum do
           unquote(enum_values)
         end
 
-        def cast(value) when is_binary(value) do
-          if value in enum() do
-            {:ok, value}
-          else
-            :error
-          end
-        end
-
         def cast(value) when is_atom(value) do
           value
           |> to_string
           |> cast()
         end
 
-        def cast(_), do: :error
+        def cast(value) do
+          with {:ok, value} <- Ecto.Type.cast(type(), value),
+               true <- value in enum() do
+            {:ok, value}
+          else
+            _ -> :error
+          end
+        end
 
-        def load(data) when is_binary(data) do
-          # if data in enum() do
+        def cast_type(type) do
+        end
+
+        def load(data) when is_binary(data) or is_integer(data) do
           {:ok, data}
-          # else
-          #   :error
-          # end
         end
 
         def load(_), do: :error
 
-        def dump(value) when is_binary(value), do: {:ok, value}
+        def dump(value) when is_binary(value) or is_integer(value), do: {:ok, value}
         def dump(value) when is_atom(value), do: {:ok, to_string(value)}
         def dump(_), do: :error
       end
