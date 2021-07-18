@@ -113,7 +113,6 @@ defmodule Magik.Params do
 
   def clean_nil(param), do: param
 
-  alias Magik.Validator
   alias Magik.Type
 
   @doc """
@@ -124,45 +123,62 @@ defmodule Magik.Params do
   def cast(data, schema) do
     {status, results} =
       schema
-      |> Enum.map(fn {field_name, validations} ->
-        {type, validations} = Keyword.pop(validations, :type)
-        {default, validations} = Keyword.pop(validations, :default)
-
-        value =
-          case Map.fetch(data, field_name) do
-            {:ok, value} -> value
-            _ -> Map.get(data, "#{field_name}", :__missing)
-          end
-
-        case cast_value(value, type, default) do
-          :error ->
-            {:error, {field_name, ["is in valid"]}}
-
-          {:error, errors} ->
-            {:error, {field_name, errors}}
-
-          {:ok, data} ->
-            validations
-            |> Enum.map(fn validation ->
-              do_validate(value, validation, field_name: field_name, data: data)
-            end)
-            |> collect_validation_result()
-            |> case do
-              :ok -> {:ok, {field_name, data}}
-              {_, errors} -> {:error, {field_name, errors}}
-            end
-        end
-      end)
+      |> Enum.map(&cast_field(data, &1))
       |> collect_schema_result()
 
     {status, Map.new(results)}
   end
 
-  defp cast_value(:__missing, _type, default), do: {:ok, default}
+  defp cast_field(data, {field_name, definitions}) do
+    {type, definitions} = Keyword.pop(definitions, :type)
+    {default, definitions} = Keyword.pop(definitions, :default)
+    {cast_func, validations} = Keyword.pop(definitions, :cast_func)
+
+    value =
+      Map.get(data, field_name) ||
+        Map.get(data, "#{field_name}") ||
+        get_default(default)
+
+    cast_func =
+      if is_function(cast_func) do
+        cast_func
+      else
+        &cast_value(&1, type, default)
+      end
+
+    case cast_func.(value) do
+      :error ->
+        {:error, {field_name, ["is in valid"]}}
+
+      {:error, errors} ->
+        {:error, {field_name, errors}}
+
+      {:ok, data} ->
+        validations
+        |> Enum.map(fn validation ->
+          do_validate(data, validation)
+        end)
+        |> collect_validation_result()
+        |> case do
+          :ok -> {:ok, {field_name, data}}
+          {_, errors} -> {:error, {field_name, errors}}
+        end
+    end
+  end
+
+  defp get_default(default) do
+    if is_function(default) do
+      default.()
+    else
+      default
+    end
+  end
+
+  defp cast_value(nil, _, _), do: {:ok, nil}
 
   # cast array of custom map
   defp cast_value(value, {:array, %{} = type}, _) do
-    Type.cast({:array, {:embed, __MODULE__, type}}, value)
+    cast_array({:embed, __MODULE__, type}, value)
   end
 
   # cast nested map
@@ -174,58 +190,28 @@ defmodule Magik.Params do
     Type.cast(type, value)
   end
 
-  defp do_validate(:__missing, {:required, true}, _opts) do
+  # rewrite cast_array for more detail errors
+  def cast_array(type, value, acc \\ [])
+
+  def cast_array(type, [value | t], acc) do
+    case Type.cast(type, value) do
+      {:ok, data} -> cast_array(type, t, [data | acc])
+      error -> error
+    end
+  end
+
+  def cast_array(_, [], acc), do: {:ok, Enum.reverse(acc)}
+
+  defp do_validate(nil, {:required, true}) do
     {:error, "is required"}
   end
 
-  defp do_validate(_, {:required, _}, _), do: :ok
+  defp do_validate(_, {:required, _}), do: :ok
 
-  defp do_validate(:__missing, _, _), do: :ok
+  defp do_validate(nil, _), do: :ok
 
-  defp do_validate(value, {:allow_nil, allow_nil}, _) when is_boolean(allow_nil) do
-    if not is_nil(value) or allow_nil do
-      :ok
-    else
-      {:error, "cannot be nil"}
-    end
-  end
-
-  defp do_validate(nil, _, _), do: :ok
-
-  defp do_validate(value, {:in, enum}, _) do
-    if Enum.member?(enum, value) do
-      :ok
-    else
-      {:error, "not be in the inclusion list"}
-    end
-  end
-
-  defp do_validate(value, {:not_in, enum}, _) do
-    if Enum.member?(enum, value) do
-      {:error, "must not be in the exclusion list"}
-    else
-      :ok
-    end
-  end
-
-  defp do_validate(value, {:format, format}, _) do
-    Validator.validate_format(value, format)
-  end
-
-  defp do_validate(value, {:number, checks}, _) when is_number(value) do
-    Validator.validate_number(value, checks)
-  end
-
-  defp do_validate(_value, {:number, _checks}, _) do
-    {:error, "is not a number"}
-  end
-
-  defp do_validate(value, {:length, checks}, _) do
-    Validator.validate_length(value, checks)
-  end
-
-  defp do_validate(value, {:func, func}, opts) when is_function(func, 3) do
-    func.(opts[:field_name], value, opts[:data])
+  defp do_validate(value, validator) do
+    Magik.Validator.validate(value, [validator])
   end
 
   defp collect_validation_result(results) do

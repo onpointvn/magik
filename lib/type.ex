@@ -44,7 +44,7 @@ defmodule Magik.Type do
   defp cast_fun(mod) when is_atom(mod), do: &maybe_cast_custom_type(mod, &1)
 
   defp cast_fun({:array, {:embed, _, _} = type}) do
-    fun = cast_fun(type)
+    fun = fn value -> cast(type, value) end
     &array(&1, fun, true, [])
   end
 

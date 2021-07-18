@@ -111,9 +111,9 @@ defmodule Magik.Validator do
   def validate_type(_, type), do: {:error, "is not a #{type}"}
 
   # loop and validate element in array
-  defp array(data, validate_func, return_data \\ false, acc \\ {:ok, []})
+  defp array(data, validate_func, return_data \\ false, acc \\ [])
 
-  defp array([], _, return_data, {:ok, acc}) do
+  defp array([], _, return_data, acc) do
     if return_data do
       {:ok, Enum.reverse(acc)}
     else
@@ -121,10 +121,10 @@ defmodule Magik.Validator do
     end
   end
 
-  defp array([h | t], validate_func, return_data, {:ok, acc}) do
+  defp array([h | t], validate_func, return_data, acc) do
     case validate_func.(h) do
       :ok -> {:ok, [h | acc]}
-      {:ok, data} -> array(t, validate_func, return_data, {:ok, [data | acc]})
+      {:ok, data} -> array(t, validate_func, return_data, [data | acc])
       {:error, _} = err -> err
     end
   end
@@ -249,14 +249,13 @@ defmodule Magik.Validator do
     (actual_length >= check_value && :ok) ||
       {
         :error,
-        "length must be greater than or equal to #{check_value}; got length: #{inspect(actual_length)}"
+        "length must be greater than or equal to #{check_value}"
       }
   end
 
   defp validate_length(:greater_than, actual_length, check_value) do
     (actual_length > check_value && :ok) ||
-      {:error,
-       "length must be greater than #{check_value}; got length: #{inspect(actual_length)}"}
+      {:error, "length must be greater than #{check_value}"}
   end
 
   defp validate_length(:max, actual_length, check_value) do
@@ -267,7 +266,7 @@ defmodule Magik.Validator do
     (actual_length <= check_value && :ok) ||
       {
         :error,
-        "length must be less than or equal to #{check_value}; got length: #{inspect(actual_length)}"
+        "length must be less than or equal to #{check_value}"
       }
   end
 
@@ -275,7 +274,7 @@ defmodule Magik.Validator do
     (actual_length < check_value && :ok) ||
       {
         :error,
-        "length must be less than #{check_value}; got length: #{inspect(actual_length)}"
+        "length must be less than #{check_value}"
       }
   end
 
@@ -283,7 +282,7 @@ defmodule Magik.Validator do
     (actual_length == check_value && :ok) ||
       {
         :error,
-        "length must be equal to #{check_value}; got length: #{inspect(actual_length)}"
+        "length must be equal to #{check_value}"
       }
   end
 
@@ -293,7 +292,7 @@ defmodule Magik.Validator do
     else
       {
         :error,
-        "length must be in range #{check_value}; got length: #{inspect(actual_length)}"
+        "length must be in range #{check_value}"
       }
     end
   end
