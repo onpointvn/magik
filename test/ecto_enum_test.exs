@@ -3,11 +3,11 @@ defmodule MagikEctoEnumTest.OrderStatus do
 end
 
 defmodule MagikEctoEnumTest.ContractType do
-  use Magik.EctoEnum, %{part_time: "Part time", full_time: "Full time", cooperator: "Cooperator"}
+  use Magik.EctoEnum, part_time: "Part time", full_time: "Full time", cooperator: "Cooperator"
 end
 
 defmodule MagikEctoEnumTest.IntegerStatus do
-  use Magik.EctoEnum, enum: %{good: 1, bad: 2, unknown: 3}, type: :integer
+  use Magik.EctoEnum, enum: [good: 1, bad: 2, unknown: 3], type: :integer
 end
 
 defmodule MagikEctoEnumTest do

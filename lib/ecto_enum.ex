@@ -25,7 +25,7 @@ defmodule Magik.EctoEnum do
   In some case, you want to use a different name instead of the same with value, you can pass a tuple like this
 
       defmodule MyEnum do
-        use Magik.EctoEnum, %{name1: "Value 1", name2: "value 2"}
+        use Magik.EctoEnum, name1: "Value 1", name2: "value 2"
       end
 
       MyEnum.name1()
@@ -49,7 +49,7 @@ defmodule Magik.EctoEnum do
   You can specify type of column in database, default is `string`
 
       defmodule MyEnum do
-        use Magik.EctoEnum, enum: %{name1: 1, name2: 2}, type: :integer
+        use Magik.EctoEnum, enum: [name1: 1, name2: 2], type: :integer
       end
   """
 
