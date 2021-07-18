@@ -10,7 +10,7 @@
     <title>Magik.TelegramNoti.send_conn_error — Magik v0.9.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-d065fa7abc.js"></script>
+    <script src="dist/sidebar_items-3c27440676.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -117,33 +117,33 @@ Magik
   <a href="#send_conn_error/3-from-router" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   From router
 </h2>
-<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="7813187901-1">do</span><span class="w">
+<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="2148969435-1">do</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">MyAppWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:router</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">Plug.ErrorHandler</span><span class="w">
     </span><span class="n">...</span><span class="w">
 
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle_errors</span><span class="p" data-group-id="7813187901-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="7813187901-2">)</span><span class="w"> </span><span class="k" data-group-id="7813187901-3">do</span><span class="w">
-        </span><span class="k">if</span><span class="w"> </span><span class="n">conn</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k" data-group-id="7813187901-4">do</span><span class="w">
-             </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="7813187901-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="7813187901-5">)</span><span class="w">
-        </span><span class="k" data-group-id="7813187901-4">end</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle_errors</span><span class="p" data-group-id="2148969435-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="2148969435-2">)</span><span class="w"> </span><span class="k" data-group-id="2148969435-3">do</span><span class="w">
+        </span><span class="k">if</span><span class="w"> </span><span class="n">conn</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k" data-group-id="2148969435-4">do</span><span class="w">
+             </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="2148969435-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p" data-group-id="2148969435-5">)</span><span class="w">
+        </span><span class="k" data-group-id="2148969435-4">end</span><span class="w">
         </span><span class="n">...</span><span class="o">.</span><span class="w">
-   </span><span class="k" data-group-id="7813187901-3">end</span><span class="w">
-</span><span class="k" data-group-id="7813187901-1">end</span></code></pre><h2 id="send_conn_error/3-from-controller" class="section-heading">
+   </span><span class="k" data-group-id="2148969435-3">end</span><span class="w">
+</span><span class="k" data-group-id="2148969435-1">end</span></code></pre><h2 id="send_conn_error/3-from-controller" class="section-heading">
   <a href="#send_conn_error/3-from-controller" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   from controller
 </h2>
-<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.PageController</span><span class="w"> </span><span class="k" data-group-id="0554504770-1">do</span><span class="w">
+<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.PageController</span><span class="w"> </span><span class="k" data-group-id="3570047429-1">do</span><span class="w">
     </span><span class="n">...</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="0554504770-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="0554504770-2">)</span><span class="k" data-group-id="0554504770-3">do</span><span class="w">
-      </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="0554504770-4">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="3570047429-2">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="3570047429-2">)</span><span class="k" data-group-id="3570047429-3">do</span><span class="w">
+      </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="3570047429-4">do</span><span class="w">
           </span><span class="n">...</span><span class="w">
-      </span><span class="k" data-group-id="0554504770-4">catch</span><span class="w">
+      </span><span class="k" data-group-id="3570047429-4">catch</span><span class="w">
         </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-           </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="0554504770-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0554504770-6">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="0554504770-6">}</span><span class="p" data-group-id="0554504770-5">)</span><span class="w">
+           </span><span class="nc">Magik.TelegramNoti</span><span class="o">.</span><span class="n">send_conn_error</span><span class="p" data-group-id="3570047429-5">(</span><span class="ss">:api</span><span class="p">,</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3570047429-6">%{</span><span class="ss">kind</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="ss">stack</span><span class="p">:</span><span class="w"> </span><span class="c">__STACKTRACE__</span><span class="p" data-group-id="3570047429-6">}</span><span class="p" data-group-id="3570047429-5">)</span><span class="w">
            </span><span class="c1"># return your error</span><span class="w">
-      </span><span class="k" data-group-id="0554504770-4">end</span><span class="w">
-    </span><span class="k" data-group-id="0554504770-3">end</span><span class="w">
-</span><span class="k" data-group-id="0554504770-1">end</span></code></pre>
+      </span><span class="k" data-group-id="3570047429-4">end</span><span class="w">
+    </span><span class="k" data-group-id="3570047429-3">end</span><span class="w">
+</span><span class="k" data-group-id="3570047429-1">end</span></code></pre>
   </section>
 </section>
 
