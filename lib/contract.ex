@@ -1,7 +1,42 @@
 defmodule Magik.Contract do
   @moduledoc """
 
-  validate contract schema
+  `Contract` helps to define a contract for function call, and do validate contract data with:
+
+  - Validate type
+  - Validate required
+  - Validate `in`|`not_in` enum
+  - Valiate length for `string`, `enumerable`
+  - Validate number
+  - Validate string against regex pattern
+  - Custom validation function
+  - With support nested type
+  - Clean not allowed fields
+
+  ```elixir
+
+  @update_user_contract %{
+    user: [type: User, required: true],
+    attributes: [type: %{
+      email: [type: :string],
+      status: [type: :string, in: ~w(active in_active)]
+      age: [type: :integer, number: [min: 10, max: 80]],
+    }, required: true]
+  }
+
+  def update_user(contract) do
+    with {:ok, validated_data} do
+       validated_data.user
+       |> Ecto.Changeset.change(validated_data.attributes)
+       |> Repo.update
+    else
+      {:error, errors} -> IO.inspect(errors)
+    end
+  end
+
+  ```
+
+  **NOTES: Contract only validate data, not cast data**
 
   ## Support validation
 
@@ -163,8 +198,13 @@ defmodule Magik.Contract do
 
   alias Magik.Validator
 
+  @doc """
+  Validate data against given schema
+  """
+
+  @spec validate(data :: map(), schema :: map()) :: {:ok, map()} | {:error, errors :: map()}
   def validate(data, schema) do
-    validation_result =
+    {status, results} =
       schema
       |> Enum.map(fn {field_name, validations} ->
         validations =
@@ -179,18 +219,15 @@ defmodule Magik.Contract do
           value = Map.get(data, field_name, :__missing)
           do_validate(value, validation, field_name: field_name, data: data)
         end)
-        |> collect_result()
+        |> collect_validation_result()
         |> case do
-          :ok -> :ok
+          {:ok, data} -> {:ok, {field_name, data}}
           {_, errors} -> {:error, {field_name, errors}}
         end
       end)
-      |> collect_result()
+      |> collect_schema_result()
 
-    case validation_result do
-      :ok -> {:ok, data}
-      {:error, errors} -> {:error, Map.new(errors)}
-    end
+    {status, Map.new(results)}
   end
 
   defp do_validate(:__missing, {:required, true}, _opts) do
@@ -213,10 +250,7 @@ defmodule Magik.Contract do
 
   # validate nested type
   defp do_validate(%{} = value, {:type, type}, _) when is_map(type) do
-    case validate(value, type) do
-      {:ok, _} -> :ok
-      error -> error
-    end
+    validate(value, type)
   end
 
   defp do_validate(_value, {:type, type}, _) when is_map(type) do
@@ -230,15 +264,23 @@ defmodule Magik.Contract do
         do_validate(item, {:type, type}, value)
       end)
 
-    if Enum.all?(results, &(&1 == :ok)) do
-      :ok
+    error =
+      Enum.find(results, fn
+        {rs, _} -> rs == :error
+      end)
+
+    if not is_nil(error) do
+      error
     else
-      Enum.find(results, fn {rs, _} -> rs == :error end)
+      {:ok, Enum.map(results, fn {_, data} -> data end)}
     end
   end
 
   defp do_validate(value, {:type, type}, _) do
-    Validator.validate_type(value, type)
+    case Validator.validate_type(value, type) do
+      :ok -> {:ok, value}
+      err -> err
+    end
   end
 
   defp do_validate(value, {:in, enum}, _) do
@@ -277,17 +319,19 @@ defmodule Magik.Contract do
     func.(opts[:field_name], value, opts[:data])
   end
 
-  defp collect_result(results) do
+  defp collect_validation_result(results) do
     summary =
-      Enum.reduce(results, :ok, fn
+      Enum.reduce(results, {:ok, nil}, fn
         :ok, acc -> acc
-        {:error, msg}, :ok -> {:error, [msg]}
+        {:ok, data}, {:ok, _acc} -> {:ok, data}
+        {:error, msg}, {:ok, _} -> {:error, [msg]}
         {:error, msg}, {:error, acc_msg} -> {:error, [msg | acc_msg]}
+        _, acc -> acc
       end)
 
     case summary do
-      :ok ->
-        :ok
+      {:ok, _} ->
+        summary
 
       {:error, errors} ->
         errors =
@@ -303,5 +347,14 @@ defmodule Magik.Contract do
 
         {:error, errors}
     end
+  end
+
+  defp collect_schema_result(results) do
+    Enum.reduce(results, {:ok, []}, fn
+      {:ok, data}, {:ok, acc} -> {:ok, [data | acc]}
+      {:error, error}, {:ok, _} -> {:error, [error]}
+      {:error, error}, {:error, acc} -> {:error, [error | acc]}
+      _, acc -> acc
+    end)
   end
 end
