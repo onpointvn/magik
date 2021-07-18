@@ -55,6 +55,13 @@ defmodule ContractTest do
     end)
   end
 
+  test "unexpected key should be removed in the result" do
+    assert {:ok, %{"key" => "a string"}} ==
+             Magik.Contract.validate(%{"key" => "a string", "strange_key" => "value"}, %{
+               "key" => [type: :string, required: true]
+             })
+  end
+
   test "validate require" do
     assert {:ok, _} =
              Magik.Contract.validate(%{"key" => "a string"}, %{
@@ -161,7 +168,11 @@ defmodule ContractTest do
           key: [type: :integer, number: [{condition, value}]]
         })
 
-      assert {^expect, _} = rs
+      if expect == :ok do
+        assert {:ok, %{key: ^actual_value}} = rs
+      else
+        assert {:error, _} = rs
+      end
     end
   end
 
@@ -202,7 +213,11 @@ defmodule ContractTest do
           key: [type: :string, length: [{condition, value}]]
         })
 
-      assert {^expect, _} = rs
+      if expect == :ok do
+        assert {:ok, %{key: ^actual_value}} = rs
+      else
+        assert {:error, _} = rs
+      end
     end
   end
 
@@ -218,7 +233,11 @@ defmodule ContractTest do
           key: [type: type, length: [{:greater_than, value}]]
         })
 
-      assert {^expect, _} = rs
+      if expect == :ok do
+        assert {:ok, %{key: ^actual_value}} = rs
+      else
+        assert {:error, _} = rs
+      end
     end
   end
 
@@ -242,7 +261,8 @@ defmodule ContractTest do
       ]
     }
 
-    assert {:ok, _} = Magik.Contract.validate(data, schema)
+    assert {:ok, %{name: "Doe John", address: %{city: "HCM", street: "NVL"}}} =
+             Magik.Contract.validate(data, schema)
   end
 
   test "validate nested map with bad value should error" do
