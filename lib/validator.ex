@@ -21,6 +21,64 @@ defmodule Magik.Validator do
   - keyword
   - struct
   """
+
+  def validate(value, validators) do
+    do_validate(value, validators, :ok)
+  end
+
+  defp do_validate(_, [], acc), do: acc
+
+  defp do_validate(value, [h | t] = _validators, acc) do
+    case do_validate(value, h) do
+      :ok -> do_validate(value, t, acc)
+      error -> error
+    end
+  end
+
+  defp do_validate(value, {:allow_nil, allow_nil}) when is_boolean(allow_nil) do
+    if not is_nil(value) or allow_nil do
+      :ok
+    else
+      {:error, "cannot be nil"}
+    end
+  end
+
+  defp do_validate(nil, _), do: :ok
+  defp do_validate(value, {:func, func}), do: func.(value)
+
+  defp do_validate(value, {validator, opts}) do
+    case get_validator(validator) do
+      {:error, _} = err -> err
+      validate_func -> validate_func.(value, opts)
+    end
+  end
+
+  defp get_validator(:type), do: &validate_type/2
+  defp get_validator(:format), do: &validate_format/2
+  defp get_validator(:number), do: &validate_number/2
+  defp get_validator(:length), do: &validate_length/2
+  defp get_validator(:in), do: &validate_inclusion/2
+  defp get_validator(:not_in), do: &validate_exclusion/2
+  defp get_validator(name), do: {:error, "validate_#{name} is not support"}
+
+  def validate_embed(value, {:embed, mod, params}) when is_map(value) do
+    mod.validate(value, params)
+  end
+
+  def validate_embed(value, {:array, {:embed, _, _} = type}) when is_list(value) do
+    array(value, &validate_embed(&1, type), true)
+  end
+
+  def validate_embed(_, _) do
+    {:error, "is invalid"}
+  end
+
+  def validate_type(value, {:embed, mod, params}), do: mod.validate(value, params)
+
+  def validate_type(value, {:array, type}) when is_list(value) do
+    array(value, &validate_type(&1, type))
+  end
+
   def validate_type(value, :boolean) when is_boolean(value), do: :ok
 
   def validate_type(value, :integer) when is_integer(value), do: :ok
@@ -52,10 +110,44 @@ defmodule Magik.Validator do
   def validate_type(_, type) when is_tuple(type), do: {:error, "is not an array"}
   def validate_type(_, type), do: {:error, "is not a #{type}"}
 
+  # loop and validate element in array
+  defp array(data, validate_func, return_data \\ false, acc \\ {:ok, []})
+
+  defp array([], _, return_data, {:ok, acc}) do
+    if return_data do
+      {:ok, Enum.reverse(acc)}
+    else
+      :ok
+    end
+  end
+
+  defp array([h | t], validate_func, return_data, {:ok, acc}) do
+    case validate_func.(h) do
+      :ok -> {:ok, [h | acc]}
+      {:ok, data} -> array(t, validate_func, return_data, {:ok, [data | acc]})
+      {:error, _} = err -> err
+    end
+  end
+
+  @doc """
+  Validate number value
+  Support conditions
+  - `equal_to`
+  - `greater_than_or_equal_to` | `min`
+  - `greater_than`
+  - `less_than`
+  - `less_than_or_equal_to` | `max`
+
+      validate_number(x, [min: 10, max: 20])
+  """
   def validate_number(value, checks) when is_list(checks) do
-    checks
-    |> Enum.map(&validate_number(value, &1))
-    |> collect_result()
+    if is_number(value) do
+      checks
+      |> Enum.map(&validate_number(value, &1))
+      |> collect_result()
+    else
+      {:error, "must be a number"}
+    end
   end
 
   @spec validate_number(number, {atom, number}) :: boolean
@@ -208,6 +300,22 @@ defmodule Magik.Validator do
 
   defp validate_length(check, _actual_length, _check_value) do
     {:error, "unknown check '#{check}'"}
+  end
+
+  def validate_inclusion(value, enum) do
+    if Enum.member?(enum, value) do
+      :ok
+    else
+      {:error, "not be in the inclusion list"}
+    end
+  end
+
+  defp validate_exclusion(value, enum) do
+    if Enum.member?(enum, value) do
+      {:error, "must not be in the exclusion list"}
+    else
+      :ok
+    end
   end
 
   defp collect_result(results) do

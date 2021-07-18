@@ -1,3 +1,16 @@
+defmodule ParamTest.StringList do
+  def cast(value) when is_binary(value) do
+    rs =
+      String.split(value, ",")
+      |> Magik.Params.scrub_param()
+      |> Magik.Params.clean_nil()
+
+    {:ok, rs}
+  end
+
+  def cast(_), do: :error
+end
+
 defmodule ParamTest do
   use ExUnit.Case
   alias Magik.Params
@@ -105,6 +118,58 @@ defmodule ParamTest do
       }
 
       assert %{"address" => %Address{province: nil, city: "Hochiminh"}} = Params.clean_nil(params)
+    end
+  end
+
+  alias ParamTest.StringList
+
+  describe "test Params.cast function" do
+    @type_checks [
+      [:string, "Bluz", "Bluz", :ok],
+      [:string, 10, nil, :error],
+      [:binary, "Bluz", "Bluz", :ok],
+      [:binary, true, nil, :error],
+      [:boolean, "1", true, :ok],
+      [:boolean, "true", true, :ok],
+      [:boolean, "0", false, :ok],
+      [:boolean, "false", false, :ok],
+      [:boolean, 10, nil, :error],
+      [:integer, 10, 10, :ok],
+      [:integer, "10", 10, :ok],
+      [:integer, 10.0, nil, :error],
+      [:integer, "10.0", nil, :error],
+      [:float, 10.1, 10.1, :ok],
+      [:float, "10.1", 10.1, :ok],
+      [:float, 10, 10.0, :ok],
+      [:float, "10", 10.0, :ok],
+      [:float, "10xx", nil, :error],
+      [:map, %{name: "Bluz"}, %{name: "Bluz"}, :ok],
+      [:map, %{"name" => "Bluz"}, %{"name" => "Bluz"}, :ok],
+      [:map, [], nil, :error],
+      [{:array, :integer}, [1, 2, 3], [1, 2, 3], :ok],
+      [{:array, :integer}, ["1", "2", "3"], [1, 2, 3], :ok],
+      [{:array, :string}, ["1", "2", "3"], ["1", "2", "3"], :ok],
+      [StringList, "1,2,3", ["1", "2", "3"], :ok],
+      [StringList, "", [], :ok],
+      [StringList, [], nil, :error],
+      [{:array, StringList}, ["1", "2"], [["1"], ["2"]], :ok],
+      [{:array, StringList}, [1, 2], nil, :error]
+    ]
+
+    test "cast base type" do
+      @type_checks
+      |> Enum.each(fn [type, value, expected_value, expect] ->
+        rs =
+          Params.cast(%{"key" => value}, %{
+            key: [type: type]
+          })
+
+        if expect == :ok do
+          assert {:ok, %{key: ^expected_value}} = rs
+        else
+          assert {:error, _} = rs
+        end
+      end)
     end
   end
 end
