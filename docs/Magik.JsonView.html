@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.JsonView — Magik v0.9.0</title>
+    <title>Magik.JsonView — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Magik
     <div id="content" class="content-inner">
 
       <h1>
-Magik.JsonView <small class="app-vsn">(Magik v0.9.0)</small>
+Magik.JsonView <small class="app-vsn">(Magik v0.10.0)</small>
 
           <a href="https://github.com/onpointvn/magik/blob/master/lib/json_view.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -91,36 +91,36 @@ Magik.JsonView <small class="app-vsn">(Magik v0.9.0)</small>
 
 
         <section id="moduledoc">
-<p>Render a struct to a map with given options</p><ul><li><code class="inline">fields</code>: which fields are extract directly from struct</li><li><code class="inline">custom_fields</code>: which fields are render using custom <code class="inline">render_field/2</code> function</li><li><code class="inline">relationships</code>: a list of {field, view_module} defines which fields are rendered using another view</li></ul><p>Here is a sample view</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.PostView</span><span class="w"> </span><span class="k" data-group-id="1308435991-1">do</span><span class="w">
+<p>Render a struct to a map with given options</p><ul><li><code class="inline">fields</code>: which fields are extract directly from struct</li><li><code class="inline">custom_fields</code>: which fields are render using custom <code class="inline">render_field/2</code> function</li><li><code class="inline">relationships</code>: a list of {field, view_module} defines which fields are rendered using another view</li></ul><p>Here is a sample view</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.PostView</span><span class="w"> </span><span class="k" data-group-id="9531095502-1">do</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
 
-    </span><span class="na">@fields</span><span class="w"> </span><span class="p" data-group-id="1308435991-2">[</span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="ss">:excerpt</span><span class="p">,</span><span class="w"> </span><span class="ss">:cover</span><span class="p" data-group-id="1308435991-2">]</span><span class="w">
-    </span><span class="na">@custom_fields</span><span class="w"> </span><span class="p" data-group-id="1308435991-3">[</span><span class="ss">:like_count</span><span class="p" data-group-id="1308435991-3">]</span><span class="w">
-    </span><span class="na">@relationships</span><span class="w"> </span><span class="p" data-group-id="1308435991-4">[</span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.AuthorView</span><span class="p" data-group-id="1308435991-4">]</span><span class="w">
+    </span><span class="na">@fields</span><span class="w"> </span><span class="p" data-group-id="9531095502-2">[</span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="ss">:excerpt</span><span class="p">,</span><span class="w"> </span><span class="ss">:cover</span><span class="p" data-group-id="9531095502-2">]</span><span class="w">
+    </span><span class="na">@custom_fields</span><span class="w"> </span><span class="p" data-group-id="9531095502-3">[</span><span class="ss">:like_count</span><span class="p" data-group-id="9531095502-3">]</span><span class="w">
+    </span><span class="na">@relationships</span><span class="w"> </span><span class="p" data-group-id="9531095502-4">[</span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.AuthorView</span><span class="p" data-group-id="9531095502-4">]</span><span class="w">
 
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render</span><span class="p" data-group-id="1308435991-5">(</span><span class="s">&quot;post.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1308435991-6">%{</span><span class="ss">post</span><span class="p">:</span><span class="w"> </span><span class="n">post</span><span class="p" data-group-id="1308435991-6">}</span><span class="p" data-group-id="1308435991-5">)</span><span class="w"> </span><span class="k" data-group-id="1308435991-7">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render</span><span class="p" data-group-id="9531095502-5">(</span><span class="s">&quot;post.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9531095502-6">%{</span><span class="ss">post</span><span class="p">:</span><span class="w"> </span><span class="n">post</span><span class="p" data-group-id="9531095502-6">}</span><span class="p" data-group-id="9531095502-5">)</span><span class="w"> </span><span class="k" data-group-id="9531095502-7">do</span><span class="w">
 
         </span><span class="c1"># 1st way if `use JsonView`</span><span class="w">
-        </span><span class="n">render_json</span><span class="p" data-group-id="1308435991-8">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@fields</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="1308435991-8">)</span><span class="w">
+        </span><span class="n">render_json</span><span class="p" data-group-id="9531095502-8">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@fields</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="9531095502-8">)</span><span class="w">
 
         </span><span class="c1"># 2nd way same as above</span><span class="w">
-        </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_json</span><span class="p" data-group-id="1308435991-9">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w">
+        </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_json</span><span class="p" data-group-id="9531095502-9">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w">
             </span><span class="ss">fields</span><span class="p">:</span><span class="w"> </span><span class="na">@fields</span><span class="p">,</span><span class="w">
             </span><span class="ss">custom_fields</span><span class="p">:</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p">,</span><span class="w">
             </span><span class="ss">relationships</span><span class="p">:</span><span class="w"> </span><span class="na">@relationships</span><span class="w">
-        </span><span class="p" data-group-id="1308435991-9">)</span><span class="w">
+        </span><span class="p" data-group-id="9531095502-9">)</span><span class="w">
 
         </span><span class="c1"># 3rd render manual</span><span class="w">
         </span><span class="n">post</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_fields</span><span class="p" data-group-id="1308435991-10">(</span><span class="na">@fields</span><span class="p" data-group-id="1308435991-10">)</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="1308435991-11">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_custom_fields</span><span class="p" data-group-id="1308435991-12">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p" data-group-id="1308435991-12">)</span><span class="p" data-group-id="1308435991-11">)</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="1308435991-13">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_relationships</span><span class="p" data-group-id="1308435991-14">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="1308435991-14">)</span><span class="p" data-group-id="1308435991-13">)</span><span class="w">
-    </span><span class="k" data-group-id="1308435991-7">end</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_fields</span><span class="p" data-group-id="9531095502-10">(</span><span class="na">@fields</span><span class="p" data-group-id="9531095502-10">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="9531095502-11">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_custom_fields</span><span class="p" data-group-id="9531095502-12">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="na">@custom_fields</span><span class="p" data-group-id="9531095502-12">)</span><span class="p" data-group-id="9531095502-11">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">merge</span><span class="p" data-group-id="9531095502-13">(</span><span class="nc">JsonView</span><span class="o">.</span><span class="n">render_relationships</span><span class="p" data-group-id="9531095502-14">(</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="na">@relationships</span><span class="p" data-group-id="9531095502-14">)</span><span class="p" data-group-id="9531095502-13">)</span><span class="w">
+    </span><span class="k" data-group-id="9531095502-7">end</span><span class="w">
 
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="1308435991-15">(</span><span class="ss">:like_count</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="1308435991-15">)</span><span class="w"> </span><span class="k" data-group-id="1308435991-16">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="9531095502-15">(</span><span class="ss">:like_count</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="9531095502-15">)</span><span class="w"> </span><span class="k" data-group-id="9531095502-16">do</span><span class="w">
         </span><span class="c1"># load like_count from some where</span><span class="w">
-    </span><span class="k" data-group-id="1308435991-16">end</span><span class="w">
-</span><span class="k" data-group-id="1308435991-1">end</span></code></pre>
+    </span><span class="k" data-group-id="9531095502-16">end</span><span class="w">
+</span><span class="k" data-group-id="9531095502-1">end</span></code></pre>
         </section>
 
 
@@ -224,11 +224,11 @@ Functions
 <p>Render field with custom render function
 View module must defines <code class="inline">render_field/2</code> function to render each custom field</p><pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">JsonView</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="0867236678-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="0867236678-1">)</span><span class="w"> </span><span class="k" data-group-id="0867236678-2">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="2723883362-1">(</span><span class="ss">:is_success</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="2723883362-1">)</span><span class="w"> </span><span class="k" data-group-id="2723883362-2">do</span><span class="w">
   </span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">
-</span><span class="k" data-group-id="0867236678-2">end</span><span class="w">
+</span><span class="k" data-group-id="2723883362-2">end</span><span class="w">
 
-</span><span class="n">render_custom_fields</span><span class="p" data-group-id="0867236678-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0867236678-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="0867236678-4">]</span><span class="p" data-group-id="0867236678-3">)</span></code></pre>
+</span><span class="n">render_custom_fields</span><span class="p" data-group-id="2723883362-3">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2723883362-4">[</span><span class="ss">:is_success</span><span class="p" data-group-id="2723883362-4">]</span><span class="p" data-group-id="2723883362-3">)</span></code></pre>
   </section>
 </section>
 <section class="detail" id="render_fields/2">
@@ -317,10 +317,10 @@ View module must defines <code class="inline">render_field/2</code> function to 
   <section class="docstring">
 
 <p>Render relationship field for struct. <code class="inline">relationships</code> is a list of {field, view} for mapping render.
-For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p><p>Example relationships:</p><pre><code class="makeup elixir"><span class="n">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="3887704243-1">[</span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="p" data-group-id="3887704243-1">]</span></code></pre><p>Result of <code class="inline">render_relationships(post, relationships)</code> equal to output of below code</p><pre><code class="makeup elixir"><span class="p" data-group-id="1560242094-1">%{</span><span class="w">
-    </span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="o">.</span><span class="n">render_many</span><span class="p" data-group-id="1560242094-2">(</span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comment.json&quot;</span><span class="p" data-group-id="1560242094-2">)</span><span class="p">,</span><span class="w">
-    </span><span class="ss">autho</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="o">.</span><span class="n">render_one</span><span class="p" data-group-id="1560242094-3">(</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="nc">UserView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user.json&quot;</span><span class="p" data-group-id="1560242094-3">)</span><span class="w">
-</span><span class="p" data-group-id="1560242094-1">}</span></code></pre>
+For each field, call function <code class="inline">View.render()</code> to render json for relation object.</p><p>Example relationships:</p><pre><code class="makeup elixir"><span class="n">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="2583511756-1">[</span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="ss">author</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="p" data-group-id="2583511756-1">]</span></code></pre><p>Result of <code class="inline">render_relationships(post, relationships)</code> equal to output of below code</p><pre><code class="makeup elixir"><span class="p" data-group-id="2388890771-1">%{</span><span class="w">
+    </span><span class="ss">comments</span><span class="p">:</span><span class="w"> </span><span class="nc">CommentView</span><span class="o">.</span><span class="n">render_many</span><span class="p" data-group-id="2388890771-2">(</span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="nc">CommentView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comment.json&quot;</span><span class="p" data-group-id="2388890771-2">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">autho</span><span class="p">:</span><span class="w"> </span><span class="nc">UserView</span><span class="o">.</span><span class="n">render_one</span><span class="p" data-group-id="2388890771-3">(</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="nc">UserView</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user.json&quot;</span><span class="p" data-group-id="2388890771-3">)</span><span class="w">
+</span><span class="p" data-group-id="2388890771-1">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="render_template/3">

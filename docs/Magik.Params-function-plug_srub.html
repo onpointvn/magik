@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Params.plug_srub — Magik v0.9.0</title>
+    <title>Magik.Params.plug_srub — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -106,13 +106,13 @@ Magik
 
   <section class="docstring">
 
-<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="6317422136-1">do</span><span class="w">
+<p>A plug which do srubbing params</p><p><strong>Use in Router</strong></p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Router</span><span class="w"> </span><span class="k" data-group-id="7661609991-1">do</span><span class="w">
   </span><span class="n">...</span><span class="w">
   </span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w">
   </span><span class="n">...</span><span class="w">
-</span><span class="k" data-group-id="6317422136-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="5771375604-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="5771375604-1">]</span><span class="w">
+</span><span class="k" data-group-id="7661609991-1">end</span></code></pre><p><strong>Use in controller</strong></p><pre><code class="makeup elixir"><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="0633020943-1">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="0633020943-1">]</span><span class="w">
 </span><span class="c1"># or specify which field to scrub</span><span class="w">
-</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5771375604-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="5771375604-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="5771375604-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="5771375604-3">]</span></code></pre>
+</span><span class="n">plug</span><span class="w"> </span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">plug_srub</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0633020943-2">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keyword&quot;</span><span class="p" data-group-id="0633020943-2">]</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p" data-group-id="0633020943-3">[</span><span class="ss">:index</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p" data-group-id="0633020943-3">]</span></code></pre>
   </section>
 </section>
 

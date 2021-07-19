@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.ExcelView — Magik v0.9.0</title>
+    <title>Magik.ExcelView — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Magik
     <div id="content" class="content-inner">
 
       <h1>
-Magik.ExcelView <small class="app-vsn">(Magik v0.9.0)</small>
+Magik.ExcelView <small class="app-vsn">(Magik v0.10.0)</small>
 
           <a href="https://github.com/onpointvn/magik/blob/master/lib/excel_view.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -95,46 +95,46 @@ Magik.ExcelView <small class="app-vsn">(Magik v0.9.0)</small>
   <a href="#module-use-as-a-view" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Use as a view
 </h2>
-<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TestView</span><span class="w"> </span><span class="k" data-group-id="9378257299-1">do</span><span class="w">
+<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TestView</span><span class="w"> </span><span class="k" data-group-id="0226084183-1">do</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.ExcelView</span><span class="w">
 
     </span><span class="c1"># render list or stream</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_content</span><span class="p" data-group-id="9378257299-2">(</span><span class="n">user_list</span><span class="p" data-group-id="9378257299-2">)</span><span class="w"> </span><span class="k" data-group-id="9378257299-3">do</span><span class="w">
-      </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9378257299-4">[</span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">:age</span><span class="p">,</span><span class="w"> </span><span class="ss">:is_teenager</span><span class="p" data-group-id="9378257299-4">]</span><span class="w">
-      </span><span class="n">render_row</span><span class="p" data-group-id="9378257299-5">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="9378257299-5">)</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_content</span><span class="p" data-group-id="0226084183-2">(</span><span class="n">user_list</span><span class="p" data-group-id="0226084183-2">)</span><span class="w"> </span><span class="k" data-group-id="0226084183-3">do</span><span class="w">
+      </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0226084183-4">[</span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">:age</span><span class="p">,</span><span class="w"> </span><span class="ss">:is_teenager</span><span class="p" data-group-id="0226084183-4">]</span><span class="w">
+      </span><span class="n">render_row</span><span class="p" data-group-id="0226084183-5">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="0226084183-5">)</span><span class="w">
 
       </span><span class="c1"># or render with assigns</span><span class="w">
-      </span><span class="n">render_row</span><span class="p" data-group-id="9378257299-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9378257299-7">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p" data-group-id="9378257299-7">}</span><span class="p" data-group-id="9378257299-6">)</span><span class="w">
-    </span><span class="k" data-group-id="9378257299-3">end</span><span class="w">
+      </span><span class="n">render_row</span><span class="p" data-group-id="0226084183-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0226084183-7">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p" data-group-id="0226084183-7">}</span><span class="p" data-group-id="0226084183-6">)</span><span class="w">
+    </span><span class="k" data-group-id="0226084183-3">end</span><span class="w">
 
     </span><span class="c1"># by default raw value of the item is used</span><span class="w">
     </span><span class="c1"># here we define custom render for a specific view</span><span class="w">
-    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="9378257299-8">(</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="9378257299-8">)</span><span class="w"> </span><span class="k" data-group-id="9378257299-9">do</span><span class="w">
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">render_field</span><span class="p" data-group-id="0226084183-8">(</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="0226084183-8">)</span><span class="w"> </span><span class="k" data-group-id="0226084183-9">do</span><span class="w">
       </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NO&quot;</span><span class="w">
-    </span><span class="k" data-group-id="9378257299-9">end</span><span class="w">
-  </span><span class="k" data-group-id="9378257299-1">end</span></code></pre><p><strong>Fields</strong>
+    </span><span class="k" data-group-id="0226084183-9">end</span><span class="w">
+  </span><span class="k" data-group-id="0226084183-1">end</span></code></pre><p><strong>Fields</strong>
 Could be a real field in the data or virtual field. If it's virtual field, you have to define a custom render function as described below.
 A field could be:</p><ul><li><code class="inline">field_name</code> Ex: <code class="inline">:name</code></li><li><code class="inline">{field, format}</code> Ex: <code class="inline">{:name, bold: true, italic: true}</code></li></ul><p><strong>Custom render</strong>
 You can define custom render function for specific field</p><ul><li><code class="inline">render_field(field_name, struct)</code></li><li><code class="inline">render_field(field_name, struct, assigns)</code></li></ul><h2 id="module-use-without-view" class="section-heading">
   <a href="#module-use-without-view" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Use without view
 </h2>
-<p><code class="inline">ExcelView</code> can be used without defining a view.</p><pre><code class="makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">render_excel_data</span><span class="w"> </span><span class="p" data-group-id="6824170550-1">(</span><span class="n">user_list</span><span class="p" data-group-id="6824170550-1">)</span><span class="w"> </span><span class="k" data-group-id="6824170550-2">do</span><span class="w">
-  </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="6824170550-3">[</span><span class="w">
+<p><code class="inline">ExcelView</code> can be used without defining a view.</p><pre><code class="makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">render_excel_data</span><span class="w"> </span><span class="p" data-group-id="5198821597-1">(</span><span class="n">user_list</span><span class="p" data-group-id="5198821597-1">)</span><span class="w"> </span><span class="k" data-group-id="5198821597-2">do</span><span class="w">
+  </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5198821597-3">[</span><span class="w">
     </span><span class="ss">:name</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6824170550-4">{</span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">bold</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="6824170550-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5198821597-4">{</span><span class="ss">:email</span><span class="p">,</span><span class="w"> </span><span class="ss">bold</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="5198821597-4">}</span><span class="p">,</span><span class="w">
     </span><span class="ss">:age</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6824170550-5">{</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="o">/</span><span class="n">is_teenager</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="6824170550-5">}</span><span class="w">
-  </span><span class="p" data-group-id="6824170550-3">]</span><span class="w">
-  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="6824170550-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="6824170550-6">)</span><span class="w">
+    </span><span class="p" data-group-id="5198821597-5">{</span><span class="ss">:is_teenager</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="o">/</span><span class="n">is_teenager</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="5198821597-5">}</span><span class="w">
+  </span><span class="p" data-group-id="5198821597-3">]</span><span class="w">
+  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="5198821597-6">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p" data-group-id="5198821597-6">)</span><span class="w">
 
   </span><span class="c1"># or with assigns</span><span class="w">
-  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="6824170550-7">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6824170550-8">%{</span><span class="ss">custom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom&quot;</span><span class="p" data-group-id="6824170550-8">}</span><span class="p" data-group-id="6824170550-7">)</span><span class="w">
-</span><span class="k" data-group-id="6824170550-2">end</span><span class="w">
+  </span><span class="nc">Magik.ExcelView</span><span class="o">.</span><span class="n">rener_row</span><span class="p" data-group-id="5198821597-7">(</span><span class="n">user_list</span><span class="p">,</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5198821597-8">%{</span><span class="ss">custom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom&quot;</span><span class="p" data-group-id="5198821597-8">}</span><span class="p" data-group-id="5198821597-7">)</span><span class="w">
+</span><span class="k" data-group-id="5198821597-2">end</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">is_teenager</span><span class="p" data-group-id="6824170550-9">(</span><span class="n">user</span><span class="p" data-group-id="6824170550-9">)</span><span class="w"> </span><span class="k" data-group-id="6824170550-10">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">is_teenager</span><span class="p" data-group-id="5198821597-9">(</span><span class="n">user</span><span class="p" data-group-id="5198821597-9">)</span><span class="w"> </span><span class="k" data-group-id="5198821597-10">do</span><span class="w">
   </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NO&quot;</span><span class="w">
-</span><span class="k" data-group-id="6824170550-10">end</span></code></pre><p>A field could be:</p><ul><li><code class="inline">field_name</code> Ex: <code class="inline">:name</code></li><li><code class="inline">{field, format}</code> Ex: <code class="inline">{:name, bold: true, italic: true}</code></li><li><code class="inline">{field, render_func}</code></li><li><code class="inline">{field, render_func, format}</code></li></ul><p>Render functions would be accepted</p><ul><li><code class="inline">func(struct)</code></li><li><code class="inline">func(field_name, struct)</code></li></ul>
+</span><span class="k" data-group-id="5198821597-10">end</span></code></pre><p>A field could be:</p><ul><li><code class="inline">field_name</code> Ex: <code class="inline">:name</code></li><li><code class="inline">{field, format}</code> Ex: <code class="inline">{:name, bold: true, italic: true}</code></li><li><code class="inline">{field, render_func}</code></li><li><code class="inline">{field, render_func, format}</code></li></ul><p>Render functions would be accepted</p><ul><li><code class="inline">func(struct)</code></li><li><code class="inline">func(field_name, struct)</code></li></ul>
         </section>
 
 

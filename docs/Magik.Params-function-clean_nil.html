@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Params.clean_nil — Magik v0.9.0</title>
+    <title>Magik.Params.clean_nil — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -111,12 +111,12 @@ Magik
 
       </div>
 
-<p>Clean all nil field from params, support nested map and list.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5562359361-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="5562359361-1">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="5562359361-2">(</span><span class="n">params</span><span class="p" data-group-id="5562359361-2">)</span><span class="w">
+<p>Clean all nil field from params, support nested map and list.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1485916536-1">%{</span><span class="s">&quot;keyword&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p" data-group-id="1485916536-1">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="1485916536-2">(</span><span class="n">params</span><span class="p" data-group-id="1485916536-2">)</span><span class="w">
 </span><span class="c1"># =&gt; %{&quot;type&quot; =&gt; &quot;customer&quot;}</span><span class="w">
 
-</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5562359361-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5562359361-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="5562359361-4">]</span><span class="p" data-group-id="5562359361-3">}</span><span class="w">
-</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="5562359361-5">(</span><span class="n">params</span><span class="p" data-group-id="5562359361-5">)</span><span class="w">
+</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1485916536-3">%{</span><span class="ss">user_ids</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1485916536-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="1485916536-4">]</span><span class="p" data-group-id="1485916536-3">}</span><span class="w">
+</span><span class="nc">Magik.Params</span><span class="o">.</span><span class="n">clean_nil</span><span class="p" data-group-id="1485916536-5">(</span><span class="n">params</span><span class="p" data-group-id="1485916536-5">)</span><span class="w">
 </span><span class="c1"># =&gt; %{user_ids: [1, 2]}</span></code></pre>
   </section>
 </section>

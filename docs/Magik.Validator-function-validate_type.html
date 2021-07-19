@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Validator.validate_type — Magik v0.9.0</title>
+    <title>Magik.Validator.validate_type — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -94,7 +94,7 @@ Magik
     </a>
     <h1 class="signature">validate_type(value, struct_name)</h1>
 
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L136" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -104,7 +104,10 @@ Magik
 
   <section class="docstring">
 
-<p>Validate value type that support</p><ul><li>boolean</li><li>integer</li><li>float</li><li>number</li><li>string</li><li>tuple</li><li>map</li><li>list</li><li>atom</li><li>function</li><li>keyword</li><li>struct</li></ul>
+<p>Validate data types.</p><pre><code class="makeup elixir"><span class="gp unselectable">iex(1)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_type</span><span class="p" data-group-id="6887026308-1">(</span><span class="s">&quot;a string&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="p" data-group-id="6887026308-1">)</span><span class="w">
+</span><span class="ss">:ok</span><span class="w">
+</span><span class="gp unselectable">iex(2)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_type</span><span class="p" data-group-id="6887026308-2">(</span><span class="s">&quot;a string&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:number</span><span class="p" data-group-id="6887026308-2">)</span><span class="w">
+</span><span class="p" data-group-id="6887026308-3">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;is not a number&quot;</span><span class="p" data-group-id="6887026308-3">}</span></code></pre><p>Support built-in types:</p><ul><li><code class="inline">boolean</code></li><li><code class="inline">integer</code></li><li><code class="inline">float</code></li><li><code class="inline">number</code> (integer or float)</li><li><code class="inline">string</code> | <code class="inline">binary</code></li><li><code class="inline">tuple</code></li><li><code class="inline">map</code></li><li><code class="inline">array</code></li><li><code class="inline">atom</code></li><li><code class="inline">function</code></li><li><code class="inline">keyword</code></li></ul><p>It can also check extend types</p><ul><li><code class="inline">struct</code> Ex: <code class="inline">User</code></li><li><code class="inline">{:array, type}</code> : array of type</li></ul>
   </section>
 </section>
 

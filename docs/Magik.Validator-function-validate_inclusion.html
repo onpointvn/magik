@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.0">
     <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Validator.validate_format — Magik v0.10.0</title>
+    <title>Magik.Validator.validate_inclusion — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-c1adb848d3.js"></script>
@@ -79,22 +79,22 @@ Magik
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Magik.Validator.validate_format</h1>
+<h1>Magik.Validator.validate_inclusion</h1>
 
 <div class="deprecated">
-  You're seeing just the function <code>validate_format</code>, go back to <a href="Magik.Validator.html">Magik.Validator</a> module for more information.
+  You're seeing just the function <code>validate_inclusion</code>, go back to <a href="Magik.Validator.html">Magik.Validator</a> module for more information.
 </div>
 
-<section class="detail" id="validate_format/2">
+<section class="detail" id="validate_inclusion/2">
 
   <div class="detail-header">
-    <a href="#validate_format/2" class="detail-link" title="Link to this function">
+    <a href="#validate_inclusion/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">validate_format(value, check)</h1>
+    <h1 class="signature">validate_inclusion(value, enum)</h1>
 
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L322" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L344" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -104,17 +104,14 @@ Magik
 
   <section class="docstring">
 
-      <h2>Specs</h2>
-      <div class="specs">
-
-          <pre>validate_format(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/Regex.html#t:t/0">Regex.t</a>()) :: :ok | <a href="#t:error/0">error</a>()</pre>
-
-      </div>
-
-<p>Checks whether a string match the given regex.</p><pre><code class="makeup elixir"><span class="gp unselectable">iex(11)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_format</span><span class="p" data-group-id="8531709045-1">(</span><span class="s">&quot;year: 2001&quot;</span><span class="p">,</span><span class="w"> </span><span class="sr">~r/year: {4}/</span><span class="p" data-group-id="8531709045-1">)</span><span class="w">
+<p>Check if value is included in the given enumerable.</p><pre><code class="makeup elixir"><span class="gp unselectable">iex(21)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_inclusion</span><span class="p" data-group-id="2687510727-1">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2687510727-2">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2687510727-2">]</span><span class="p" data-group-id="2687510727-1">)</span><span class="w">
 </span><span class="ss">:ok</span><span class="w">
-</span><span class="gp unselectable">iex(12)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_format</span><span class="p" data-group-id="8531709045-2">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="sr">~r/+/</span><span class="p" data-group-id="8531709045-2">)</span><span class="w">
-</span><span class="p" data-group-id="8531709045-3">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;does not match format&quot;</span><span class="p" data-group-id="8531709045-3">}</span></code></pre>
+</span><span class="gp unselectable">iex(22)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_inclusion</span><span class="p" data-group-id="2687510727-3">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2687510727-4">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2687510727-4">}</span><span class="p" data-group-id="2687510727-3">)</span><span class="w">
+</span><span class="p" data-group-id="2687510727-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;given condition does not implement protocol Enumerable&quot;</span><span class="p" data-group-id="2687510727-5">}</span><span class="w">
+</span><span class="gp unselectable">iex(23)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_inclusion</span><span class="p" data-group-id="2687510727-6">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2687510727-7">%{</span><span class="ss">a</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">b</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2687510727-7">}</span><span class="p" data-group-id="2687510727-6">)</span><span class="w">
+</span><span class="p" data-group-id="2687510727-8">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;not be in the inclusion list&quot;</span><span class="p" data-group-id="2687510727-8">}</span><span class="w">
+</span><span class="gp unselectable">iex(24)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_inclusion</span><span class="p" data-group-id="2687510727-9">(</span><span class="p" data-group-id="2687510727-10">{</span><span class="ss">:a</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2687510727-10">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2687510727-11">%{</span><span class="ss">a</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">b</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2687510727-11">}</span><span class="p" data-group-id="2687510727-9">)</span><span class="w">
+</span><span class="ss">:ok</span></code></pre>
   </section>
 </section>
 

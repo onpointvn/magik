@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.PowerUpRepo — Magik v0.9.0</title>
+    <title>Magik.PowerUpRepo — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Magik
     <div id="content" class="content-inner">
 
       <h1>
-Magik.PowerUpRepo <small>behaviour</small> <small class="app-vsn">(Magik v0.9.0)</small>
+Magik.PowerUpRepo <small>behaviour</small> <small class="app-vsn">(Magik v0.10.0)</small>
 
           <a href="https://github.com/onpointvn/magik/blob/master/lib/power_up_repo.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -95,13 +95,13 @@ Magik.PowerUpRepo <small>behaviour</small> <small class="app-vsn">(Magik v0.9.0)
   <a href="#module-how-to-use" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   How to use
 </h2>
-<p><code class="inline">use Magik.PowerUpRepo</code> in your Repo module and all helper functions are ready for use</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w"> </span><span class="k" data-group-id="2014734867-1">do</span><span class="w">
+<p><code class="inline">use Magik.PowerUpRepo</code> in your Repo module and all helper functions are ready for use</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w"> </span><span class="k" data-group-id="4138468288-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Repo</span><span class="p">,</span><span class="w">
       </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w">
       </span><span class="ss">adapter</span><span class="p">:</span><span class="w"> </span><span class="nc">Ecto.Adapters.Postgres</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Magik.PowerUpRepo</span><span class="w">
-</span><span class="k" data-group-id="2014734867-1">end</span></code></pre>
+</span><span class="k" data-group-id="4138468288-1">end</span></code></pre>
         </section>
 
 
@@ -196,12 +196,12 @@ Callbacks
 
       </div>
 
-<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="9448371293-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="9448371293-1">)</span><span class="w"> </span><span class="k" data-group-id="9448371293-2">do</span><span class="w">
-  </span><span class="p" data-group-id="9448371293-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="9448371293-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="9448371293-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="9448371293-4">)</span><span class="w">
-  </span><span class="p" data-group-id="9448371293-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="9448371293-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="9448371293-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="9448371293-6">)</span><span class="w">
-</span><span class="k" data-group-id="9448371293-2">end</span></code></pre>
+<p>Find the first entry in the database that match the filter</p><pre><code class="makeup elixir"><span class="k">case</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">find</span><span class="p" data-group-id="7894729043-1">(</span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">brand_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">is_active</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="7894729043-1">)</span><span class="w"> </span><span class="k" data-group-id="7894729043-2">do</span><span class="w">
+  </span><span class="p" data-group-id="7894729043-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p" data-group-id="7894729043-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="7894729043-4">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="7894729043-4">)</span><span class="w">
+  </span><span class="p" data-group-id="7894729043-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:not_found</span><span class="p" data-group-id="7894729043-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p" data-group-id="7894729043-6">(</span><span class="s">&quot;No product found&quot;</span><span class="p" data-group-id="7894729043-6">)</span><span class="w">
+</span><span class="k" data-group-id="7894729043-2">end</span></code></pre>
   </section>
 </section>
 <section class="detail" id="c:paginate/3">
@@ -231,8 +231,8 @@ Callbacks
 
       </div>
 
-<p>Fetch query by pagination parama</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">from</span><span class="p" data-group-id="6744382914-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="6744382914-1">)</span><span class="w">
-</span><span class="p" data-group-id="6744382914-2">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="6744382914-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="6744382914-3">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6744382914-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="6744382914-4">}</span><span class="p" data-group-id="6744382914-3">)</span></code></pre>
+<p>Fetch query by pagination parama</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">from</span><span class="p" data-group-id="5331478984-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="5331478984-1">)</span><span class="w">
+</span><span class="p" data-group-id="5331478984-2">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="5331478984-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="5331478984-3">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5331478984-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="5331478984-4">}</span><span class="p" data-group-id="5331478984-3">)</span></code></pre>
   </section>
 </section>
 <section class="detail" id="c:preload_paginate/2">
@@ -262,10 +262,10 @@ Callbacks
 
       </div>
 
-<p>Preload entries return from <code class="inline">Repo.paginate</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="2680879159-1">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="2680879159-1">}</span><span class="w"> </span><span class="o">=</span><span class="w">
-  </span><span class="n">from</span><span class="p" data-group-id="2680879159-2">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="2680879159-2">)</span><span class="w">
-  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="2680879159-3">(</span><span class="p" data-group-id="2680879159-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="2680879159-4">}</span><span class="p" data-group-id="2680879159-3">)</span><span class="w">
-  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="2680879159-5">(</span><span class="p" data-group-id="2680879159-6">[</span><span class="ss">:brand</span><span class="p">,</span><span class="w"> </span><span class="ss">:category</span><span class="p" data-group-id="2680879159-6">]</span><span class="p" data-group-id="2680879159-5">)</span></code></pre>
+<p>Preload entries return from <code class="inline">Repo.paginate</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="2375509787-1">{</span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="n">paginator</span><span class="p" data-group-id="2375509787-1">}</span><span class="w"> </span><span class="o">=</span><span class="w">
+  </span><span class="n">from</span><span class="p" data-group-id="2375509787-2">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="2375509787-2">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">paginate</span><span class="p" data-group-id="2375509787-3">(</span><span class="p" data-group-id="2375509787-4">%{</span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">size</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="2375509787-4">}</span><span class="p" data-group-id="2375509787-3">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="2375509787-5">(</span><span class="p" data-group-id="2375509787-6">[</span><span class="ss">:brand</span><span class="p">,</span><span class="w"> </span><span class="ss">:category</span><span class="p" data-group-id="2375509787-6">]</span><span class="p" data-group-id="2375509787-5">)</span></code></pre>
   </section>
 </section>
 <section class="detail" id="c:stream_query/2">
@@ -295,9 +295,9 @@ Callbacks
 
       </div>
 
-<p>Load query with given size and provide the result as a stream</p><p><strong>Options</strong></p><ul><li>page_size: number of entry to load per batch</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">from</span><span class="p" data-group-id="9199066602-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="9199066602-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">stream_query</span><span class="p" data-group-id="9199066602-2">(</span><span class="mi">20</span><span class="p" data-group-id="9199066602-2">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="9199066602-3">(</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="9199066602-3">)</span><span class="w">
+<p>Load query with given size and provide the result as a stream</p><p><strong>Options</strong></p><ul><li>page_size: number of entry to load per batch</li></ul><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">from</span><span class="p" data-group-id="5243222103-1">(</span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Product</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="5243222103-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">stream_query</span><span class="p" data-group-id="5243222103-2">(</span><span class="mi">20</span><span class="p" data-group-id="5243222103-2">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="5243222103-3">(</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">.</span><span class="n">name</span><span class="p" data-group-id="5243222103-3">)</span><span class="w">
 </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">to_list</span></code></pre>
   </section>
 </section>

@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Validator.validate_length — Magik v0.9.0</title>
+    <title>Magik.Validator.validate_length — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -94,7 +94,7 @@ Magik
     </a>
     <h1 class="signature">validate_length(value, checks)</h1>
 
-      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/onpointvn/magik/blob/master/lib/validator.ex#L290" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -104,7 +104,17 @@ Magik
 
   <section class="docstring">
 
+      <h2>Specs</h2>
+      <div class="specs">
 
+          <pre>validate_length(<a href="#t:support_length_types/0">support_length_types</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) :: :ok | <a href="#t:error/0">error</a>()</pre>
+
+      </div>
+
+<p>Check if length of value match given conditions. Length condions are the same with <a href="#validate_number/2"><code class="inline">validate_number/2</code></a></p><pre><code class="makeup elixir"><span class="gp unselectable">iex(15)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_length</span><span class="p" data-group-id="4669426233-1">(</span><span class="p" data-group-id="4669426233-2">[</span><span class="mi">1</span><span class="p" data-group-id="4669426233-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">min</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4669426233-1">)</span><span class="w">
+</span><span class="p" data-group-id="4669426233-3">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;length must be greater than or equal to 2&quot;</span><span class="p" data-group-id="4669426233-3">}</span><span class="w">
+</span><span class="gp unselectable">iex(16)&gt; </span><span class="nc">Magik.Validator</span><span class="o">.</span><span class="n">validate_length</span><span class="p" data-group-id="4669426233-4">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">equal_to</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="4669426233-4">)</span><span class="w">
+</span><span class="ss">:ok</span></code></pre><p><strong>Supported types</strong></p><ul><li><code class="inline">list</code></li><li><code class="inline">map</code></li><li><code class="inline">tuple</code></li><li><code class="inline">keyword</code></li><li><code class="inline">string</code></li></ul>
   </section>
 </section>
 

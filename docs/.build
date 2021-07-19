@@ -8,7 +8,9 @@ Magik.Maybe.html
 Magik.Paginator.html
 Magik.Params.html
 Magik.PowerUpRepo.html
+Magik.Schema.html
 Magik.TelegramNoti.html
+Magik.Type.html
 Magik.Validator.html
 Magik.html
 api-reference.html
@@ -18,8 +20,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-0fd47e0298.js
-dist/sidebar_items-3c27440676.js
+dist/search_items-015f9ecc34.js
+dist/sidebar_items-c1adb848d3.js
 index.html
 readme.html
 search.html

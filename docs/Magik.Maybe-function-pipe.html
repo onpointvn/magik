@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.0">
-    <meta name="project" content="Magik v0.9.0">
+    <meta name="project" content="Magik v0.10.0">
 
-    <title>Magik.Maybe.pipe — Magik v0.9.0</title>
+    <title>Magik.Maybe.pipe — Magik v0.10.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-3c27440676.js"></script>
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Magik
       </a>
       <strong class="sidebar-projectVersion">
-        v0.9.0
+        v0.10.0
       </strong>
     </div>
 
@@ -111,11 +111,11 @@ Magik
 
       </div>
 
-<p>This function check first argument, if it is tuple of <code class="inline">{:ok, data}</code> then invoke the function with <code class="inline">data</code> of the tuple. Otherwise return the first argument.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="2336179605-1">(</span><span class="p" data-group-id="2336179605-2">%</span><span class="nc" data-group-id="2336179605-2">User</span><span class="p" data-group-id="2336179605-2">{</span><span class="p" data-group-id="2336179605-2">}</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="2336179605-1">)</span><span class="w">
-</span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="2336179605-3">(</span><span class="n">changeset</span><span class="p" data-group-id="2336179605-3">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="2336179605-4">(</span><span class="k" data-group-id="2336179605-5">fn</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+<p>This function check first argument, if it is tuple of <code class="inline">{:ok, data}</code> then invoke the function with <code class="inline">data</code> of the tuple. Otherwise return the first argument.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="2499715032-1">(</span><span class="p" data-group-id="2499715032-2">%</span><span class="nc" data-group-id="2499715032-2">User</span><span class="p" data-group-id="2499715032-2">{</span><span class="p" data-group-id="2499715032-2">}</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p" data-group-id="2499715032-1">)</span><span class="w">
+</span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="2499715032-3">(</span><span class="n">changeset</span><span class="p" data-group-id="2499715032-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="2499715032-4">(</span><span class="k" data-group-id="2499715032-5">fn</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
   </span><span class="c1"># do something with user</span><span class="w">
-</span><span class="k" data-group-id="2336179605-5">end</span><span class="p" data-group-id="2336179605-4">)</span></code></pre><p>In case you are using <code class="inline">with</code>, don't care about this function</p>
+</span><span class="k" data-group-id="2499715032-5">end</span><span class="p" data-group-id="2499715032-4">)</span></code></pre><p>In case you are using <code class="inline">with</code>, don't care about this function</p>
   </section>
 </section>
 
@@ -150,14 +150,14 @@ Magik
 </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="w">
 
 </span><span class="n">a</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">*</span><span class="p" data-group-id="3087581635-1">(</span><span class="mi">2</span><span class="p" data-group-id="3087581635-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="3087581635-2">(</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">/</span><span class="n">b</span><span class="p" data-group-id="3087581635-2">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="3087581635-3">(</span><span class="mi">10</span><span class="p" data-group-id="3087581635-3">)</span></code></pre><p><strong>The condition</strong>
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">*</span><span class="p" data-group-id="0610029678-1">(</span><span class="mi">2</span><span class="p" data-group-id="0610029678-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="0610029678-2">(</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="o">/</span><span class="n">b</span><span class="p" data-group-id="0610029678-2">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="0610029678-3">(</span><span class="mi">10</span><span class="p" data-group-id="0610029678-3">)</span></code></pre><p><strong>The condition</strong>
 Could be any value:</p><ul><li>if condition is <code class="inline">true</code> then call the function with the first argument</li><li>if condition is <code class="inline">function/1</code> then invoke condition function. If return value is <code class="inline">true</code> then invoke the function with first argument</li><li>other value of condition don't trigger the function and just return the first argument that passed to this function</li></ul><p><strong>Example 2</strong>
 Using function condition</p><pre><code class="makeup elixir"><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="n">a</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="1567290150-1">(</span><span class="mi">3</span><span class="p" data-group-id="1567290150-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="1567290150-2">(</span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="1567290150-2">)</span></code></pre>
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="o">+</span><span class="p" data-group-id="4528739455-1">(</span><span class="mi">3</span><span class="p" data-group-id="4528739455-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Maybe</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="4528739455-2">(</span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="4528739455-2">)</span></code></pre>
   </section>
 </section>
 

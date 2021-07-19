@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.24.0">
+    <meta name="project" content="Magik v0.10.0">
+
+    <title>Magik.Schema — Magik v0.10.0</title>
+    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+
+    <script src="dist/sidebar_items-c1adb848d3.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+Magik
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.10.0
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Magik.Schema <small class="app-vsn">(Magik v0.10.0)</small>
+
+          <a href="https://github.com/onpointvn/magik/blob/master/lib/schema.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>This is only a specification to define a schema to use with <code class="inline">Magik.Params.cast</code> and <code class="inline">Magik.Contract.validate</code></p><p>Schema is just a map or keyword list that follow some simple conventions. Map's key is the field name and the value is a keyword list of field specifications.</p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="3409805523-1">%{</span><span class="w">
+  </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="sr">~r/{4}/</span><span class="p" data-group-id="3409805523-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-3">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:integer</span><span class="p">,</span><span class="w"> </span><span class="ss">number</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-4">[</span><span class="ss">min</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">max</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p" data-group-id="3409805523-4">]</span><span class="p" data-group-id="3409805523-3">]</span><span class="o">.</span><span class="w">
+  </span><span class="ss">skill</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-5">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-6">{</span><span class="ss">:array</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="p" data-group-id="3409805523-6">}</span><span class="p">,</span><span class="w"> </span><span class="ss">length</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3409805523-7">[</span><span class="ss">min</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">max</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="3409805523-7">]</span><span class="p" data-group-id="3409805523-5">]</span><span class="w">
+</span><span class="p" data-group-id="3409805523-1">}</span></code></pre><p>This schema define a map with a field <code class="inline">name</code> which type is <code class="inline">string</code></p><h2 id="module-i-field-type" class="section-heading">
+  <a href="#module-i-field-type" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  I. Field type
+</h2>
+<p><strong>Built-in types</strong></p><p>A type could be any of built-in supported types:</p><ul><li><code class="inline">boolean</code></li><li><code class="inline">string</code> | <code class="inline">binary</code></li><li><code class="inline">integer</code></li><li><code class="inline">float</code></li><li><code class="inline">number</code> (integer or float)</li><li><code class="inline">date</code></li><li><code class="inline">time</code></li><li><code class="inline">datetime</code> | <code class="inline">utc_datetime</code>: date time with time zone</li><li><code class="inline">naive_datetime</code>: date time without time zone</li><li><code class="inline">map</code></li><li><code class="inline">keyword</code></li><li><code class="inline">{array, type}</code> array of built-in type, all item must be the same type</li></ul><p><strong>Other types</strong>
+Custom type may be supported depends on module.</p><p><strong>Nested types</strong>
+Nested types could be a another <strong>schema</strong> or list of <strong>schema</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="8283118904-1">%{</span><span class="w">
+  </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8283118904-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8283118904-3">%{</span><span class="w">
+      </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8283118904-4">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p" data-group-id="8283118904-4">]</span><span class="w">
+    </span><span class="p" data-group-id="8283118904-3">}</span><span class="p" data-group-id="8283118904-2">]</span><span class="w">
+</span><span class="p" data-group-id="8283118904-1">}</span></code></pre><p>Or list of schema</p><pre><code class="makeup elixir"><span class="p" data-group-id="9357706397-1">%{</span><span class="w">
+  </span><span class="ss">users</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9357706397-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9357706397-3">{</span><span class="ss">:array</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9357706397-4">%{</span><span class="w">
+      </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9357706397-5">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p" data-group-id="9357706397-5">]</span><span class="w">
+    </span><span class="p" data-group-id="9357706397-4">}</span><span class="p" data-group-id="9357706397-3">}</span><span class="w"> </span><span class="p" data-group-id="9357706397-2">]</span><span class="w">
+</span><span class="p" data-group-id="9357706397-1">}</span></code></pre><h2 id="module-ii-field-casting-and-default-value" class="section-heading">
+  <a href="#module-ii-field-casting-and-default-value" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  II. Field casting and default value
+</h2>
+<p>These specifications is used for casting data with <code class="inline">Magik.Params.cast</code></p><h3 id="module-1-default-value" class="section-heading">
+  <a href="#module-1-default-value" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  1. Default value
+</h3>
+<p>Is used when the given field is missing or nil.</p><ul><li><p>Default could be a value</p><pre><code class="makeup elixir"><span class="p" data-group-id="1732022548-1">%{</span><span class="w">
+  </span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1732022548-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;active&quot;</span><span class="p" data-group-id="1732022548-2">]</span><span class="w">
+</span><span class="p" data-group-id="1732022548-1">}</span></code></pre></li><li><p>Or a <code class="inline">function/0</code>, this function will be invoke each time data is <code class="inline">casted</code></p><pre><code class="makeup elixir"><span class="p" data-group-id="3719375532-1">%{</span><span class="w">
+  </span><span class="ss">published_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3719375532-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:datetime</span><span class="p">,</span><span class="w"> </span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="o">/</span><span class="mi">0</span><span class="p" data-group-id="3719375532-2">]</span><span class="w">
+</span><span class="p" data-group-id="3719375532-1">}</span></code></pre></li></ul><h3 id="module-2-custom-cast-function" class="section-heading">
+  <a href="#module-2-custom-cast-function" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  2. Custom cast function
+</h3>
+<p>You can provide a function to cast field value instead of using default casting function by using
+<code class="inline">cast_func: &lt;function/1&gt;</code></p><pre><code class="makeup elixir"><span class="p" data-group-id="3301397845-1">%{</span><span class="w">
+    </span><span class="ss">published_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3301397845-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:datetime</span><span class="p">,</span><span class="w"> </span><span class="ss">cast_func</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">DateTime</span><span class="o">.</span><span class="n">from_iso8601</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="3301397845-2">]</span><span class="w">
+</span><span class="p" data-group-id="3301397845-1">}</span></code></pre><h2 id="module-iii-field-validation" class="section-heading">
+  <a href="#module-iii-field-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  III. Field validation
+</h2>
+<p><strong>These validation are supported by <a href="Magik.Validator.html"><code class="inline">Magik.Validator</code></a></strong></p><h3 id="module-1-type-validation" class="section-heading">
+  <a href="#module-1-type-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  1. Type validation
+</h3>
+<p>Type specification above could be used for validating or casting data.</p><h3 id="module-2-numeric-validation" class="section-heading">
+  <a href="#module-2-numeric-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  2. Numeric validation
+</h3>
+<p>Support validating number value. These are list of supported validations:</p><ul><li><code class="inline">equal_to</code></li><li><code class="inline">greater_than_or_equal_to</code> | <code class="inline">min</code></li><li><code class="inline">greater_than</code></li><li><code class="inline">less_than</code></li><li><code class="inline">less_than_or_equal_to</code> | <code class="inline">max</code></li></ul><p> Define validation: <code class="inline">number: [&lt;name&gt;: &lt;value&gt;, ...]</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="0066905334-1">%{</span><span class="w">
+  </span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0066905334-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:integer</span><span class="p">,</span><span class="w"> </span><span class="ss">number</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0066905334-3">[</span><span class="ss">min</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">max</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p" data-group-id="0066905334-3">]</span><span class="p" data-group-id="0066905334-2">]</span><span class="w">
+</span><span class="p" data-group-id="0066905334-1">}</span></code></pre><h3 id="module-3-length-validation" class="section-heading">
+  <a href="#module-3-length-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  3. Length validation
+</h3>
+<p>Validate length of supported types include <code class="inline">string</code>, <code class="inline">array</code>, <code class="inline">map</code>, <code class="inline">tuple</code>, <code class="inline">keyword</code>.
+Length condions are the same with <strong>Numeric validation</strong></p><p>Define validation: <code class="inline">length: [&lt;name&gt;: &lt;value&gt;, ...]</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="8414495297-1">%{</span><span class="w">
+  </span><span class="ss">skills</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8414495297-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8414495297-3">{</span><span class="ss">:array</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="p" data-group-id="8414495297-3">}</span><span class="p">,</span><span class="w"> </span><span class="ss">length</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8414495297-4">[</span><span class="ss">min</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="ss">max</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="8414495297-4">]</span><span class="p" data-group-id="8414495297-2">]</span><span class="w">
+</span><span class="p" data-group-id="8414495297-1">}</span></code></pre><h3 id="module-4-format-validation" class="section-heading">
+  <a href="#module-4-format-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  4. Format validation
+</h3>
+<p>Check if a string match a given pattern.</p><p>Define validation: <code class="inline">format: &lt;Regex&gt;</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="8095086752-1">%{</span><span class="w">
+  </span><span class="ss">year</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8095086752-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="sr">~r/year: {4}/</span><span class="p" data-group-id="8095086752-2">]</span><span class="w">
+</span><span class="p" data-group-id="8095086752-1">}</span></code></pre><h3 id="module-5-inclusion-and-exclusion-validation" class="section-heading">
+  <a href="#module-5-inclusion-and-exclusion-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  5. Inclusion and exclusion validation
+</h3>
+<p>Check if value is included or not included in given enumerable (<code class="inline">array</code>, <code class="inline">map</code>, or <code class="inline">keyword</code>)</p><p>Define validation: <code class="inline">in: &lt;enumerable&gt;</code> or <code class="inline">not_in: &lt;enumerable&gt;</code></p><p><strong>Example</strong></p><pre><code class="makeup elixir"><span class="p" data-group-id="7489288012-1">%{</span><span class="w">
+  </span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7489288012-2">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">in</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7489288012-3">[</span><span class="s">&quot;active&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;inactive&quot;</span><span class="p" data-group-id="7489288012-3">]</span><span class="p" data-group-id="7489288012-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">selected_option</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7489288012-4">[</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:integer</span><span class="p">,</span><span class="w"> </span><span class="ss">not_in</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7489288012-5">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p" data-group-id="7489288012-5">]</span><span class="p" data-group-id="7489288012-4">]</span><span class="w">
+</span><span class="p" data-group-id="7489288012-1">}</span></code></pre><h3 id="module-6-custom-validation-function" class="section-heading">
+  <a href="#module-6-custom-validation-function" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  6. Custom validation function
+</h3>
+<p>You can provide a function to validate the value.</p><p>Define validation: <code class="inline">func: &lt;function&gt;</code></p><p>Function must be follow this signature</p><pre><code class="makeup elixir"><span class="na">@spec</span><span class="w"> </span><span class="n">func</span><span class="p" data-group-id="6534322425-1">(</span><span class="n">value</span><span class="o">::</span><span class="n">any</span><span class="p" data-group-id="6534322425-2">(</span><span class="p" data-group-id="6534322425-2">)</span><span class="p" data-group-id="6534322425-1">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="ss">:ok</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p" data-group-id="6534322425-3">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="o">::</span><span class="nc">String</span><span class="o">.</span><span class="n">t</span><span class="p" data-group-id="6534322425-4">(</span><span class="p" data-group-id="6534322425-4">)</span><span class="p" data-group-id="6534322425-3">}</span></code></pre>
+        </section>
+
+
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
