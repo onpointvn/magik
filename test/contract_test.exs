@@ -126,7 +126,7 @@ defmodule ContractTest do
   end
 
   test "validate format with not match string should error" do
-    assert {:error, %{key: ["format not matched"]}} =
+    assert {:error, %{key: ["does not match format"]}} =
              Magik.Contract.validate(%{key: ""}, %{
                key: [type: :string, format: ~r/year:\s\d{4}/]
              })
