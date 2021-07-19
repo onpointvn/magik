@@ -1,27 +1,54 @@
 defmodule Magik.Validator do
   @moduledoc """
-  Validation module that support
-
+  Some helpers function to do validate data
   - Validate type
+  - validate inclusion/exclusion
+  - validate length for string and enumerable types
+  - validate number
+  - validate string format/pattern
+  - validate custom function
+  - validate allow_nil or not
 
+  Each of these validations can be used separatedly
+
+  ```elixir
+  iex(2)>   Magik.Validator.validate_type(10, :integer)
+  :ok
+  iex(3)>   Magik.Validator.validate_type(10, :string)
+  {:error, "is not a string"}
+  iex(3)>   Magik.Validator.validate_number(9, [min: 10, max: 20])
+  {:error, "must be greater than or equal to 10"}
+  ```
+
+  Or you can combine multiple condition at one
+  ```elixir
+  iex(12)> Magik.Validator.validate(10, type: :integer, number: [min: 10, max: 20])
+  :ok
+  iex(13)> Magik.Validator.validate("email@g.c", type: :string, format: ~r/.+@.+\.[a-z]{2,10}/)
+  {:error, "format not matched"}
+  ```
   """
+
+  @type error :: {:error, String.t()}
 
   @doc """
-  Validate value type that support
-  - boolean
-  - integer
-  - float
-  - number
-  - string
-  - tuple
-  - map
-  - list
-  - atom
-  - function
-  - keyword
-  - struct
-  """
+  Validate value against list of validations.
 
+  ```elixir
+  iex(13)> Magik.Validator.validate("email@g.c", type: :string, format: ~r/.+@.+\.[a-z]{2,10}/)
+  {:error, "format not matched"}
+  ```
+
+  **All supported validations**:
+  - `type`: validate datatype
+  - `format`: check if binary value matched given regex
+  - `number`: validate number value
+  - `length`: validate length of supported types. See `validate_length/2` for more details.
+  - `in`: validate inclusion
+  - `not_in`: validate exclusion
+  - `func`: custom validation function follows spec `func(any()):: :ok | {:error, message::String.t()}`
+  """
+  @spec validate(any(), keyword()) :: :ok | error
   def validate(value, validators) do
     do_validate(value, validators, :ok)
   end
@@ -61,6 +88,11 @@ defmodule Magik.Validator do
   defp get_validator(:not_in), do: &validate_exclusion/2
   defp get_validator(name), do: {:error, "validate_#{name} is not support"}
 
+  @doc """
+  Validate embed types
+  """
+  def validate_embed(value, embed_type)
+
   def validate_embed(value, {:embed, mod, params}) when is_map(value) do
     mod.validate(value, params)
   end
@@ -73,44 +105,58 @@ defmodule Magik.Validator do
     {:error, "is invalid"}
   end
 
-  def validate_type(value, {:embed, mod, params}), do: mod.validate(value, params)
+  @doc """
+  Validate data types.
+
+  ```elixir
+  iex(1)> Magik.Validator.validate_type("a string", :string)
+  :ok
+  iex(2)> Magik.Validator.validate_type("a string", :number)
+  {:error, "is not a number"}
+  ```
+
+  Support built-in types:
+  - `boolean`
+  - `integer`
+  - `float`
+  - `number` (integer or float)
+  - `string` | `binary`
+  - `tuple`
+  - `map`
+  - `array`
+  - `atom`
+  - `function`
+  - `keyword`
+
+  It can also check extend types
+  - `struct` Ex: `User`
+  - `{:array, type}` : array of type
+  """
+
+  def validate_type(value, :boolean) when is_boolean(value), do: :ok
+  def validate_type(value, :integer) when is_integer(value), do: :ok
+  def validate_type(value, :float) when is_float(value), do: :ok
+  def validate_type(value, :number) when is_number(value), do: :ok
+  def validate_type(value, :string) when is_binary(value), do: :ok
+  def validate_type(value, :binary) when is_binary(value), do: :ok
+  def validate_type(value, :tuple) when is_tuple(value), do: :ok
+  def validate_type(value, :array) when is_list(value), do: :ok
+  def validate_type(value, :list) when is_list(value), do: :ok
+  def validate_type(value, :atom) when is_atom(value), do: :ok
+  def validate_type(value, :function) when is_function(value), do: :ok
+  def validate_type(value, :map) when is_map(value), do: :ok
 
   def validate_type(value, {:array, type}) when is_list(value) do
     array(value, &validate_type(&1, type))
   end
 
-  def validate_type(value, :boolean) when is_boolean(value), do: :ok
-
-  def validate_type(value, :integer) when is_integer(value), do: :ok
-
-  def validate_type(value, :float) when is_float(value), do: :ok
-
-  def validate_type(value, :number) when is_number(value), do: :ok
-
-  def validate_type(value, :string) when is_binary(value), do: :ok
-
-  def validate_type(value, :tuple) when is_tuple(value), do: :ok
-
-  def validate_type(value, :map) when is_map(value), do: :ok
-
-  def validate_type(value, :array) when is_list(value), do: :ok
-
-  def validate_type(value, :list) when is_list(value), do: :ok
-
-  def validate_type(value, :atom) when is_atom(value), do: :ok
-
-  def validate_type(value, :function) when is_function(value), do: :ok
-
   def validate_type([] = _check_item, :keyword), do: :ok
-
   def validate_type([{atom, _} | _] = _check_item, :keyword) when is_atom(atom), do: :ok
-
   def validate_type(value, struct_name) when is_struct(value, struct_name), do: :ok
-
   def validate_type(_, type) when is_tuple(type), do: {:error, "is not an array"}
   def validate_type(_, type), do: {:error, "is not a #{type}"}
 
-  # loop and validate element in array
+  # loop and validate element in array using `validate_func`
   defp array(data, validate_func, return_data \\ false, acc \\ [])
 
   defp array([], _, return_data, acc) do
@@ -123,14 +169,28 @@ defmodule Magik.Validator do
 
   defp array([h | t], validate_func, return_data, acc) do
     case validate_func.(h) do
-      :ok -> {:ok, [h | acc]}
-      {:ok, data} -> array(t, validate_func, return_data, [data | acc])
-      {:error, _} = err -> err
+      :ok ->
+        {:ok, [h | acc]}
+
+      {:ok, data} ->
+        acc = (return_data && [data | acc]) || []
+        array(t, validate_func, return_data, acc)
+
+      {:error, _} = err ->
+        err
     end
   end
 
   @doc """
   Validate number value
+
+  ```elixir
+  iex(3)> Magik.Validator.validate_number(12, min: 10, max: 12)
+  :ok
+  iex(4)> Magik.Validator.validate_number(12, min: 15)
+  {:error, "must be greater than or equal to 15"}
+  ```
+
   Support conditions
   - `equal_to`
   - `greater_than_or_equal_to` | `min`
@@ -140,22 +200,27 @@ defmodule Magik.Validator do
 
       validate_number(x, [min: 10, max: 20])
   """
+  @spec validate_number(integer() | float(), keyword()) :: :ok | error
   def validate_number(value, checks) when is_list(checks) do
     if is_number(value) do
       checks
-      |> Enum.map(&validate_number(value, &1))
-      |> collect_result()
+      |> Enum.reduce(:ok, fn
+        check, :ok ->
+          validate_number(value, check)
+
+        _, error ->
+          error
+      end)
     else
       {:error, "must be a number"}
     end
   end
 
-  @spec validate_number(number, {atom, number}) :: boolean
   def validate_number(number, {:equal_to, check_value}) do
     if number == check_value do
       :ok
     else
-      {:error, "must be equal to #{check_value}; got: #{inspect(number)}"}
+      {:error, "must be equal to #{check_value}"}
     end
   end
 
@@ -163,7 +228,7 @@ defmodule Magik.Validator do
     if number > check_value do
       :ok
     else
-      {:error, "must be greater than #{check_value}; got: #{inspect(number)}"}
+      {:error, "must be greater than #{check_value}"}
     end
   end
 
@@ -171,7 +236,7 @@ defmodule Magik.Validator do
     if number >= check_value do
       :ok
     else
-      {:error, "must be greater than or equal to #{check_value}; got: #{inspect(number)}"}
+      {:error, "must be greater than or equal to #{check_value}"}
     end
   end
 
@@ -183,7 +248,7 @@ defmodule Magik.Validator do
     if number < check_value do
       :ok
     else
-      {:error, "must be less than #{check_value}; got: #{inspect(number)}"}
+      {:error, "must be less than #{check_value}"}
     end
   end
 
@@ -191,7 +256,7 @@ defmodule Magik.Validator do
     if number <= check_value do
       :ok
     else
-      {:error, "must be less than or equal to #{check_value}; got: #{inspect(number)}"}
+      {:error, "must be less than or equal to #{check_value}"}
     end
   end
 
@@ -204,30 +269,35 @@ defmodule Magik.Validator do
   end
 
   @doc """
-  Checks whether an item_name conforms the given format.
-  ## Examples
-  iex> Exop.ValidationChecks.validate_regex(%{a: "bar"}, :a, ~r/bar/)
+  Check if length of value match given conditions. Length condions are the same with `validate_number/2`
+
+  ```elixir
+  iex(15)> Magik.Validator.validate_length([1], min: 2)
+  {:error, "length must be greater than or equal to 2"}
+  iex(16)> Magik.Validator.validate_length("hello", equal_to: 5)
   :ok
+  ```
+
+  **Supported types**
+  - `list`
+  - `map`
+  - `tuple`
+  - `keyword`
+  - `string`
   """
-  @spec validate_format(String.t(), Regex.t()) ::
-          :ok | {:error, String.t()}
-  def validate_format(value, check) when is_binary(value) do
-    if Regex.match?(check, value), do: :ok, else: {:error, "format not matched"}
-  end
-
-  def validate_format(_value, _check) do
-    {:error, "format check only support string"}
-  end
-
-  @spec validate_length(map(), atom() | String.t(), map()) :: :ok | {:error, list()}
+  @type support_length_types :: String.t() | map() | list() | tuple()
+  @spec validate_length(support_length_types, keyword()) :: :ok | error
   def validate_length(value, checks) do
-    actual_length = get_length(value)
+    with length when is_integer(length) <- get_length(value),
+         :ok <- validate_number(length, checks) do
+      :ok
+    else
+      {:error, :wrong_type} ->
+        {:error, "length check supports only lists, binaries, maps and tuples"}
 
-    checks
-    |> Enum.map(fn {condition, condition_value} ->
-      validate_length(condition, actual_length, condition_value)
-    end)
-    |> collect_result()
+      {:error, msg} ->
+        {:error, "length #{msg}"}
+    end
   end
 
   @spec get_length(any) :: pos_integer() | {:error, :wrong_type}
@@ -237,91 +307,64 @@ defmodule Magik.Validator do
   defp get_length(param) when is_tuple(param), do: tuple_size(param)
   defp get_length(_param), do: {:error, :wrong_type}
 
-  defp validate_length(_, {:error, :wrong_type}, _check_value) do
-    {:error, "length check supports only lists, binaries, maps and tuples"}
+  @doc """
+  Checks whether a string match the given regex.
+
+  ```elixir
+  iex(11)> Magik.Validator.validate_format("year: 2001", ~r/year:\s\d{4}/)
+  :ok
+  iex(12)> Magik.Validator.validate_format("hello", ~r/\d+/)
+  {:error, "does not match format"}
+  ```
+  """
+  @spec validate_format(String.t(), Regex.t()) ::
+          :ok | error
+  def validate_format(value, check) when is_binary(value) do
+    if Regex.match?(check, value), do: :ok, else: {:error, "does not match format"}
   end
 
-  defp validate_length(:min, actual_length, check_value) do
-    validate_length(:greater_than_or_equal_to, actual_length, check_value)
+  def validate_format(_value, _check) do
+    {:error, "format check only support string"}
   end
 
-  defp validate_length(:greater_than_or_equal_to, actual_length, check_value) do
-    (actual_length >= check_value && :ok) ||
-      {
-        :error,
-        "length must be greater than or equal to #{check_value}"
-      }
-  end
+  @doc """
+  Check if value is included in the given enumerable.
 
-  defp validate_length(:greater_than, actual_length, check_value) do
-    (actual_length > check_value && :ok) ||
-      {:error, "length must be greater than #{check_value}"}
-  end
-
-  defp validate_length(:max, actual_length, check_value) do
-    validate_length(:less_than_or_equal_to, actual_length, check_value)
-  end
-
-  defp validate_length(:less_than_or_equal_to, actual_length, check_value) do
-    (actual_length <= check_value && :ok) ||
-      {
-        :error,
-        "length must be less than or equal to #{check_value}"
-      }
-  end
-
-  defp validate_length(:less_than, actual_length, check_value) do
-    (actual_length < check_value && :ok) ||
-      {
-        :error,
-        "length must be less than #{check_value}"
-      }
-  end
-
-  defp validate_length(:equal_to, actual_length, check_value) do
-    (actual_length == check_value && :ok) ||
-      {
-        :error,
-        "length must be equal to #{check_value}"
-      }
-  end
-
-  defp validate_length(:in, actual_length, check_value) do
-    if Enum.member?(check_value, actual_length) do
-      :ok
-    else
-      {
-        :error,
-        "length must be in range #{check_value}"
-      }
-    end
-  end
-
-  defp validate_length(check, _actual_length, _check_value) do
-    {:error, "unknown check '#{check}'"}
-  end
-
+  ```elixir
+  iex(21)> Magik.Validator.validate_inclusion(1, [1, 2])
+  :ok
+  iex(22)> Magik.Validator.validate_inclusion(1, {1, 2})
+  {:error, "given condition does not implement protocol Enumerable"}
+  iex(23)> Magik.Validator.validate_inclusion(1, %{a: 1, b: 2})
+  {:error, "not be in the inclusion list"}
+  iex(24)> Magik.Validator.validate_inclusion({:a, 1}, %{a: 1, b: 2})
+  :ok
+  ```
+  """
   def validate_inclusion(value, enum) do
-    if Enum.member?(enum, value) do
-      :ok
+    if Enumerable.impl_for(enum) do
+      if Enum.member?(enum, value) do
+        :ok
+      else
+        {:error, "not be in the inclusion list"}
+      end
     else
-      {:error, "not be in the inclusion list"}
+      {:error, "given condition does not implement protocol Enumerable"}
     end
   end
 
-  defp validate_exclusion(value, enum) do
-    if Enum.member?(enum, value) do
-      {:error, "must not be in the exclusion list"}
+  @doc """
+  Check if value is **not** included in the given enumerable. Similar to `validate_inclusion/2`
+  """
+  def validate_exclusion(value, enum) do
+    if Enumerable.impl_for(enum) do
+      if Enum.member?(enum, value) do
+        {:error, "must not be in the exclusion list"}
+      else
+        :ok
+      end
     else
-      :ok
+      {:error, "given condition does not implement protocol Enumerable"}
     end
-  end
-
-  defp collect_result(results) do
-    Enum.reduce(results, :ok, fn
-      :ok, acc -> acc
-      {:error, msg}, :ok -> {:error, [msg]}
-      {:error, msg}, {:error, acc_msg} -> {:error, [msg | acc_msg]}
-    end)
   end
 end
