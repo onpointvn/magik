@@ -207,6 +207,8 @@ defmodule Magik.Contract do
     {status, results} =
       schema
       |> Enum.map(fn {field_name, validations} ->
+        value = Map.get(data, field_name, :__missing)
+
         validations =
           if Keyword.has_key?(validations, :allow_nil) do
             validations
@@ -214,16 +216,21 @@ defmodule Magik.Contract do
             [{:allow_nil, false} | validations]
           end
 
-        validations
-        |> Enum.map(fn validation ->
-          value = Map.get(data, field_name, :__missing)
-          do_validate(value, validation, field_name: field_name, data: data)
-        end)
-        |> collect_validation_result()
-        |> case do
-          {:ok, data} -> {:ok, {field_name, data}}
-          {_, errors} -> {:error, {field_name, errors}}
-        end
+        {status, results} =
+          Enum.reduce(validations, {:ok, value}, fn
+            _, {:error, _} = error ->
+              error
+
+            validation, acc ->
+              case do_validate(value, validation, data) do
+                :ok -> acc
+                {:ok, data} -> {:ok, data}
+                {:error, msg} when is_list(msg) -> {:error, msg}
+                {:error, msg} -> {:error, [msg]}
+              end
+          end)
+
+        {status, {field_name, results}}
       end)
       |> collect_schema_result()
 
@@ -249,105 +256,19 @@ defmodule Magik.Contract do
   defp do_validate(nil, _, _), do: :ok
 
   # validate nested type
-  defp do_validate(%{} = value, {:type, type}, _) when is_map(type) do
-    validate(value, type)
+  defp do_validate(value, {:type, type}, _) when is_map(type) do
+    Validator.validate_embed(value, {:embed, __MODULE__, type})
   end
 
-  defp do_validate(_value, {:type, type}, _) when is_map(type) do
-    {:error, "is not a nested map"}
-  end
-
-  defp do_validate(value, {:type, {:array, type}}, _) when is_list(value) do
-    results =
-      value
-      |> Enum.map(fn item ->
-        do_validate(item, {:type, type}, value)
-      end)
-
-    error =
-      Enum.find(results, fn
-        {rs, _} -> rs == :error
-      end)
-
-    if not is_nil(error) do
-      error
-    else
-      {:ok, Enum.map(results, fn {_, data} -> data end)}
-    end
-  end
-
-  defp do_validate(value, {:type, type}, _) do
-    case Validator.validate_type(value, type) do
-      :ok -> {:ok, value}
-      err -> err
-    end
-  end
-
-  defp do_validate(value, {:in, enum}, _) do
-    if Enum.member?(enum, value) do
-      :ok
-    else
-      {:error, "not be in the inclusion list"}
-    end
-  end
-
-  defp do_validate(value, {:not_in, enum}, _) do
-    if Enum.member?(enum, value) do
-      {:error, "must not be in the exclusion list"}
-    else
-      :ok
-    end
-  end
-
-  defp do_validate(value, {:format, format}, _) do
-    Validator.validate_format(value, format)
-  end
-
-  defp do_validate(value, {:number, checks}, _) when is_number(value) do
-    Validator.validate_number(value, checks)
-  end
-
-  defp do_validate(_value, {:number, _checks}, _) do
-    {:error, "is not a number"}
-  end
-
-  defp do_validate(value, {:length, checks}, _) do
-    Validator.validate_length(value, checks)
+  defp do_validate(value, {:type, {:array, type}}, _) when is_map(type) do
+    Validator.validate_embed(value, {:array, {:embed, __MODULE__, type}})
   end
 
   defp do_validate(value, {:func, func}, opts) when is_function(func, 3) do
     func.(opts[:field_name], value, opts[:data])
   end
 
-  defp collect_validation_result(results) do
-    summary =
-      Enum.reduce(results, {:ok, nil}, fn
-        :ok, acc -> acc
-        {:ok, data}, {:ok, _acc} -> {:ok, data}
-        {:error, msg}, {:ok, _} -> {:error, [msg]}
-        {:error, msg}, {:error, acc_msg} -> {:error, [msg | acc_msg]}
-        _, acc -> acc
-      end)
-
-    case summary do
-      {:ok, _} ->
-        summary
-
-      {:error, errors} ->
-        errors =
-          errors
-          |> Enum.map(fn item ->
-            if is_list(item) do
-              item
-            else
-              [item]
-            end
-          end)
-          |> Enum.concat()
-
-        {:error, errors}
-    end
-  end
+  defp do_validate(value, validation, _), do: Validator.validate(value, [validation])
 
   defp collect_schema_result(results) do
     Enum.reduce(results, {:ok, []}, fn

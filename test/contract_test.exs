@@ -126,7 +126,7 @@ defmodule ContractTest do
   end
 
   test "validate format with not match string should error" do
-    assert {:error, %{key: ["format not matched"]}} =
+    assert {:error, %{key: ["does not match format"]}} =
              Magik.Contract.validate(%{key: ""}, %{
                key: [type: :string, format: ~r/year:\s\d{4}/]
              })
@@ -177,7 +177,7 @@ defmodule ContractTest do
   end
 
   test "validate number with string should error" do
-    assert {:error, %{key: ["is not a number"]}} =
+    assert {:error, %{key: ["must be a number"]}} =
              Magik.Contract.validate(%{key: "magic"}, %{
                key: [type: :string, number: [min: 10]]
              })
@@ -278,7 +278,7 @@ defmodule ContractTest do
       ]
     }
 
-    assert {:error, %{address: ["is not a nested map"]}} = Magik.Contract.validate(data, schema)
+    assert {:error, %{address: ["is invalid"]}} = Magik.Contract.validate(data, schema)
   end
 
   test "validate nested map with bad nested value should error" do
