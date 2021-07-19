@@ -116,7 +116,25 @@ defmodule Magik.Params do
   alias Magik.Type
 
   @doc """
-  Cast and validate params with given schema
+  Cast and validate params with given schema.
+  See `Magik.Schema` for instruction on how to define a schema
+  And then use it like this
+
+  ```elixir
+  def index(conn, params) do
+    index_schema = %{
+      status: [type: :string, required: true],
+      type: [type: :string, in: ["type1", "type2", "type3"]],
+      keyword: [type: :string, length: [min: 3, max: 100]],
+    }
+
+    with {:ok, data} <- Magik.Params.cast(params, index_schema) do
+      # do query data
+    else
+      {:error, errors} -> IO.puts(errors)
+    end
+  end
+  ```
   """
 
   @spec cast(data :: map(), schema :: map()) :: {:ok, map()} | {:error, errors :: map()}
