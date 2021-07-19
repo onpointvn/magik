@@ -112,4 +112,142 @@ defmodule Magik.Params do
   end
 
   def clean_nil(param), do: param
+
+  alias Magik.Type
+
+  @doc """
+  Cast and validate params with given schema
+  """
+
+  @spec cast(data :: map(), schema :: map()) :: {:ok, map()} | {:error, errors :: map()}
+  def cast(data, schema) do
+    {status, results} =
+      schema
+      |> Enum.map(&cast_field(data, &1))
+      |> collect_schema_result()
+
+    {status, Map.new(results)}
+  end
+
+  defp cast_field(data, {field_name, definitions}) do
+    {type, definitions} = Keyword.pop(definitions, :type)
+    {default, definitions} = Keyword.pop(definitions, :default)
+    {cast_func, validations} = Keyword.pop(definitions, :cast_func)
+
+    value =
+      Map.get(data, field_name) ||
+        Map.get(data, "#{field_name}") ||
+        get_default(default)
+
+    cast_func =
+      if is_function(cast_func) do
+        cast_func
+      else
+        &cast_value(&1, type, default)
+      end
+
+    case cast_func.(value) do
+      :error ->
+        {:error, {field_name, ["is in valid"]}}
+
+      {:error, errors} ->
+        {:error, {field_name, errors}}
+
+      {:ok, data} ->
+        validations
+        |> Enum.map(fn validation ->
+          do_validate(data, validation)
+        end)
+        |> collect_validation_result()
+        |> case do
+          :ok -> {:ok, {field_name, data}}
+          {_, errors} -> {:error, {field_name, errors}}
+        end
+    end
+  end
+
+  defp get_default(default) do
+    if is_function(default) do
+      default.()
+    else
+      default
+    end
+  end
+
+  defp cast_value(nil, _, _), do: {:ok, nil}
+
+  # cast array of custom map
+  defp cast_value(value, {:array, %{} = type}, _) do
+    cast_array({:embed, __MODULE__, type}, value)
+  end
+
+  # cast nested map
+  defp cast_value(value, %{} = type, _) do
+    Type.cast({:embed, __MODULE__, type}, value)
+  end
+
+  defp cast_value(value, type, _) do
+    Type.cast(type, value)
+  end
+
+  # rewrite cast_array for more detail errors
+  def cast_array(type, value, acc \\ [])
+
+  def cast_array(type, [value | t], acc) do
+    case Type.cast(type, value) do
+      {:ok, data} -> cast_array(type, t, [data | acc])
+      error -> error
+    end
+  end
+
+  def cast_array(_, [], acc), do: {:ok, Enum.reverse(acc)}
+
+  defp do_validate(nil, {:required, true}) do
+    {:error, "is required"}
+  end
+
+  defp do_validate(_, {:required, _}), do: :ok
+
+  defp do_validate(nil, _), do: :ok
+
+  defp do_validate(value, validator) do
+    Magik.Validator.validate(value, [validator])
+  end
+
+  defp collect_validation_result(results) do
+    summary =
+      Enum.reduce(results, :ok, fn
+        :ok, acc -> acc
+        {:error, msg}, :ok -> {:error, [msg]}
+        {:error, msg}, {:error, acc_msg} -> {:error, [msg | acc_msg]}
+      end)
+
+    case summary do
+      :ok ->
+        :ok
+
+      {:error, errors} ->
+        errors =
+          errors
+          |> Enum.map(fn item ->
+            if is_list(item) do
+              item
+            else
+              [item]
+            end
+          end)
+          |> Enum.concat()
+
+        {:error, errors}
+    end
+  end
+
+  defp collect_schema_result(results) do
+    Enum.reduce(results, {:ok, []}, fn
+      {:ok, data}, {:ok, acc} -> {:ok, [data | acc]}
+      {:error, error}, {:ok, _} -> {:error, [error]}
+      {:error, error}, {:error, acc} -> {:error, [error | acc]}
+      _, acc -> acc
+    end)
+  end
 end
