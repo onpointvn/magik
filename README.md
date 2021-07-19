@@ -26,8 +26,10 @@ Add some handy method to your Repo module that make your Repo module more powerf
 Provide helper function watch exception, format message and send notification to a Telegram conversation
 
 ### 7. `Magik.Params`
-Provide helper function to process params like `scrub_params` and `clean_nil`
-
+Provide helper function to process params like `scrub_params` and `clean_nil` and `cast` params with given schema
 
 ### 8. `Magik.Contract`
 Provide helper function to validate data structure and value, it does not cast value, only validate data
+
+### 9. `Magik.Schema`
+Instruction to define schema that used with `Magik.Params.cast/2` and `Magik.Contract.validate/2`
