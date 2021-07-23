@@ -43,7 +43,10 @@ defmodule Magik.Paginator do
     {default_paging(), @param_schema}
     |> Ecto.Changeset.cast(params, [:page, :size])
     |> Ecto.Changeset.validate_number(:page, greater_than: 0)
-    |> Ecto.Changeset.validate_number(:size, greater_than: 0, less_than_or_equal_to: 80)
+    |> Ecto.Changeset.validate_number(:size,
+      greater_than: 0,
+      less_than_or_equal_to: @default_config[:max_size]
+    )
     |> Ecto.Changeset.apply_action(:insert)
     |> case do
       {:ok, data} -> data

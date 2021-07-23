@@ -152,7 +152,8 @@ defmodule Magik.Validator do
 
   def validate_type([] = _check_item, :keyword), do: :ok
   def validate_type([{atom, _} | _] = _check_item, :keyword) when is_atom(atom), do: :ok
-  def validate_type(value, struct_name) when is_struct(value, struct_name), do: :ok
+  # def validate_type(value, struct_name) when is_struct(value, struct_name), do: :ok
+  def validate_type(%{__struct__: struct}, struct_name) when struct == struct_name, do: :ok
   def validate_type(_, type) when is_tuple(type), do: {:error, "is not an array"}
   def validate_type(_, type), do: {:error, "is not a #{type}"}
 
