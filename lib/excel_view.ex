@@ -80,15 +80,7 @@ defmodule Magik.ExcelView do
 
   defmacro __before_compile__(_env) do
     quote do
-      def render_field(field, struct), do: Map.get(struct, field)
-
-      def render_field(field, struct, assigns) do
-        if Map.has_key?(assigns, :__if_no_renderer) do
-          assigns[:__if_no_renderer]
-        else
-          raise BadFunctionError, "No render_cell function is implemented for #{field}"
-        end
-      end
+      def render_field(field, struct, _), do: Map.get(struct, field)
     end
   end
 
@@ -104,8 +96,6 @@ defmodule Magik.ExcelView do
   def render_row(struct, view, fields, assigns) when is_list(fields) do
     Enum.map(fields, fn field -> render_cell(struct, view, field, assigns) end)
   end
-
-  # this hack is for back compatible with old version
 
   def render_row(struct, fields, assigns, _) do
     Enum.map(fields, fn field -> render_cell(struct, nil, field, assigns) end)
@@ -130,24 +120,18 @@ defmodule Magik.ExcelView do
     assigns = Map.new(assigns)
 
     case field do
-      {field, render_fn, format} when is_function(render_fn) ->
-        value = render_cell(struct, nil, [field, render_fn])
-        [value | format]
-
-      {_, render_fn} when is_function(render_fn, 1) ->
-        render_fn.(struct)
-
-      {field, render_fn} when is_function(render_fn, 2) ->
-        render_fn.(field, struct)
-
-      {field, render_fn} when is_function(render_fn, 3) ->
-        render_fn.(field, struct, assigns)
-
       {field, format} when is_list(format) ->
-        [Map.get(struct, field) | format]
+        value = render_cell(struct, nil, field, assigns)
+        [value | format]
 
       field when is_atom(field) ->
         Map.get(struct, field)
+
+      render_fn when is_function(render_fn, 1) ->
+        render_fn.(struct)
+
+      render_fn when is_function(render_fn, 2) ->
+        render_fn.(struct, assigns)
 
       _ ->
         nil
@@ -155,9 +139,7 @@ defmodule Magik.ExcelView do
   end
 
   def render_cell(struct, view, field, assigns) when is_atom(view) do
-    assigns =
-      Map.new(assigns)
-      |> Map.put(:__if_no_renderer, :not_implemented)
+    assigns = Map.new(assigns)
 
     case field do
       {field_name, format} when is_list(format) ->
@@ -165,18 +147,10 @@ defmodule Magik.ExcelView do
         [value | format]
 
       field_name when is_atom(field_name) ->
-        case view.render_field(field_name, struct, assigns) do
-          :not_implemented -> view.render_field(field_name, struct)
-          value -> value
-        end
+        view.render_field(field_name, struct, assigns)
 
       _ ->
         nil
     end
-  end
-
-  # this hack is for compatible with old version
-  def render_cell(struct, field, assigns, _) do
-    render_cell(struct, nil, field, assigns)
   end
 end

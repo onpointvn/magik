@@ -17,16 +17,12 @@ defmodule ExcelWithoutViewTest do
   end
 
   test "render field with render_field/1" do
-    assert ["100000d"] == ExcelView.render_row(@data, [{:price, &render_price/1}])
-  end
-
-  test "render field with render_field/2" do
-    assert ["100000d"] == ExcelView.render_row(@data, [{:price, &render_field/2}])
+    assert ["100000d"] == ExcelView.render_row(@data, [&render_price/1])
   end
 
   test "render field with render_field/3" do
     assert ["product", "sku.001", "Cat"] ==
-             ExcelView.render_row(@data, [:name, :sku, {:category, &render_field/3}], %{
+             ExcelView.render_row(@data, [:name, :sku, &render_field(:category, &1, &2)], %{
                category: %{name: "Cat"}
              })
   end
@@ -38,7 +34,7 @@ defmodule ExcelWithoutViewTest do
 
   test "render with style" do
     assert [["product", bold: true], "sku.001", "100000d"] =
-             ExcelView.render_row(@data, [{:name, [bold: true]}, :sku, {:price, &render_price/1}])
+             ExcelView.render_row(@data, [{:name, [bold: true]}, :sku, &render_price/1])
   end
 
   def render_price(struct) do
