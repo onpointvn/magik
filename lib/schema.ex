@@ -14,7 +14,15 @@ defmodule Magik.Schema do
   }
   ```
 
-  This schema define a map with a field `name` which type is `string`
+  If you only specify type of data, you can write it shorthand style like this
+
+  ```elixir
+  %{
+    name: :string,
+    age: :integer,
+    skill: {:array, :string}
+  }
+  ```
 
 
   ## I. Field type
@@ -182,4 +190,46 @@ defmodule Magik.Schema do
   @spec func(value::any()) :: :ok | {:error, message::String.t()}
   ```
   """
+
+  @doc """
+  Expand short-hand type syntax to full syntax
+
+      field: :string -> field: [type: :string]
+      field: {:array, :string} -> field: [type: {:array, :string}]
+      field: %{#embedded} -> field: [type: %{#embedded}]
+  """
+  @spec expand(map()) :: map()
+  def expand(schema) do
+    schema
+    |> Enum.map(&do_expand_field/1)
+    |> Enum.into(%{})
+  end
+
+  defp do_expand_field({field, type}) when is_atom(type) do
+    {field, [type: type]}
+  end
+
+  defp do_expand_field({field, type}) when is_map(type) do
+    {field, [type: do_expand_type(type)]}
+  end
+
+  defp do_expand_field({field, {:array, type}}) do
+    {field, [type: {:array, do_expand_type(type)}]}
+  end
+
+  defp do_expand_field({field, attrs}) do
+    type = attrs[:type]
+
+    if type do
+      {field, Keyword.put(attrs, :type, do_expand_type(type))}
+    else
+      {field, attrs}
+    end
+  end
+
+  defp do_expand_type(%{} = type) do
+    expand(type)
+  end
+
+  defp do_expand_type(type), do: type
 end

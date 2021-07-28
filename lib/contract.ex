@@ -206,6 +206,7 @@ defmodule Magik.Contract do
   def validate(data, schema) do
     {status, results} =
       schema
+      |> Magik.Schema.expand()
       |> Enum.map(fn {field_name, validations} ->
         value = Map.get(data, field_name, :__missing)
 
