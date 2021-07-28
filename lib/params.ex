@@ -141,6 +141,7 @@ defmodule Magik.Params do
   def cast(data, schema) do
     {status, results} =
       schema
+      |> Magik.Schema.expand()
       |> Enum.map(&cast_field(data, &1))
       |> collect_schema_result()
 
