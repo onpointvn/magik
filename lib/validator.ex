@@ -53,6 +53,68 @@ defmodule Magik.Validator do
     do_validate(value, validators, :ok)
   end
 
+  @doc """
+  Validate list value aganst validator and return error if any item is not valid.
+  In case of error `{:error, errors}`, `errors` is list of error detail for all error item includes `[index, message]`
+
+  ```elixir
+  iex(51)> Magik.Validator.validate_list([1,2,3], type: :integer, number: [min: 2])
+  {:error, [[0, "must be greater than or equal to 2"]]}
+  ```
+  """
+
+  @spec validate_list(list(), keyword()) :: :ok | {:error, list()}
+  def validate_list(items, validators) do
+    items
+    |> Enum.with_index()
+    |> Enum.reduce({:ok, []}, fn {value, index}, {status, acc} ->
+      case do_validate(value, validators, :ok) do
+        :ok -> {status, acc}
+        {:error, message} -> {:error, [[index, message] | acc]}
+      end
+    end)
+    |> case do
+      {:ok, _} -> :ok
+      {:error, errors} -> {:error, Enum.reverse(errors)}
+    end
+  end
+
+  @doc """
+  Validate map value with given map specification.
+  Validation spec is a map
+
+  ```elixir
+  validation_spec = %{
+    email: [type: :string, allow_nil: false],
+    password: [type: :string, length: [min: 8]],
+    age: [type: :integer, number: [min: 16, max: 60]]
+  }
+  ```
+
+  `validate_map` use the key from validation to extract value from input data map and then validate value against the validators for that key.
+
+  In case of error, the error detail is a map of error for each key.
+
+  ```elixir
+  iex(56)> Magik.Validator.validate_map(%{name: "dzung", password: "123456", emal: "ddd@example.com", age: 28}, validation_spec)
+  {:error, %{password: "length must be greater than or equal to 8"}}
+  ```
+  """
+  @spec validate_map(map(), map()) :: :ok | {:error, map()}
+  def validate_map(data, validations_spec) do
+    validations_spec
+    |> Enum.reduce({:ok, []}, fn {key, validators}, {status, acc} ->
+      case do_validate(Map.get(data, key), validators, :ok) do
+        :ok -> {status, acc}
+        {:error, message} -> {:error, [{key, message} | acc]}
+      end
+    end)
+    |> case do
+      {:ok, _} -> :ok
+      {:error, messages} -> {:error, Enum.into(messages, %{})}
+    end
+  end
+
   defp do_validate(_, [], acc), do: acc
 
   defp do_validate(value, [h | t] = _validators, acc) do
@@ -171,11 +233,10 @@ defmodule Magik.Validator do
   defp array([h | t], validate_func, return_data, acc) do
     case validate_func.(h) do
       :ok ->
-        {:ok, [h | acc]}
+        array(t, validate_func, return_data, [h | acc])
 
       {:ok, data} ->
-        acc = (return_data && [data | acc]) || []
-        array(t, validate_func, return_data, acc)
+        array(t, validate_func, return_data, [data | acc])
 
       {:error, _} = err ->
         err
