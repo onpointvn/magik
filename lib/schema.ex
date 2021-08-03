@@ -201,35 +201,41 @@ defmodule Magik.Schema do
   @spec expand(map()) :: map()
   def expand(schema) do
     schema
-    |> Enum.map(&do_expand_field/1)
+    |> Enum.map(&expand_field/1)
     |> Enum.into(%{})
   end
 
-  defp do_expand_field({field, type}) when is_atom(type) do
-    {field, [type: type]}
+  defp expand_field({field, type}) when is_atom(type) or is_map(type) do
+    expand_field({field, [type: type]})
   end
 
-  defp do_expand_field({field, type}) when is_map(type) do
-    {field, [type: do_expand_type(type)]}
+  defp expand_field({field, {:array, type}}) do
+    {field, [type: {:array, expand_type(type)}]}
   end
 
-  defp do_expand_field({field, {:array, type}}) do
-    {field, [type: {:array, do_expand_type(type)}]}
+  defp expand_field({field, attrs}) do
+    attrs =
+      if attrs[:type] do
+        Keyword.put(attrs, :type, expand_type(attrs[:type]))
+      else
+        attrs
+      end
+
+    attrs = Keyword.put(attrs, :default, expand_default(attrs[:default]))
+
+    {field, attrs}
   end
 
-  defp do_expand_field({field, attrs}) do
-    type = attrs[:type]
-
-    if type do
-      {field, Keyword.put(attrs, :type, do_expand_type(type))}
-    else
-      {field, attrs}
-    end
-  end
-
-  defp do_expand_type(%{} = type) do
+  # expand nested schema
+  defp expand_type(%{} = type) do
     expand(type)
   end
 
-  defp do_expand_type(type), do: type
+  defp expand_type(type), do: type
+
+  defp expand_default(default) when is_function(default, 0) do
+    default.()
+  end
+
+  defp expand_default(default), do: default
 end

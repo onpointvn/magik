@@ -154,15 +154,16 @@ defmodule Magik.Params do
     {cast_func, validations} = Keyword.pop(definitions, :cast_func)
 
     value =
-      Map.get(data, field_name) ||
-        Map.get(data, "#{field_name}") ||
-        get_default(default)
+      case Map.fetch(data, field_name) do
+        {:ok, value} -> value
+        _ -> Map.get(data, "#{field_name}", default)
+      end
 
     cast_func =
       if is_function(cast_func) do
         cast_func
       else
-        &cast_value(&1, type, default)
+        &cast_value(&1, type)
       end
 
     case cast_func.(value) do
@@ -185,27 +186,19 @@ defmodule Magik.Params do
     end
   end
 
-  defp get_default(default) do
-    if is_function(default) do
-      default.()
-    else
-      default
-    end
-  end
-
-  defp cast_value(nil, _, _), do: {:ok, nil}
+  defp cast_value(nil, _), do: {:ok, nil}
 
   # cast array of custom map
-  defp cast_value(value, {:array, %{} = type}, _) do
+  defp cast_value(value, {:array, %{} = type}) do
     cast_array({:embed, __MODULE__, type}, value)
   end
 
   # cast nested map
-  defp cast_value(value, %{} = type, _) do
+  defp cast_value(value, %{} = type) do
     Type.cast({:embed, __MODULE__, type}, value)
   end
 
-  defp cast_value(value, type, _) do
+  defp cast_value(value, type) do
     Type.cast(type, value)
   end
 
@@ -221,11 +214,9 @@ defmodule Magik.Params do
 
   def cast_array(_, [], acc), do: {:ok, Enum.reverse(acc)}
 
-  defp do_validate(nil, {:required, true}) do
-    {:error, "is required"}
+  defp do_validate(value, {:required, _} = validator) do
+    Magik.Validator.validate(value, [validator])
   end
-
-  defp do_validate(_, {:required, _}), do: :ok
 
   defp do_validate(nil, _), do: :ok
 

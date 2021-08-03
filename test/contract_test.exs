@@ -9,6 +9,34 @@ defmodule ContractTest do
 
   alias ContractTest.User
 
+  test "default value is nil if not set" do
+    assert {:ok, %{"key" => nil}} =
+             Magik.Contract.validate(%{}, %{
+               "key" => [type: :string]
+             })
+  end
+
+  test "default value by a specific value" do
+    assert {:ok, %{"key" => "hello"}} =
+             Magik.Contract.validate(%{}, %{
+               "key" => [type: :string, default: "hello"]
+             })
+  end
+
+  test "default value by a function" do
+    assert {:ok, %{"key" => "hello"}} =
+             Magik.Contract.validate(%{}, %{
+               "key" => [type: :string, default: fn -> "hello" end]
+             })
+  end
+
+  test "default value should not override nil value" do
+    assert {:ok, %{"key" => nil}} =
+             Magik.Contract.validate(%{"key" => nil}, %{
+               "key" => [type: :string, default: "hello"]
+             })
+  end
+
   @type_checks [
     [:string, "Bluz", :ok],
     [:string, 10, :error],
@@ -76,17 +104,10 @@ defmodule ContractTest do
              })
   end
 
-  test "validate allow_nil=false with not nil should ok" do
-    assert {:ok, _} =
-             Magik.Contract.validate(%{"key" => "a string"}, %{
-               "key" => [type: :string, allow_nil: false]
-             })
-  end
-
-  test "validate allow_nil=false with nil should error" do
-    assert {:error, %{"key" => ["cannot be nil"]}} =
+  test "validate required with nil value" do
+    assert {:error, %{"key" => ["is required"]}} =
              Magik.Contract.validate(%{"key" => nil}, %{
-               "key" => [type: :string, allow_nil: false]
+               "key" => [type: :string, required: true]
              })
   end
 
@@ -308,7 +329,7 @@ defmodule ContractTest do
           city: [type: :number],
           street: [type: :string]
         },
-        allow_nil: true
+        required: false
       ]
     }
 
@@ -325,7 +346,7 @@ defmodule ContractTest do
           city: [type: :number],
           street: [type: :string]
         },
-        allow_nil: true
+        required: false
       ]
     }
 

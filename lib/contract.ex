@@ -208,14 +208,10 @@ defmodule Magik.Contract do
       schema
       |> Magik.Schema.expand()
       |> Enum.map(fn {field_name, validations} ->
-        value = Map.get(data, field_name, :__missing)
+        {default, validations} = Keyword.pop(validations, :default)
+        value = Map.get(data, field_name, default)
 
-        validations =
-          if Keyword.has_key?(validations, :allow_nil) do
-            validations
-          else
-            [{:allow_nil, false} | validations]
-          end
+        validations = sort_validator(validations)
 
         {status, results} =
           Enum.reduce(validations, {:ok, value}, fn
@@ -238,24 +234,20 @@ defmodule Magik.Contract do
     {status, Map.new(results)}
   end
 
-  defp do_validate(:__missing, {:required, true}, _opts) do
-    {:error, "is required"}
+  # prioritize checking
+  # `required` -> `type` -> others
+  defp sort_validator(validators) do
+    {required, validators} = Keyword.pop(validators, :required, false)
+    {type, validators} = Keyword.pop(validators, :type, :any)
+    validators = [{:type, type} | validators]
+    [{:required, required} | validators]
   end
 
-  defp do_validate(_, {:required, _}, _), do: :ok
+  defp do_validate(value, {:required, _} = validation, _),
+    do: Validator.validate(value, [validation])
 
-  defp do_validate(:__missing, _, _), do: :ok
-
-  defp do_validate(value, {:allow_nil, allow_nil}, _) when is_boolean(allow_nil) do
-    if not is_nil(value) or allow_nil do
-      :ok
-    else
-      {:error, "cannot be nil"}
-    end
-  end
-
+  # skip other validation if nil
   defp do_validate(nil, _, _), do: :ok
-
   # validate nested type
   defp do_validate(value, {:type, type}, _) when is_map(type) do
     Validator.validate_embed(value, {:embed, __MODULE__, type})
