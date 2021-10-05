@@ -5,12 +5,13 @@ defmodule Magik.Crypto do
 
   @aad "AES256GCM"
   @block_size 16
+  @key_size 32
 
   @doc """
   Generates a random 16 byte and encode base64 secret key.
   """
   def generate_secret do
-    :crypto.strong_rand_bytes(@block_size)
+    :crypto.strong_rand_bytes(@key_size)
     |> Base.encode64()
   end
 
@@ -24,10 +25,11 @@ defmodule Magik.Crypto do
   def encrypt(plaintext, secret_key) do
     with {:ok, secret_key} <- decode_key(secret_key) do
       iv = :crypto.strong_rand_bytes(@block_size)
-      plaintext = pad(plaintext, @block_size)
-      ciphertext = :crypto.crypto_one_time(:aes_128_cbc, secret_key, iv, plaintext, true)
 
-      {:ok, Base.encode64(iv <> ciphertext)}
+      {ciphertext, ciphertag} =
+        :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, plaintext, @aad, true)
+
+      {:ok, Base.encode64(iv <> ciphertag <> ciphertext)}
     end
   end
 
@@ -50,66 +52,10 @@ defmodule Magik.Crypto do
   @spec decrypt(String.t(), String.t()) :: {:ok, String.t()} | {:error, String.t()}
   def decrypt(ciphertext, secret_key) do
     with {:ok, secret_key} <- decode_key(secret_key),
-         {:ok, <<iv::binary-@block_size, ciphertext::binary>>} <- Base.decode64(ciphertext) do
-      plaintext =
-        :crypto.crypto_one_time(:aes_128_cbc, secret_key, iv, ciphertext, false)
-        |> unpad
-
-      {:ok, plaintext}
-    else
-      {:error, _} = err -> err
-      _ -> {:error, "Bad encrypted data"}
-    end
-  end
-
-  def decrypt!(ciphertext, secret_key) do
-    case decrypt(ciphertext, secret_key) do
-      {:ok, data} -> data
-      {:error, msg} -> raise msg
-    end
-  end
-
-  @doc """
-  Encrypt data using `:aes_128_cbc` mode, and return base64 encrypted string
-
-      key = generate_secret()
-      encrypt_aead("hello", key)
-  """
-  @spec encrypt_aead(String.t(), String.t()) :: {:ok, String.t()} | {:error, String.t()}
-  def encrypt_aead(plaintext, secret_key) do
-    with {:ok, secret_key} <- decode_key(secret_key) do
-      iv = :crypto.strong_rand_bytes(@block_size)
-
-      {ciphertext, ciphertag} =
-        :crypto.crypto_one_time_aead(:aes_128_gcm, secret_key, iv, plaintext, @aad, true)
-
-      {:ok, Base.encode64(iv <> ciphertag <> ciphertext)}
-    end
-  end
-
-  @spec encrypt_aead!(String.t(), String.t()) :: String.t()
-  def encrypt_aead!(plaintext, secret_key) do
-    case encrypt_aead(plaintext, secret_key) do
-      {:ok, data} -> data
-      {:error, msg} -> raise msg
-    end
-  end
-
-  @doc """
-  Decode cipher data which encrypted using `encrypt/2`
-
-      key = generate_secret()
-      {:ok, cipher} = encrypt_aead("hello", key)
-      decrypt_aead(cipher, key)
-
-  """
-  @spec decrypt_aead(String.t(), String.t()) :: {:ok, String.t()} | {:error, String.t()}
-  def decrypt_aead(ciphertext, secret_key) do
-    with {:ok, secret_key} <- decode_key(secret_key),
          {:ok, <<iv::binary-@block_size, tag::binary-@block_size, ciphertext::binary>>} <-
            Base.decode64(ciphertext) do
       plaintext =
-        :crypto.crypto_one_time_aead(:aes_128_gcm, secret_key, iv, ciphertext, @aad, tag, false)
+        :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, ciphertext, @aad, tag, false)
 
       {:ok, plaintext}
     else
@@ -118,9 +64,9 @@ defmodule Magik.Crypto do
     end
   end
 
-  @spec decrypt_aead!(String.t(), String.t()) :: String.t()
-  def decrypt_aead!(ciphertext, secret_key) do
-    case decrypt_aead(ciphertext, secret_key) do
+  @spec decrypt!(String.t(), String.t()) :: String.t()
+  def decrypt!(ciphertext, secret_key) do
+    case decrypt(ciphertext, secret_key) do
       {:ok, data} -> data
       {:error, msg} -> raise msg
     end
@@ -130,21 +76,11 @@ defmodule Magik.Crypto do
 
   defp decode_key(key) do
     with {:ok, data} <- Base.decode64(key),
-         true <- byte_size(data) == @block_size do
+         true <- byte_size(data) == @key_size do
       {:ok, data}
     else
       _ ->
         {:error, "Bad secret key"}
     end
-  end
-
-  defp pad(data, block_size) do
-    to_add = block_size - rem(byte_size(data), block_size)
-    data <> :binary.copy(<<to_add>>, to_add)
-  end
-
-  defp unpad(data) do
-    to_remove = :binary.last(data)
-    :binary.part(data, 0, byte_size(data) - to_remove)
   end
 end
