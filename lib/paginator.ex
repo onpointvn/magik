@@ -6,13 +6,11 @@ defmodule Magik.Paginator do
   """
   import Ecto.Query
 
-  @default_config [size: 10, max_size: 100]
-
   def paginate(query, params, opts \\ []) do
-    %{page: page_number, size: page_size} = cast_params(params)
-    count_total? = Map.get(params, "count_total") || Keyword.get(opts, :count_total, false)
+    %{page: page_number, size: page_size} = cast_params(Magik.Params.clean_nil(params))
+    count_total? = Keyword.get(opts, :count_total, false)
 
-    repo = get_repo(opts)
+    repo = opts[:repo]
     entries = entries(query, page_number, page_size, repo)
 
     total =
@@ -36,52 +34,13 @@ defmodule Magik.Paginator do
   end
 
   @param_schema %{
-    page: :integer,
-    size: :integer
+    page: [type: :integer, number: [min: 1], default: 1],
+    size: [type: :integer, number: [min: 1, max: 500], default: 10]
   }
   defp cast_params(params) do
-    {default_paging(), @param_schema}
-    |> Ecto.Changeset.cast(params, [:page, :size])
-    |> Ecto.Changeset.validate_number(:page, greater_than: 0)
-    |> Ecto.Changeset.validate_number(:size,
-      greater_than: 0,
-      less_than_or_equal_to: @default_config[:max_size]
-    )
-    |> Ecto.Changeset.apply_action(:insert)
-    |> case do
+    case Magik.Params.cast(params, @param_schema) do
       {:ok, data} -> data
-      _err -> default_paging()
-    end
-  end
-
-  defp get_config(key, default \\ nil) do
-    config = Application.get_env(:magik, :pagination, [])
-
-    @default_config
-    |> Keyword.merge(config)
-    |> Keyword.get(key, default)
-  end
-
-  defp default_paging() do
-    %{
-      page: 1,
-      size: get_config(:size)
-    }
-  end
-
-  defp get_repo(opts) do
-    repo_module = Keyword.get(opts, :repo)
-    config_repo = get_config(:repo)
-
-    cond do
-      is_atom(repo_module) ->
-        repo_module
-
-      is_atom(config_repo) ->
-        config_repo
-
-      true ->
-        raise ":repo configuration for Paginator is missing"
+      _ -> %{page: 1, size: 10}
     end
   end
 
@@ -91,6 +50,7 @@ defmodule Magik.Paginator do
     query
     |> limit(^page_size)
     |> offset(^offset)
+    |> distinct(true)
     |> repo.all()
   end
 
