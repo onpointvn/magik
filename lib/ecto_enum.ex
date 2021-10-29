@@ -51,6 +51,14 @@ defmodule Magik.EctoEnum do
       defmodule MyEnum do
         use Magik.EctoEnum, enum: [name1: 1, name2: 2], type: :integer
       end
+
+  ## use Gettext for enum value with type string
+
+      defmodule MyEnum do
+        import MyApp.Gettext
+        use Magik.EctoEnum, enum: ["one", "two"], use_gettext: true
+      end
+
   """
 
   defmacro __using__(opts) do
@@ -62,6 +70,8 @@ defmodule Magik.EctoEnum do
       else
         {opts, :string}
       end
+
+    use_gettext = opts[:use_gettext]
 
     if type not in support_types do
       raise "Enum of type #{type} is not support"
@@ -81,7 +91,12 @@ defmodule Magik.EctoEnum do
 
     enum_values = Enum.map(enum, &elem(&1, 1))
 
-    quote bind_quoted: [enum: enum, enum_values: enum_values, type: type] do
+    quote bind_quoted: [
+            enum: enum,
+            enum_values: enum_values,
+            type: type,
+            use_gettext: use_gettext
+          ] do
       ### Type definition
 
       defmodule Type do
@@ -126,9 +141,18 @@ defmodule Magik.EctoEnum do
         unquote(enum_values)
       end
 
-      for {key, value} <- enum do
-        def unquote(:"#{key}")() do
-          unquote(value)
+      if use_gettext and type == :string do
+        for {key, value} <- enum do
+          def unquote(:"#{key}")() do
+            gettext(unquote(value))
+            unquote(value)
+          end
+        end
+      else
+        for {key, value} <- enum do
+          def unquote(:"#{key}")() do
+            unquote(value)
+          end
         end
       end
 
