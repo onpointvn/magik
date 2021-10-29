@@ -141,7 +141,7 @@ defmodule Magik.EctoEnum do
         unquote(enum_values)
       end
 
-      if use_gettext and type == :string do
+      if use_gettext == true and type == :string do
         for {key, value} <- enum do
           def unquote(:"#{key}")() do
             gettext(unquote(value))
