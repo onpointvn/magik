@@ -56,7 +56,7 @@ defmodule Magik.MixProject do
       {:phoenix, "~> 1.5", optional: true},
       {:jason, "~> 1.2", optional: true},
       {:tesla, "~> 1.4.0", optional: true},
-      {:hackney, "~> 1.17.0", optional: true},
+      {:hackney, "~> 1.18", optional: true},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false}
     ]
   end
