@@ -11,7 +11,9 @@ defmodule Magik.Paginator do
     count_total? = Keyword.get(opts, :count_total, false)
 
     repo = opts[:repo]
-    entries = entries(query, page_number, page_size, repo)
+
+    query_distinct? = Keyword.get(opts, :query_distinct, true)
+    entries = entries(query, page_number, page_size, repo, query_distinct?)
 
     total =
       if count_total? do
@@ -44,13 +46,13 @@ defmodule Magik.Paginator do
     end
   end
 
-  defp entries(query, page_number, page_size, repo) do
+  defp entries(query, page_number, page_size, repo, query_distinct?) do
     offset = page_size * (page_number - 1)
 
     query
     |> limit(^page_size)
     |> offset(^offset)
-    |> distinct(true)
+    |> distinct(^query_distinct?)
     |> repo.all()
   end
 
