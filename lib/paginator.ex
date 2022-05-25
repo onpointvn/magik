@@ -69,6 +69,6 @@ defmodule Magik.Paginator do
         e.id
       )
     )
-    |> repo.one()
+    |> repo.one() || 0
   end
 end
