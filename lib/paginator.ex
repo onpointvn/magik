@@ -54,7 +54,7 @@ defmodule Magik.Paginator do
       |> offset(^offset)
 
     query =
-      if query_distinct? and not is_nil(distinct_on) do
+      if not is_nil(distinct_on) do
         distinct(query, [q], field(q, ^distinct_on))
       else
         distinct(query, ^query_distinct?)
