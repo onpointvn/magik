@@ -9,15 +9,12 @@ defmodule Magik.Paginator do
   def paginate(query, params, opts \\ []) do
     %{page: page_number, size: page_size} = cast_params(Magik.Params.clean_nil(params))
     count_total? = Keyword.get(opts, :count_total, false)
-
     repo = opts[:repo]
-
-    query_distinct? = Keyword.get(opts, :query_distinct, true)
-    entries = entries(query, page_number, page_size, repo, query_distinct?)
+    entries = entries(query, page_number, page_size, repo, opts)
 
     total =
       if count_total? do
-        count_entry(query, repo)
+        count_entry(query, repo, opts)
       else
         0
       end
@@ -46,17 +43,31 @@ defmodule Magik.Paginator do
     end
   end
 
-  defp entries(query, page_number, page_size, repo, query_distinct?) do
+  defp entries(query, page_number, page_size, repo, opts) do
     offset = page_size * (page_number - 1)
+    query_distinct? = Keyword.get(opts, :query_distinct, true)
+    distinct_on = Keyword.get(opts, :distinct_on)
+
+    query =
+      query
+      |> limit(^page_size)
+      |> offset(^offset)
+
+    query =
+      if query_distinct? and not is_nil(distinct_on) do
+        distinct(query, [q], field(q, ^distinct_on))
+      else
+        distinct(query, ^query_distinct?)
+      end
 
     query
-    |> limit(^page_size)
-    |> offset(^offset)
     |> distinct(^query_distinct?)
     |> repo.all()
   end
 
-  defp count_entry(query, repo) do
+  defp count_entry(query, repo, opts) do
+    distinct_on = Keyword.get(opts, :distinct_on) || :id
+
     query
     |> exclude(:order_by)
     |> exclude(:preload)
@@ -66,7 +77,7 @@ defmodule Magik.Paginator do
       [e],
       fragment(
         "count(distinct ?)",
-        e.id
+        field(e, ^distinct_on)
       )
     )
     |> repo.one() || 0
