@@ -61,7 +61,6 @@ defmodule Magik.Paginator do
       end
 
     query
-    |> distinct(^query_distinct?)
     |> repo.all()
   end
 
