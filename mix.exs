@@ -53,7 +53,8 @@ defmodule Magik.MixProject do
     [
       {:ecto, "~> 3.0", optional: true},
       {:plug, "~> 1.11", optional: true},
-      {:phoenix, "~> 1.5", optional: true},
+      {:phoenix, "~> 1.7", optional: true},
+      {:phoenix_view, "~> 2.0", optional: true},
       {:jason, "~> 1.2", optional: true},
       {:tesla, "~> 1.4.0", optional: true},
       {:hackney, "~> 1.18", optional: true},
