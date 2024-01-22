@@ -23,7 +23,7 @@ defmodule Magik.Commands do
       {:error, :create_user, error, _} ->
         {:error, error}
       {:error, :create_post, error, %{create_user: user}} ->
-        # rollback create_user
+        # delete create_user
     end
 
   """
