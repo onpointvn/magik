@@ -1,5 +1,6 @@
 defmodule CommandTest do
   use ExUnit.Case
+
   alias Magik.Commands
 
   test "init command" do
@@ -7,29 +8,25 @@ defmodule CommandTest do
   end
 
   test "add command" do
-    assert %Commands{chains: [{:step1, func}]} =
-             Commands.new() |> Commands.chain(:step1, fn -> {:ok, "one"} end)
+    assert %Commands{chains: [{:step1, func}]} = Commands.chain(Commands.new(), :step1, fn -> {:ok, "one"} end)
 
     assert is_function(func, 0)
   end
 
   test "add command accept 1 argument" do
-    assert %Commands{chains: [{:step1, func}]} =
-             Commands.new() |> Commands.chain(:step1, fn acc -> {:ok, acc} end)
+    assert %Commands{chains: [{:step1, func}]} = Commands.chain(Commands.new(), :step1, fn acc -> {:ok, acc} end)
 
     assert is_function(func, 1)
   end
 
   test "add command if condition is true" do
-    assert %Commands{chains: [{:step1, func}]} =
-             Commands.new() |> Commands.chain_if(:step1, true, fn -> {:ok, "one"} end)
+    assert %Commands{chains: [{:step1, func}]} = Commands.chain_if(Commands.new(), :step1, true, fn -> {:ok, "one"} end)
 
     assert is_function(func, 0)
   end
 
   test "do not add command if condition is false" do
-    assert %Commands{chains: []} =
-             Commands.new() |> Commands.chain_if(:step1, false, fn -> {:ok, "one"} end)
+    assert %Commands{chains: []} = Commands.chain_if(Commands.new(), :step1, false, fn -> {:ok, "one"} end)
   end
 
   test "return accumulate result if all success" do

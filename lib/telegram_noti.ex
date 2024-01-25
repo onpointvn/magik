@@ -52,7 +52,8 @@ defmodule Magik.TelegramNoti do
               label
             else
               {mod_name, func_name, arity, _} =
-                Process.info(self(), :current_stacktrace)
+                self()
+                |> Process.info(:current_stacktrace)
                 |> elem(1)
                 |> Enum.fetch!(2)
 
@@ -79,9 +80,10 @@ defmodule Magik.TelegramNoti do
   def send_message(conversation \\ :default, message) do
     config = Application.get_env(:magik, :telegram_noti, [])
 
-    with conversations <- config[:conversations],
-         chat_id <- Keyword.get(conversations || [], conversation),
-         false <- chat_id in [nil, ""],
+    conversations = config[:conversations]
+    chat_id = Keyword.get(conversations || [], conversation)
+
+    with false <- chat_id in [nil, ""],
          false <- config[:bot_token] in [nil, ""] do
       url = "https://api.telegram.org/bot#{config[:bot_token]}/sendMessage"
 
@@ -138,11 +140,7 @@ defmodule Magik.TelegramNoti do
 
   """
   @spec send_conn_error(atom, Plug.Conn.t(), map) :: {:ok, map} | {:error, map}
-  def send_conn_error(conversation \\ :default, %{} = conn, %{
-        kind: kind,
-        reason: reason,
-        stack: stacktrace
-      }) do
+  def send_conn_error(conversation \\ :default, %{} = conn, %{kind: kind, reason: reason, stack: stacktrace}) do
     message = """
     *ERROR: #{conn.private[:phoenix_controller]}.#{conn.private[:phoenix_action]}*
     --------------------
@@ -180,11 +178,7 @@ defmodule Magik.TelegramNoti do
       end
   """
   @spec send_error(atom, String.t(), any, map) :: {:ok, map} | {:error, map}
-  def send_error(conversation \\ :default, title, args \\ nil, %{
-        kind: kind,
-        reason: reason,
-        stack: stacktrace
-      }) do
+  def send_error(conversation \\ :default, title, args \\ nil, %{kind: kind, reason: reason, stack: stacktrace}) do
     message = """
     *ERROR: #{title}*
     ----------------

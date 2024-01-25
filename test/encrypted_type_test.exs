@@ -1,7 +1,8 @@
 defmodule EncryptedTypeTest do
   use ExUnit.Case
-  alias Magik.EctoType.EncryptedText
+
   alias Magik.EctoType.EncryptedMap
+  alias Magik.EctoType.EncryptedText
 
   describe "test Encrypted text" do
     test "cast binary succes" do

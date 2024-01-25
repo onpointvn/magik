@@ -10,11 +10,10 @@ defmodule MagikTest.TestHookView do
   end
 
   def append_x(data) do
-    Enum.map(data, fn
+    Map.new(data, fn
       {k, v} when is_binary(v) -> {k, "#{v}.x"}
       {k, v} -> {k, v}
     end)
-    |> Enum.into(%{})
   end
 end
 

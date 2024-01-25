@@ -1,32 +1,4 @@
 defmodule Magik.JsonView do
-  defmacro __using__(opts \\ []) do
-    fields = Keyword.get(opts, :fields, [])
-    custom_fields = Keyword.get(opts, :custom_fields, [])
-
-    after_render = Keyword.get(opts, :after_render)
-
-    quote do
-      def render_json(struct, fields, custom_fields, relationships) do
-        data =
-          Magik.JsonView.render_json(struct, __MODULE__,
-            fields: unquote(fields) ++ fields,
-            custom_fields: unquote(custom_fields) ++ custom_fields,
-            relationships: relationships
-          )
-
-        if is_function(unquote(after_render)) do
-          apply(unquote(after_render), [data])
-        else
-          data
-        end
-      end
-
-      def render_view(struct, view, template) do
-        Magik.JsonView.render_template(struct, view, template)
-      end
-    end
-  end
-
   @moduledoc """
   Render a struct to a map with given options
 
@@ -70,6 +42,34 @@ defmodule Magik.JsonView do
 
   """
 
+  defmacro __using__(opts \\ []) do
+    fields = Keyword.get(opts, :fields, [])
+    custom_fields = Keyword.get(opts, :custom_fields, [])
+
+    after_render = Keyword.get(opts, :after_render)
+
+    quote do
+      def render_json(struct, fields, custom_fields, relationships) do
+        data =
+          Magik.JsonView.render_json(struct, __MODULE__,
+            fields: unquote(fields) ++ fields,
+            custom_fields: unquote(custom_fields) ++ custom_fields,
+            relationships: relationships
+          )
+
+        if is_function(unquote(after_render)) do
+          apply(unquote(after_render), [data])
+        else
+          data
+        end
+      end
+
+      def render_view(struct, view, template) do
+        Magik.JsonView.render_template(struct, view, template)
+      end
+    end
+  end
+
   def render_json(nil, _, _), do: nil
 
   def render_json(struct, view, opts) when is_list(opts) do
@@ -104,15 +104,10 @@ defmodule Magik.JsonView do
   def render_custom_fields(struct, view \\ nil, fields) do
     # if fields is not empty and render_field/2 is not defined, raise exception
 
-    fields
-    |> Enum.map(fn
-      {field, render_func} when is_function(render_func) ->
-        {field, render_func.(struct)}
-
-      field ->
-        {field, view.render_field(field, struct)}
+    Map.new(fields, fn
+      {field, render_func} when is_function(render_func) -> {field, render_func.(struct)}
+      field -> {field, view.render_field(field, struct)}
     end)
-    |> Enum.into(%{})
   end
 
   @doc """
@@ -131,10 +126,7 @@ defmodule Magik.JsonView do
       }
   """
   def render_relationships(struct, relationships) when is_list(relationships) do
-    Enum.map(relationships, fn {field, view} ->
-      {field, render_relationship(struct, field, view)}
-    end)
-    |> Enum.into(%{})
+    Map.new(relationships, fn {field, view} -> {field, render_relationship(struct, field, view)} end)
   end
 
   # render a single relationship

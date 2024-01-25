@@ -243,8 +243,7 @@ defmodule Magik.Contract do
     [{:required, required} | validators]
   end
 
-  defp do_validate(value, {:required, _} = validation, _),
-    do: Validator.validate(value, [validation])
+  defp do_validate(value, {:required, _} = validation, _), do: Validator.validate(value, [validation])
 
   # skip other validation if nil
   defp do_validate(nil, _, _), do: :ok

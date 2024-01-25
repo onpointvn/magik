@@ -1,5 +1,6 @@
 defmodule MagikTelegramNotiTest do
   use ExUnit.Case
+
   require Magik.TelegramNoti
 
   # test "send error default conversation should pass" do

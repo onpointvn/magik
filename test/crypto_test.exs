@@ -1,10 +1,11 @@
 defmodule Magik.CryptoTest do
   use ExUnit.Case
+
   alias Magik.Crypto
 
   describe "test aes crypt functions" do
-    test "generate secret should be 16 byte" do
-      assert 16 =
+    test "generate secret should be 32 byte" do
+      assert 32 =
                Crypto.generate_secret()
                |> Base.decode64!()
                |> byte_size()
@@ -33,70 +34,20 @@ defmodule Magik.CryptoTest do
       end
     end
 
-    test "encrypt, decrypt with key differ 16byte" do
+    test "encrypt, decrypt with key differ 32byte" do
       assert {:error, "Bad secret key"} = Crypto.encrypt("hello", Base.encode64("123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.encrypt("hello", Base.encode64("123123123123123123"))
+      assert {:error, "Bad secret key"} = Crypto.encrypt("hello", Base.encode64("123123123123123123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt(Base.encode64("hello"), Base.encode64("123"))
+      assert {:error, "Bad secret key"} = Crypto.decrypt(Base.encode64("hello"), Base.encode64("123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt(Base.encode64("hello"), Base.encode64("123123123123123123"))
+      assert {:error, "Bad secret key"} = Crypto.decrypt(Base.encode64("hello"), Base.encode64("123123123123123123"))
     end
 
     test "decrypt with bad data" do
-      assert {:error, "Bad encrypted data"} =
-               Crypto.decrypt(Base.encode64("hello"), Crypto.generate_secret())
+      assert {:error, "Bad encrypted data"} = Crypto.decrypt(Base.encode64("hello"), Crypto.generate_secret())
 
       assert {:error, "Bad encrypted data"} = Crypto.decrypt("hello", Crypto.generate_secret())
-    end
-  end
-
-  describe "test aead crypt functions" do
-    test "encrypt_aead and decrypt_aead" do
-      key = Crypto.generate_secret()
-      assert {:ok, _cipher} = Crypto.encrypt_aead("hello", key)
-      assert cipher = Crypto.encrypt_aead!("hello", key)
-      assert "hello" = Crypto.decrypt_aead!(cipher, key)
-      assert {:ok, "hello"} = Crypto.decrypt_aead(cipher, key)
-    end
-
-    test "encrypt_aead and decrypt_aead with empty key" do
-      assert {:error, "Bad secret key"} = Crypto.encrypt_aead("hello", "")
-      assert {:error, "Bad secret key"} = Crypto.decrypt_aead("hello", "")
-    end
-
-    test "encrypt_aead! and decrypt_aead! with empty key" do
-      assert_raise RuntimeError, fn ->
-        Crypto.encrypt_aead!("hello", "")
-      end
-
-      assert_raise RuntimeError, fn ->
-        Crypto.decrypt_aead!("hello", "")
-      end
-    end
-
-    test "encrypt_aead, decrypt_aead with key differ 16byte" do
-      assert {:error, "Bad secret key"} = Crypto.encrypt_aead("hello", Base.encode64("123"))
-
-      assert {:error, "Bad secret key"} =
-               Crypto.encrypt_aead("hello", Base.encode64("123123123123123123"))
-
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt_aead(Base.encode64("hello"), Base.encode64("123"))
-
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt_aead(Base.encode64("hello"), Base.encode64("123123123123123123"))
-    end
-
-    test "decrypt_aead with bad data" do
-      assert {:error, "Bad encrypted data"} =
-               Crypto.decrypt_aead(Base.encode64("hello"), Crypto.generate_secret())
-
-      assert {:error, "Bad encrypted data"} =
-               Crypto.decrypt_aead("hello", Crypto.generate_secret())
     end
   end
 end

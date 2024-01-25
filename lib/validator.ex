@@ -116,7 +116,7 @@ defmodule Magik.Validator do
     end)
     |> case do
       {:ok, _} -> :ok
-      {:error, messages} -> {:error, Enum.into(messages, %{})}
+      {:error, messages} -> {:error, Map.new(messages)}
     end
   end
 
@@ -139,8 +139,7 @@ defmodule Magik.Validator do
   end
 
   # validate required need to check nil
-  defp do_validate(value, {:required = validator, opts}),
-    do: get_validator(validator).(value, opts)
+  defp do_validate(value, {:required = validator, opts}), do: get_validator(validator).(value, opts)
 
   # other validation is skipped if value is nil
   defp do_validate(nil, _), do: :ok
@@ -271,8 +270,7 @@ defmodule Magik.Validator do
   ```
   """
 
-  def validate_required(value, func) when is_function(func, 0),
-    do: validate_required(value, func.())
+  def validate_required(value, func) when is_function(func, 0), do: validate_required(value, func.())
 
   def validate_required(nil, true), do: {:error, "is required"}
   def validate_required(_, _), do: :ok
@@ -299,13 +297,9 @@ defmodule Magik.Validator do
   @spec validate_number(integer() | float(), keyword()) :: :ok | error
   def validate_number(value, checks) when is_list(checks) do
     if is_number(value) do
-      checks
-      |> Enum.reduce(:ok, fn
-        check, :ok ->
-          validate_number(value, check)
-
-        _, error ->
-          error
+      Enum.reduce(checks, :ok, fn
+        check, :ok -> validate_number(value, check)
+        _, error -> error
       end)
     else
       {:error, "must be a number"}

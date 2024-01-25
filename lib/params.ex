@@ -3,6 +3,8 @@ defmodule Magik.Params do
   Params provide some helpers method to work with parameters
   """
 
+  alias Magik.Type
+
   @doc """
   A plug which do srubbing params
 
@@ -101,7 +103,8 @@ defmodule Magik.Params do
   end
 
   def clean_nil(param) when is_list(param) do
-    Enum.reduce(param, [], fn item, acc ->
+    param
+    |> Enum.reduce([], fn item, acc ->
       if is_nil(item) do
         acc
       else
@@ -112,8 +115,6 @@ defmodule Magik.Params do
   end
 
   def clean_nil(param), do: param
-
-  alias Magik.Type
 
   @doc """
   Cast and validate params with given schema.

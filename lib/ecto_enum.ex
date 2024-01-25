@@ -100,7 +100,9 @@ defmodule Magik.EctoEnum do
       ### Type definition
 
       defmodule Type do
+        @moduledoc false
         use Ecto.Type
+
         def type, do: unquote(type)
 
         defp enum do
@@ -109,7 +111,7 @@ defmodule Magik.EctoEnum do
 
         def cast(value) when is_atom(value) do
           value
-          |> to_string
+          |> to_string()
           |> cast()
         end
 
