@@ -1,4 +1,5 @@
 defmodule ContractTest.User do
+  @moduledoc false
   defstruct name: nil, email: nil
 
   def dumb(_), do: nil
@@ -68,12 +69,8 @@ defmodule ContractTest do
   ]
 
   test "validate type" do
-    @type_checks
-    |> Enum.each(fn [type, value, expect] ->
-      rs =
-        Magik.Contract.validate(%{"key" => value}, %{
-          "key" => [type: type]
-        })
+    Enum.each(@type_checks, fn [type, value, expect] ->
+      rs = Magik.Contract.validate(%{"key" => value}, %{"key" => [type: type]})
 
       if expect == :ok do
         assert {:ok, _} = rs
@@ -282,8 +279,7 @@ defmodule ContractTest do
       ]
     }
 
-    assert {:ok, %{name: "Doe John", address: %{city: "HCM", street: "NVL"}}} =
-             Magik.Contract.validate(data, schema)
+    assert {:ok, %{name: "Doe John", address: %{city: "HCM", street: "NVL"}}} = Magik.Contract.validate(data, schema)
   end
 
   test "validate nested map with bad value should error" do
@@ -315,8 +311,7 @@ defmodule ContractTest do
       ]
     }
 
-    assert {:error, %{address: [%{city: ["is not a number"]}]}} =
-             Magik.Contract.validate(data, schema)
+    assert {:error, %{address: [%{city: ["is not a number"]}]}} = Magik.Contract.validate(data, schema)
   end
 
   test "validate nested map skip nested check if value nil" do
@@ -386,8 +381,7 @@ defmodule ContractTest do
       ]
     }
 
-    assert {:error, %{address: [%{city: ["is not a number"]}]}} =
-             Magik.Contract.validate(data, schema)
+    assert {:error, %{address: [%{city: ["is not a number"]}]}} = Magik.Contract.validate(data, schema)
   end
 
   def validate_email(_name, value, _params) do

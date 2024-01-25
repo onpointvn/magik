@@ -1,20 +1,24 @@
 defmodule MagikEctoEnumTest.OrderStatus do
+  @moduledoc false
   use Magik.EctoEnum, ["new", "pending", "processing", "completed", "cancelled"]
 end
 
 defmodule MagikEctoEnumTest.ContractType do
+  @moduledoc false
   use Magik.EctoEnum, part_time: "Part time", full_time: "Full time", cooperator: "Cooperator"
 end
 
 defmodule MagikEctoEnumTest.IntegerStatus do
+  @moduledoc false
   use Magik.EctoEnum, enum: [good: 1, bad: 2, unknown: 3], type: :integer
 end
 
 defmodule MagikEctoEnumTest do
   use ExUnit.Case
-  alias MagikEctoEnumTest.OrderStatus
+
   alias MagikEctoEnumTest.ContractType
   alias MagikEctoEnumTest.IntegerStatus
+  alias MagikEctoEnumTest.OrderStatus
 
   @states ["new", "pending", "processing", "completed", "cancelled"]
   test "enum value should match" do
@@ -22,10 +26,7 @@ defmodule MagikEctoEnumTest do
   end
 
   test "value helper function should pass" do
-    @states
-    |> Enum.each(fn state ->
-      assert apply(OrderStatus, :"#{state}", []) == state
-    end)
+    Enum.each(@states, fn state -> assert apply(OrderStatus, :"#{state}", []) == state end)
   end
 
   test "enum with tuple key - value" do
@@ -43,10 +44,7 @@ defmodule MagikEctoEnumTest do
   end
 
   test "check has_value should pass all" do
-    @states
-    |> Enum.each(fn state ->
-      assert OrderStatus.has_value?(state)
-    end)
+    Enum.each(@states, fn state -> assert OrderStatus.has_value?(state) end)
   end
 
   test "cast value in enum should pass" do
@@ -71,10 +69,7 @@ defmodule MagikEctoEnumTest do
   end
 
   test "load data in enum should pass" do
-    @states
-    |> Enum.each(fn state ->
-      assert OrderStatus.Type.load(state) == {:ok, state}
-    end)
+    Enum.each(@states, fn state -> assert OrderStatus.Type.load(state) == {:ok, state} end)
   end
 
   test "load string not in enum should pass" do
@@ -82,9 +77,6 @@ defmodule MagikEctoEnumTest do
   end
 
   test "dump string value should pass" do
-    @states
-    |> Enum.each(fn state ->
-      assert OrderStatus.Type.dump(state) == {:ok, state}
-    end)
+    Enum.each(@states, fn state -> assert OrderStatus.Type.dump(state) == {:ok, state} end)
   end
 end

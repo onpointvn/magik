@@ -200,9 +200,7 @@ defmodule Magik.Schema do
   """
   @spec expand(map()) :: map()
   def expand(schema) do
-    schema
-    |> Enum.map(&expand_field/1)
-    |> Enum.into(%{})
+    Map.new(schema, &expand_field/1)
   end
 
   defp expand_field({field, type}) when is_atom(type) or is_map(type) do

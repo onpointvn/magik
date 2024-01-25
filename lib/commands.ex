@@ -27,15 +27,16 @@ defmodule Magik.Commands do
     end
 
   """
-  defstruct chains: []
   alias Magik.Commands
+
+  defstruct chains: []
   @type t :: %Commands{chains: [{atom() | String.t(), (any() -> any())}]}
 
   @doc """
   Create a new Commands struct
   """
   @spec new() :: Commands.t()
-  def new() do
+  def new do
     %Commands{chains: []}
   end
 

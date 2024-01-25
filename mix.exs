@@ -26,14 +26,14 @@ defmodule Magik.MixProject do
     ]
   end
 
-  defp docs() do
+  defp docs do
     [
       main: "readme",
       extras: ["README.md"]
     ]
   end
 
-  defp package() do
+  defp package do
     [
       maintainers: ["Dung Nguyen"],
       licenses: ["MIT"],
@@ -41,7 +41,7 @@ defmodule Magik.MixProject do
     ]
   end
 
-  defp description() do
+  defp description do
     """
     Toolbox that help to do trivial things faster. I have more free time for life
     """
@@ -58,7 +58,8 @@ defmodule Magik.MixProject do
       {:tesla, "~> 1.4.0", optional: true},
       {:hackney, "~> 1.18", optional: true},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
-      {:redix, "~> 0.8", optional: true}
+      {:redix, "~> 0.8", optional: true},
+      {:styler, "~> 0.11", only: [:dev, :test], runtime: false}
     ]
   end
 end

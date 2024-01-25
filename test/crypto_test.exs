@@ -1,5 +1,6 @@
 defmodule Magik.CryptoTest do
   use ExUnit.Case
+
   alias Magik.Crypto
 
   describe "test aes crypt functions" do
@@ -36,19 +37,15 @@ defmodule Magik.CryptoTest do
     test "encrypt, decrypt with key differ 32byte" do
       assert {:error, "Bad secret key"} = Crypto.encrypt("hello", Base.encode64("123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.encrypt("hello", Base.encode64("123123123123123123"))
+      assert {:error, "Bad secret key"} = Crypto.encrypt("hello", Base.encode64("123123123123123123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt(Base.encode64("hello"), Base.encode64("123"))
+      assert {:error, "Bad secret key"} = Crypto.decrypt(Base.encode64("hello"), Base.encode64("123"))
 
-      assert {:error, "Bad secret key"} =
-               Crypto.decrypt(Base.encode64("hello"), Base.encode64("123123123123123123"))
+      assert {:error, "Bad secret key"} = Crypto.decrypt(Base.encode64("hello"), Base.encode64("123123123123123123"))
     end
 
     test "decrypt with bad data" do
-      assert {:error, "Bad encrypted data"} =
-               Crypto.decrypt(Base.encode64("hello"), Crypto.generate_secret())
+      assert {:error, "Bad encrypted data"} = Crypto.decrypt(Base.encode64("hello"), Crypto.generate_secret())
 
       assert {:error, "Bad encrypted data"} = Crypto.decrypt("hello", Crypto.generate_secret())
     end

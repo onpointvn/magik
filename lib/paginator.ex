@@ -54,14 +54,13 @@ defmodule Magik.Paginator do
       |> offset(^offset)
 
     query =
-      if not is_nil(distinct_on) do
-        distinct(query, [q], field(q, ^distinct_on))
-      else
+      if is_nil(distinct_on) do
         distinct(query, ^query_distinct?)
+      else
+        distinct(query, [q], field(q, ^distinct_on))
       end
 
-    query
-    |> repo.all()
+    repo.all(query)
   end
 
   defp count_entry(query, repo, opts) do

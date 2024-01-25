@@ -16,9 +16,10 @@ defmodule Magik.Type do
   end
 
   def cast!(type, value) do
-    with {:ok, data} <- cast(type, value) do
-      data
-    else
+    case cast(type, value) do
+      {:ok, data} ->
+        data
+
       _ ->
         raise "invalid #{inspect(type)}"
     end
@@ -147,9 +148,8 @@ defmodule Magik.Type do
     end
   end
 
-  defp cast_naive_datetime(%{year: empty, month: empty, day: empty, hour: empty, minute: empty})
-       when empty in ["", nil],
-       do: {:ok, nil}
+  defp cast_naive_datetime(%{year: empty, month: empty, day: empty, hour: empty, minute: empty}) when empty in ["", nil],
+    do: {:ok, nil}
 
   defp cast_naive_datetime(%{} = map) do
     with {:ok, %Date{} = date} <- cast_date(map),

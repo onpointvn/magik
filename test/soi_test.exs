@@ -1,5 +1,6 @@
 defmodule SoiTest do
   use ExUnit.Case
+
   doctest Magik.Soi
 
   test "fetch data from map" do

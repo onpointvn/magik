@@ -1,8 +1,8 @@
 defmodule ExcelWithoutViewTest do
   use ExUnit.Case
+  use Magik.ExcelView
 
   alias Magik.ExcelView
-  use Magik.ExcelView
 
   @data %{
     name: "product",
@@ -28,8 +28,7 @@ defmodule ExcelWithoutViewTest do
   end
 
   test "render row list" do
-    assert [["product", "sku.001", 100_000] | _] =
-             ExcelView.render_row([@data, @data, @data], [:name, :sku, :price])
+    assert [["product", "sku.001", 100_000] | _] = ExcelView.render_row([@data, @data, @data], [:name, :sku, :price])
   end
 
   test "render with style" do

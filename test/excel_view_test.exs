@@ -1,6 +1,5 @@
 defmodule TestExcelView do
   use ExUnit.Case
-
   use Magik.ExcelView
 
   @data %{
@@ -23,13 +22,11 @@ defmodule TestExcelView do
   end
 
   test "render row list" do
-    assert [["product", "sku.001", "100000d"] | _] =
-             render_row([@data, @data, @data], [:name, :sku, :price])
+    assert [["product", "sku.001", "100000d"] | _] = render_row([@data, @data, @data], [:name, :sku, :price])
   end
 
   test "render with style" do
-    assert [["product", bold: true], "sku.001", "100000d"] =
-             render_row(@data, [{:name, bold: true}, :sku, :price])
+    assert [["product", bold: true], "sku.001", "100000d"] = render_row(@data, [{:name, bold: true}, :sku, :price])
   end
 
   def render_field(:price, struct, _) do

@@ -1,7 +1,9 @@
 defmodule ParamTest.StringList do
+  @moduledoc false
   def cast(value) when is_binary(value) do
     rs =
-      String.split(value, ",")
+      value
+      |> String.split(",")
       |> Magik.Params.scrub_param()
       |> Magik.Params.clean_nil()
 
@@ -13,9 +15,12 @@ end
 
 defmodule ParamTest do
   use ExUnit.Case
+
   alias Magik.Params
+  alias ParamTest.StringList
 
   defmodule Address do
+    @moduledoc false
     defstruct [:province, :city]
   end
 
@@ -51,7 +56,7 @@ defmodule ParamTest do
     end
 
     test "scrub success with mix atom and string key" do
-      params = %{email: "   "} |> Map.put("type", "customer")
+      params = Map.put(%{email: "   "}, "type", "customer")
       assert %{email: nil} = Params.scrub_param(params)
     end
 
@@ -62,8 +67,7 @@ defmodule ParamTest do
         "address" => %Address{province: "   ", city: "Hochiminh"}
       }
 
-      assert %{"address" => %Address{province: "   ", city: "Hochiminh"}} =
-               Params.scrub_param(params)
+      assert %{"address" => %Address{province: "   ", city: "Hochiminh"}} = Params.scrub_param(params)
     end
   end
 
@@ -121,8 +125,6 @@ defmodule ParamTest do
     end
   end
 
-  alias ParamTest.StringList
-
   describe "Params.cast" do
     @type_checks [
       [:string, "Bluz", "Bluz", :ok],
@@ -175,12 +177,8 @@ defmodule ParamTest do
     ]
 
     test "cast base type" do
-      @type_checks
-      |> Enum.each(fn [type, value, expected_value, expect] ->
-        rs =
-          Params.cast(%{"key" => value}, %{
-            key: [type: type]
-          })
+      Enum.each(@type_checks, fn [type, value, expected_value, expect] ->
+        rs = Params.cast(%{"key" => value}, %{key: [type: type]})
 
         if expect == :ok do
           assert {:ok, %{key: ^expected_value}} = rs
@@ -191,18 +189,15 @@ defmodule ParamTest do
     end
 
     test "cast use default value if field not exist in params" do
-      assert {:ok, %{name: "Dzung"}} =
-               Params.cast(%{}, %{name: [type: :string, default: "Dzung"]})
+      assert {:ok, %{name: "Dzung"}} = Params.cast(%{}, %{name: [type: :string, default: "Dzung"]})
     end
 
     test "cast use default function if field not exist in params" do
-      assert {:ok, %{name: "123"}} =
-               Params.cast(%{}, %{name: [type: :string, default: fn -> "123" end]})
+      assert {:ok, %{name: "123"}} = Params.cast(%{}, %{name: [type: :string, default: fn -> "123" end]})
     end
 
     test "cast validate required skip if default is set" do
-      assert {:ok, %{name: "Dzung"}} =
-               Params.cast(%{}, %{name: [type: :string, default: "Dzung", required: true]})
+      assert {:ok, %{name: "Dzung"}} = Params.cast(%{}, %{name: [type: :string, default: "Dzung", required: true]})
     end
 
     test "cast func is used if set" do
@@ -257,8 +252,7 @@ defmodule ParamTest do
         }
       }
 
-      assert {:error, %{user: %{email: ["length must be greater than or equal to 5"]}}} =
-               Params.cast(data, @schema)
+      assert {:error, %{user: %{email: ["length must be greater than or equal to 5"]}}} = Params.cast(data, @schema)
     end
 
     test "cast missing required value should error" do
@@ -293,8 +287,7 @@ defmodule ParamTest do
         ]
       }
 
-      assert {:ok, %{user: [%{age: 10, email: "d@h.com", name: "D"}]}} =
-               Params.cast(data, @array_schema)
+      assert {:ok, %{user: [%{age: 10, email: "d@h.com", name: "D"}]}} = Params.cast(data, @array_schema)
     end
 
     test "cast empty array embed should ok" do

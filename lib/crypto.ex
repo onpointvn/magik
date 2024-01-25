@@ -11,7 +11,8 @@ defmodule Magik.Crypto do
   Generates a random 16 byte and encode base64 secret key.
   """
   def generate_secret do
-    :crypto.strong_rand_bytes(@key_size)
+    @key_size
+    |> :crypto.strong_rand_bytes()
     |> Base.encode64()
   end
 
@@ -26,8 +27,7 @@ defmodule Magik.Crypto do
     with {:ok, secret_key} <- decode_key(secret_key) do
       iv = :crypto.strong_rand_bytes(@block_size)
 
-      {ciphertext, ciphertag} =
-        :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, plaintext, @aad, true)
+      {ciphertext, ciphertag} = :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, plaintext, @aad, true)
 
       {:ok, Base.encode64(iv <> ciphertag <> ciphertext)}
     end
@@ -54,8 +54,7 @@ defmodule Magik.Crypto do
     with {:ok, secret_key} <- decode_key(secret_key),
          {:ok, <<iv::binary-@block_size, tag::binary-@block_size, ciphertext::binary>>} <-
            Base.decode64(ciphertext) do
-      plaintext =
-        :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, ciphertext, @aad, tag, false)
+      plaintext = :crypto.crypto_one_time_aead(:aes_256_gcm, secret_key, iv, ciphertext, @aad, tag, false)
 
       {:ok, plaintext}
     else

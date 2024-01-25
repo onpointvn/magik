@@ -63,8 +63,7 @@ defmodule Magik.GlobalLock do
             _ -> :unknown
           end
 
-        {:error,
-         "Failed to acquired lock on #{inspect({name_space, id})}. Unlocking in #{remaining_time}s"}
+        {:error, "Failed to acquired lock on #{inspect({name_space, id})}. Unlocking in #{remaining_time}s"}
     end
   end
 

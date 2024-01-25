@@ -1,4 +1,5 @@
 defmodule Magik.Soi do
+  @moduledoc false
   @doc """
   Query data nested in map and list, return default if path not exist
 
@@ -206,7 +207,8 @@ defmodule Magik.Soi do
   end
 
   def traverse(object, fun) when is_list(object) do
-    Enum.reduce(object, [], fn item, acc ->
+    object
+    |> Enum.reduce([], fn item, acc ->
       case fun.(item) do
         :discard -> acc
         {:skip, item} -> [item | acc]
