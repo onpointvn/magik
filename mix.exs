@@ -4,12 +4,11 @@ defmodule Magik.MixProject do
   def project do
     [
       app: :magik,
-      version: "1.0.0",
+      version: "1.1.0",
       build_path: "./_build",
-      config_path: "./config/config.exs",
       deps_path: "./deps",
       lockfile: "./mix.lock",
-      elixir: "~> 1.10",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
@@ -58,7 +57,8 @@ defmodule Magik.MixProject do
       {:jason, "~> 1.2", optional: true},
       {:tesla, "~> 1.4.0", optional: true},
       {:hackney, "~> 1.18", optional: true},
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      {:redix, "~> 0.8", optional: true}
     ]
   end
 end

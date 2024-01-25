@@ -56,7 +56,7 @@ defmodule ContractTest do
     [:array, 10, :error],
     [:atom, :hihi, :ok],
     [:atom, "string", :error],
-    [:function, &User.dumb/0, :ok],
+    [:function, &User.dumb/1, :ok],
     [:function, "not func", :error],
     [:keyword, [limit: 12], :ok],
     [:keyword, [1, 2], :error],
