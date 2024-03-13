@@ -1,4 +1,4 @@
-defmodule Magik.Soi do
+defmodule Magik.Nested do
   @moduledoc false
   @doc """
   Query data nested in map and list, return default if path not exist
